@@ -1,0 +1,197 @@
+\documentclass[9pt, letterpaper, oneside]{article}
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\setlength{\headwidth}{500pt}
+\pagestyle{fancyplain}
+
+\usepackage[parfill]{parskip} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{fullpage}
+\usepackage[linktoc=section, colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+
+\title{MATH 240 - Discrete Structures}
+\author{McGill University \\ Fall 2011}
+\date{}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\begin{document}
+\lhead{Brought to you by WikiNotes. Join our \href{http://www.facebook.com/home.php?sk=group_166578420027385&ap=1}{facebook group} or take a look at our website on \href{http://www.wikinotes.ca}{wikinotes.ca}\newline}
+
+\maketitle
+\tableofcontents
+\addcontentsline{toc}{section}{Course Information}
+
+%%% Friday September 2nd 2011
+
+\section*{Course Information}
+
+\begin{itemize}
+\item When/Where: MWF 10:35-11:35, Stewart Bio N2/2
+\item Instructor: Sergey Norin math.mcgill.ca/~snorin
+\item Textbook: Discrete Mathematics, Elementary and Beyond by Lovasz, Pelikan and Vesztergombi
+\item Prerequisites: 
+\item Grading:
+	\begin{itemize}
+		\item 20 \% assignments 20 \% midterm and 60 \% final
+		\item 20 \% assignments 80 \% final
+		\item (best of two above)
+	\end{itemize}
+\end{itemize}
+
+\section*{Introduction}
+Discrete vs. Continuous structures
+\begin{itemize}
+	\item Objects in discrete structures are individual and separable
+	\item An intuitive analogy is that discrete structures focus on individual trees in the forest whereas continuous structures care about the landscape airplane view.
+	\item Discrete structure courses can be called "computer science semantics" in other universities. Mathematics for computer science.
+	\item Naive examples
+	\begin{itemize}
+		\item Counting techniques: There are two ice cream shops. One sells 20 different flavours whereas the other offers 1000 different combinations of three flavours. Which one has the most possible combinations of three flavours?
+		\item Cryptography: Two parties want to communicate securely over an insecure channel. Can they do it? Yes, using number theory. Discrete Structures are used in cryptography (what this question is about), coding theorem (compression of data) and optimization.
+		\item Graph Theory: Suppose you have 6 cities and you want to connect them with roads joining the least possible number of pairs, so that every pair is connected, perhaps indirectly. In how many ways can we connect these cities using 5 roads?
+	\end{itemize}
+	\item Before we address these problems, we must agree upon a language to formalize them.
+\end{itemize}
+
+\section{Sets}
+
+\subsection{Definition}
+A set is a collection of distinct objects which are called the elements of the set.
+
+Examples: We use a capital letter for sets.
+\begin{itemize}
+	\item $A = \{ Alice, Bob, Claire, Eve \}$
+	\item $B = \{ a, e, i, o, u \} = \{ o, i, e, a, u\}$
+	\item $\mathbb{N} = \{1, 2, 3, 4, 5, ...\}$ (natural numbers)
+	\item $\mathbb{Z} = \{.., -2, -1, 0, 1, 2, ..\}$ (integers)
+	\item $\emptyset = \{\} $ (no elements, note: $\{\emptyset \} \neq \emptyset \}$)
+	\item If x is an element of A we write $x \in A$ which is read "belongs", "is an element of" or "is in" e.g. $Alice \in A, Alice \notin \mathbb{N}$
+	\item We say that X is a subset of a set Y if for every $z \in X$ we have $z \in Y$ Notation: $X \subseteq Y$.
+	\item $\emptyset \subseteq \{1,2,3,4,5\} \subseteq \mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R} $
+\end{itemize}
+
+\subsection{Operations on sets}
+
+$U = \{1,2,3,4,5,6 .. 10\} = \{ x \in \mathbb{N}: x \leq 10\}$
+
+$A = \{2,4,6,8,10\} = \{x \in U: x $ is even$ \}$
+
+$B = \{2,3,5,7\} = \{x \in U: x $ is prime$ \}$
+
+An intersection $A \cap B$ is a set of all elements belonging to both A or B: $A \cap B = \{2\}$
+
+A union $A \cup B$ is a set of all elements belonging to either A or B: $A \cap B = \{2,3,4,5,6,7,8,10\}$
+
+$|A| = 5, |B| = 4, |A \cap B| = 1, |A \cup B| = 8 |\emptyset| = 0, |\mathbb{N}| = \infty$
+
+$A - B$: all elements of A which do not belong to B $\{x : x \in A, x \notin B\}$
+
+$A \oplus B, A \triangle B$: symmetric difference, set of all elements belonging to exactly one of A and B
+
+\subsection{Venn Diagrams}
+
+A way of depicting all possible relations between a collection of sets. For a set A, $|A|$ denotes the number of elements in it. 
+
+Typically, Venn diagrams are useful for 2 or 3 sets.
+
+\subsection{Theorems}
+
+\begin{itemize}
+	\item $A \cap (B \cup C) - (A \cap B) \cup (A \cap C)$
+	\begin{itemize}
+		\item Fact: For any two finites sets $|A| + |B| = |A \cap B| + |A \cup B|$
+		\item Proof:
+		\begin{enumerate}
+			\item $x \in A \cap (B \cup C)$ then $x \in (A \cap B) \cup (A \cap C)$
+			\begin{itemize}
+				\item $x \in A$ and $(x \in B$ or $x \in C)$
+				\item if $x \in B$ then $x \in (A \cap B)$ therefore $x \in (A \cap B) \cup (A \cap C)$
+				\item if $x \in C$ then $x \in (A \cap C)$ therefore $x \in (A \cap B) \cup (A \cap C)$
+			\end{itemize}
+			\item $x \in (A \cap B) \cup (A \cap C)$ then $x \in A \cap (B \cup C)$
+				\begin{itemize}
+					\item $x \in (A \cap B)$ therefore $x \in A$ and $x \in (B \cup C)$
+				\end{itemize}
+		\end{enumerate}
+
+	\end{itemize}
+		\item $A \oplus B = (A \cup B)-(A \cap B) = (A - B) \cup (B - A)$
+\end{itemize}
+
+% Wednesday September 7th
+
+
+\section{Logic}
+
+Way of formally organizing knowledge studies inference rules i.e. which arguments are valid and which are fallacies.
+
+\subsection{Propositional Calculus}
+
+A proposition is a statement (sentence) which is either true or false.
+
+Some examples:
+\begin{itemize}
+	\item $2 + 2 = 4 \rightarrow$ true
+	\item $2+3 = 7 \rightarrow$ false
+	\item "If it is sunny tomorrow, I will go to the beach." $\rightarrow$ valid proposition
+	\item "What is going on?" $\rightarrow$ not a proposition
+	\item "Stop at the red light" $\rightarrow$ not a proposition
+	\item We are given 4 cards. Each card has a letter (A-Z) on one side, a number (0-9) on the other side. "If a card has a vowel on one side then it has an even number on the other" Two ways to refute this proposition: Either turn over a vowel card and find an odd number. Or turn over an odd number and find a vowel.
+\end{itemize}
+
+\subsection{Notation}
+\begin{itemize}
+	\item Letters will be used to denote statements: p, q, r
+	\item $p \wedge q$: "and", "conjunction", "p and q" (are both true)
+	\item $p \vee q$: "or", "disjunction", "either p or q" (is true)
+	\item $\neg p$: "not", "p is false"	
+\end{itemize}
+
+\subsection{Truth Tables}
+
+\subsection{Rules of Logic}
+
+\begin{enumerate}
+	\item Double negation: $\neg (\neg p) \leftrightarrow p$
+	\item Indempotent rules: $p \wedge p \leftrightarrow p \qquad p \vee p \leftrightarrow p$
+	\item Absorption rules: $p \wedge (p \vee q) \leftrightarrow p \qquad p \vee (p \wedge q) \leftrightarrow p$
+	\item Commutative rules: $p \wedge q \leftrightarrow q \wedge p \qquad p \vee q \leftrightarrow q \vee p $
+	\item Associative rules: $p \wedge (q \wedge r) \leftrightarrow (q \wedge p) \wedge r \qquad p \vee (q \vee r)\leftrightarrow (p \vee q) \vee r$
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

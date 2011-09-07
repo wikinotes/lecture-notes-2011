@@ -1,0 +1,92 @@
+\documentclass[9pt, letterpaper, oneside]{article}
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\setlength{\headwidth}{500pt}
+\pagestyle{fancyplain}
+
+\usepackage[parfill]{parskip} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{fullpage}
+\usepackage[linktoc=section, colorlinks=true, urlcolor=blue]{hyperref}
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\date{}
+\begin{document}
+\lhead{Brought to you by WikiNotes. Join our \href{http://www.facebook.com/home.php?sk=group_166578420027385&ap=1}{facebook group} or take a look at our website on \href{http://www.wikinotes.ca}{wikinotes.ca}\newline}
+
+\section*{}
+\begin{center}
+\section*{COMP 251 by Andrea Sigler}
+\small{McGill University - Fall 2011} 
+\end{center}
+
+%%% Thursday September 1st 2011
+
+\paragraph{Course Information}
+
+\begin{itemize}
+\item When/Where: Tuesdays and Thursdays 2:35-4:00, Trottier 0100
+\item Instructor: Andrea Sigler, adrea.sigler@mail.mcgill.ca
+\item Textbook: Introduction to Algorithms, Cormen Leisterson
+\item Material: Graphs, Greedy, Divide+Conquer, Dynamic Programming, Network Flow
+\item Prerequisites: COMP 250
+\item Grading:
+	\begin{itemize}
+		\item 4 $\times$ 10\% homework
+		\item 1 $\times$ 10\% midterm
+		\item 50\% final
+	\end{itemize}
+\end{itemize}
+
+\subparagraph{Introduction to the Course}
+\newline
+\begin{itemize}
+	\item Lists
+		\begin{itemize}
+			\item Insert
+			\item Remove
+		\end{itemize}
+	\item Arrays
+		\begin{itemize}
+			\item Access in O(1)
+		\end{itemize}
+	\item Sets
+		\begin{itemize}
+			\item Intersect
+			\item Union
+		\end{itemize}
+	\item Algorithm
+		\begin{itemize}
+			\item Finite set of operations given many goals
+			\item Complexity: The amount of time and memory in correlation with the input required.
+		\end{itemize}
+	\item Turing machine
+		\begin{itemize}
+			\item Made by Alan Turing in 1936
+			\item
+			\item Can read, write, move left, move right.
+		\end{itemize}
+	\item Time Complexity
+		\begin{itemize}
+			\item uniform cost model
+			\item bit model
+			\item uses of an object
+				\begin{itemize}
+					\item given n coins and 1 balance
+					\item you are guaranteed all coins are the same weight except one is heavier
+					\item suggested solution: divide the pile in two and take the heaviest one, divide again until you reach one coin - complexity is $\log n$. In this case worst case scenario = best case scenario.
+					\item other suggested solution: put two coins on each side, then keep on adding one on each side until there's a heavier side. Best-case scenario = 1, worst case scenario = $n / 2 \forsome $
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+
+\end{document}
