@@ -1,0 +1,77 @@
+\documentclass[9pt, letterpaper, oneside]{article}
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\setlength{\headwidth}{500pt}
+\pagestyle{fancyplain}
+
+\usepackage[parfill]{parskip} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{fullpage}
+\usepackage[linktoc=section, colorlinks=true, urlcolor=blue]{hyperref}
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\date{}
+\begin{document}
+\lhead{Brought to you by WikiNotes. Join our \href{http://www.facebook.com/home.php?sk=group_166578420027385&ap=1}{facebook group} or take a look at our website on \href{http://www.wikinotes.ca}{wikinotes.ca}\newline}
+
+\section*{}
+\begin{center}
+\section*{Principles of statistics}
+\small{McGill University - Fall 2011} 
+\end{center}
+
+%%% Wednesday September 7st 2011
+
+\paragraph{Two methods for data collection}
+
+\begin{itemize}
+\item Experimental studies: The experiment is designed, the researcher has control over the units
+\item Observational studies
+\end{itemize}
+
+\subparagraph{Beware of confounding variables}
+\begin{itemize}
+\item A confounding variable is some variable that varies along with one of the variables of your study in a similar fashion which may be a wrong cause or influence your analysis. Example: Measuring the weight and IQ now and in ten years after graduation from Mcgill. You find both IQ and weight have increased. The real driving phenomenon behind this increase is not the attendance of Mcgill university, it's time.
+\item Dependent variable: lung cancer; Independent variable: heavy smoking, do yellow fingers cause yellow fingers?
+\item Muscle cramps are correlated to stress but are they correlated to coffee consumption?
+\end{itemize}
+
+\subparagraph{Best safeguard}
+Look for a cause or an illness and compare drugs using a specific protocol. Allocate the patient to either treatment using randomization. It involves randomly allocating the experimental units across the treatment groups.
+
+\paragraph{Categories of study design}
+\begin{itemize}
+\item Parallel-group: each participant is randomly assigned to a treatment.
+\item Crossover: over time, each participant receives treatment A or B in a random sequence
+\item Split-body: parts of the participant (e.g. the two hands) are randomized to receive treatment A and B
+\item Cluster: pre-existing groups (e.g. villages, schools) are randomly selected to receive treatment A or B
+\end{itemize}
+
+\chapter{Methods for summarizing data}
+
+Graphical: useful for building intuition
+numerical: useful for confirming the intuition
+Such methods are available both for qualitative (e.g. I like fast food very much) and quantitative data (e.g. weight, IQ)
+
+\paragraph{Qualitative Data}
+\begin{itemize}
+\item numerical: frequency, relative frequency
+\item graphical: bar charts and pie charts
+\end{itemize}
+
+\subparagraph{Examples}
+\begin{itemize}
+\item Births in Quebec: The number of births per month is higher in September. What looks like a slight variation from month to month on the bar chart can actually be systematic and statistically significant.
+\item UCB admission Data: See whether women were discriminated against for college admission. It looks like the women were discriminated against indeed: 1197 men for 557 women. Maybe the data was not chosen correctly. 44.3\% of men who applied were accepted whereas 30.3\% women were accepted, the result already seems less outrageous. Then, they looked at the data per program
+\end{itemize}
+
+\end{document}
