@@ -9,3 +9,4 @@
 \contentsline {subsection}{\numberline {2.2}Notation}{4}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Truth Tables}{4}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Rules of Logic}{4}{subsection.2.4}
+\contentsline {paragraph}{Example}{4}{section*.4}
