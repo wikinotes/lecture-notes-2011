@@ -106,7 +106,7 @@ Typically, Venn diagrams are useful for 2 or 3 sets.
 \subsection{Theorems}
 
 \begin{itemize}
-	\item $A \cap (B \cup C) - (A \cap B) \cup (A \cap C)$
+	\item $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
 	\begin{itemize}
 		\item Fact: For any two finites sets $|A| + |B| = |A \cap B| + |A \cup B|$
 		\item Proof:
@@ -172,13 +172,57 @@ Some examples:
 	$p \vee (\neg ((\neg p) \wedge (\neg q))) \leftrightarrow  p \vee (p \vee q) \leftrightarrow (p \vee p) \vee q \leftrightarrow p \vee q$
 \end{enumerate}
 
-\paragraph{Example}
-\begin{itemize}
-\item p = "For lunch I will have a sandwich"
-\item q = "For lunch, I will have a soup"
-\item r = "For lunch, I will have a salad"
 
+\subsubsection{Conditional Statements}
+
+\begin{enumerate}
+	\item $p \rightarrow q$
+	\begin{itemize}
+	\item Theorem: if (an assumption holds), then (the conclusion holds).
+	\item Implication: "if p then q"\\
+		p = "a, b, \& c are two sides and the hypthenuse of a triangle"\\
+		q = "$a^2 + b^2 = c^2$"
+	\item $p \rightarrow q$ "If p then q" p implies q, p is sufficient for q\\
+		$(p \rightarrow q) \leftrightarrow (q \vee (\neg p))$
+		% insert truth table 1
+	\item Examples: 
+		\begin{itemize}
+			\item "If the Riemann hypothesis is true then 2 + 2 = 4" TRUE\\
+			p = "the Riemann hypothesis"\\
+			q = "2+2=4"\\
+			True proposition is implied by any proposition.
+			\item "If pigs can fly then pigs can get sun burned" TRUE\\
+			False statement implies any statement
+			\item "If 2+2 =4 then pigs can fly" FALSE\\
+			The implication is false only if the assumption holds and the conclusion does not.
+		\end{itemize}
+		% insert truth table 2
+	\end{itemize}
+	\item $p \rightarrow q \leftrightarrow (\neg p) \rightarrow (\neg q)$
+	\item $(p \rightarrow q) \wedge (q \rightarrow p) \leftrightarrow (p \leftrightarrow q)$
+\end{enumerate}
+
+\paragraph{puzzle}
+
+There are three boxes A, B, C. Exactly one contains gold in it.
+\begin{itemize}
+	\item Box A: Gold is not in this box
+	\item Box B: Gold is no in this box
+	\item Box C: Gold is in box A
 \end{itemize}
+Exactly one of these propositions is true. Where is the gold?
+Let us formalize the propositions.
+\begin{itemize}
+	p:  "Gold is in box A"
+	q:  "Gold is in box B"
+	r:  "Gold is in box C"
+	Box A: q \vee r
+	Box B: p \vee r
+	Box C: p
+	p \rightarrow (p \vee r)
+	\neg (p \vee r) \rightarrow q
+\end{itemize}
+
 
 
 
