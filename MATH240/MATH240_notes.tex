@@ -16,6 +16,7 @@
 %\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
+\newcommand*\dbl{\leftrightarrow}
 
 
 \title{MATH 240 - Discrete Structures}
@@ -140,11 +141,11 @@ A proposition is a statement (sentence) which is either true or false.
 
 Some examples:
 \begin{itemize}
-	\item $2 + 2 = 4 \rightarrow$ true
-	\item $2+3 = 7 \rightarrow$ false
-	\item "If it is sunny tomorrow, I will go to the beach." $\rightarrow$ valid proposition
-	\item "What is going on?" $\rightarrow$ not a proposition
-	\item "Stop at the red light" $\rightarrow$ not a proposition
+	\item $2 + 2 = 4 \to$ true
+	\item $2+3 = 7 \to$ false
+	\item "If it is sunny tomorrow, I will go to the beach." $\to$ valid proposition
+	\item "What is going on?" $\to$ not a proposition
+	\item "Stop at the red light" $\to$ not a proposition
 	\item We are given 4 cards. Each card has a letter (A-Z) on one side, a number (0-9) on the other side. "If a card has a vowel on one side then it has an even number on the other" Two ways to refute this proposition: Either turn over a vowel card and find an odd number. Or turn over an odd number and find a vowel.
 \end{itemize}
 
@@ -176,14 +177,14 @@ Some examples:
 \subsubsection{Conditional Statements}
 
 \begin{enumerate}
-	\item $p \rightarrow q$
+	\item $p \to q$
 	\begin{itemize}
 	\item Theorem: if (an assumption holds), then (the conclusion holds).
 	\item Implication: "if p then q"\\
 		p = "a, b, \& c are two sides and the hypthenuse of a triangle"\\
 		q = "$a^2 + b^2 = c^2$"
-	\item $p \rightarrow q$ "If p then q" p implies q, p is sufficient for q\\
-		$(p \rightarrow q) \leftrightarrow (q \vee (\neg p))$
+	\item $p \to q$ "If p then q" p implies q, p is sufficient for q\\
+		$(p \to q) \leftrightarrow (q \vee (\neg p))$
 		% insert truth table 1
 	\item Examples: 
 		\begin{itemize}
@@ -197,12 +198,12 @@ Some examples:
 			The implication is false only if the assumption holds and the conclusion does not.
 		\end{itemize}
 		% insert truth table 2
+	\item $p \to q \leftrightarrow (\neg p) \to (\neg q)$
+	\item $(p \to q) \wedge (q \to p) \leftrightarrow (p \leftrightarrow q)$
 	\end{itemize}
-	\item $p \rightarrow q \leftrightarrow (\neg p) \rightarrow (\neg q)$
-	\item $(p \rightarrow q) \wedge (q \rightarrow p) \leftrightarrow (p \leftrightarrow q)$
 \end{enumerate}
 
-\paragraph{puzzle}
+\paragraph{Puzzle}
 
 There are three boxes A, B, C. Exactly one contains gold in it.
 \begin{itemize}
@@ -213,40 +214,309 @@ There are three boxes A, B, C. Exactly one contains gold in it.
 Exactly one of these propositions is true. Where is the gold?
 Let us formalize the propositions.
 \begin{itemize}
-	p:  "Gold is in box A"
-	q:  "Gold is in box B"
-	r:  "Gold is in box C"
-	Box A: q \vee r
-	Box B: p \vee r
-	Box C: p
-	p \rightarrow (p \vee r)
-	\neg (p \vee r) \rightarrow q
+	\item p:  "Gold is in box A"
+	\item q:  "Gold is in box B"
+	\item r:  "Gold is in box C"
+	\item Box A: $q \vee r$
+	\item Box B: $p \vee r$
+	\item Box C: p
+	\item $p \to (p \vee r)$
+	\item $\neg (p \vee r) \to q$
 \end{itemize}
 
+%%% Monday Sept 12th
 
+\subsection{Tautologies \& Contradictions}
 
+\paragraph{Definition}
+\begin{itemize}
+	\item A \textbf{tautology} is a statement that is always true (the rightmost column of the corresponding truth table has T in every row) e.g. $p \vee (\neg p)$
+	\item A \textbf{contradiction} is a statement that is always false e.g. $p \wedge (\neg p)$
+\end{itemize}
 
+\paragraph{Notation}
+\begin{itemize}
+	\item 1 denotes a tautology
+	\item 0 denotes a contradiction
+	\item $1 \vee p \leftrightarrow 1$
+	\item $0 \vee p \leftrightarrow p$
+	\item $1 \wedge p \leftrightarrow p$
+	\item $0 \wedge p \leftrightarrow 0$
+\end{itemize}
 
+\begin{itemize}
+\item $p \wedge (p \vee q)$\\
+\begin{tabular}{| l | l | l | l | }
+  p & 1 & $p \vee q$  & $p \wedge (p \vee q)$\\
+  T & T & T & T \\
+  T & F & T & T \\
+  F & T & T & F \\
+  F & F & F & F \\
+\end{tabular} \\
+$\to$ Not a tautology and not a contradiction \\
+$p \wedge (p \vee q) \leftrightarrow p$ (one of the rules)
+\item $p \vee (p \wedge q) \vee (p \to q) \leftrightarrow (p \vee (p \wedge q)) \vee (p \to q)$ \\
+$(p \to q) \leftrightarrow (\neg p) \vee q \leftrightarrow p \vee (p \to q)$\\
+$\leftrightarrow p \vee ((\neg p) \vee q) (absorption)$\\
+$\leftrightarrow (p \vee (\neg p))\vee q$\\
+$\leftrightarrow 1 \vee q \leftrightarrow 1$
+\end{itemize}
 
+\subsection{Proofs}
+\begin{itemize}
+	\item $(p \to q) \wedge (q \to r) \to (p \to r)$ (always true)
+	\item Implication is transitive: $p \to q \to r$
+	\item A \textbf{proof} of a conclusion q given premise p is a sequence of implications (valid) $p \to p_2 \to p_3 \to .. \to p_k \to q$
+	\item To prove $(p \leftrightarrow q)$ \\
+		$\qquad (p \leftrightarrow q) \leftrightarrow (p \to q) \wedge (q \to p)$
+	\item Theorem: Let p(x) be a polynomial then p(0) = 0 if and only if p(x) = x q(x) for some polynomial q(x)
+	\item Proof: "p(0) = 0" and "p(x) = x q(x) for some polynomial q(x)"
+	\begin{enumerate}
+		\item $p(x) = a_nx^n + a_{n -1}x^{n-1} + ... + a_1x + a_0$ \\
+			$p(0) = 0 \to a_0 = 0 \to$ \\
+			$p(x) = a_nx^n + a_{n -1}x^{n-1} + ... + a_1x \to$ \\
+			$p(x) = x(a_nx^{n-1} + a_{n -1}x^{n-2} + ... + a_1$ \\
+			$p(x) = xq(x)$ \\
+			$q(x) = a)nx^{n-1} + a_{n-1}x^{n-2} + ... + a_2$ \\
+			True so proven.
+		\item $p(x) = x q(x) \to p(0) = 0 \cdot q(0) \to q(0) = 0$
+	\end{enumerate}
+	\item Proof by contradiction: $(p \to q) \leftrightarrow ((\neg q)\to (\neg p))$
+	\item Pigeonhole principle: We place an objects into m bins. If $n > m$ then some bin contains at least 2 objects.
+	\item Proof: p = "$n > m$" and q = "Some bin contains at least 2 objects" \\
+	$\neg q$ = "every bin contains at most 1 object" \\
+	$\neg p$ = "$n \leq m$"
+	$\neg q \to\ \neg p$ is trivial
+	\item Theorem: There are infinitely many prime numbers \\
+		Direct proof of this theorem is unlikely, there is no known simple formula producing prime numbers
+	\item Proof: Assume $\neg p$. There are infinitely many prime numbers $p_1, p_2, p_3 .. p_k$ \\
+	Consider $p = p_1p_2...p_k + 1$
+	Every integer greater than 1 is divisible by a prime. (Prime number is the integer divisible by only 1 and itself).
+	Suppose $p = p_im$ for some $1 \leq i \leq k$ and an integer m, then $p_i(p_1p_2...p_{i-1}p_{i+1}...p_k) + 1 = p_im$
+	$p_i(m - p_1p_2..p_k) = 1$ (except $p_1$)
+	"1 is divisible by $p_i$, a contradiction"
+\end{itemize}
 
+%%% Wednesday September 14th
 
+\section{Circuit Complexity}
 
+\subsection{Boolean Logic}
 
+\begin{itemize}
+	\item \textbf{Objects}: statements p, 1
+	\item \textbf{Operators}: $\vee, \wedge, \neg$, etc
+\end{itemize}
 
+\subsection{Logic Gates}
 
+Will insert logic gate diagrams later when I figure how to insert images.
+%%% INSERT LOGIC GATES DIAGRAMS
 
+\begin{tabular}{| l | l | l | l | l | }
+  p & q & r  & $p \oplus q$ & $(p \oplus q) \oplus r$\\
+  1 & 1 & 1 & 0 & 1 \\
+  1 & 1 & 0 & 0 & 0\\
+  1 & 0 & 1 & 1 & 0\\
+  1 & 0 & 0 & 1 & 1\\
+  0 & 1 & 1 & 0 & 0 \\
+  0 & 1 & 0 & 1 & 1\\
+  0 & 0 & 1 & 1 & 1\\
+  0 & 0 & 0 & 0 & 0\\
+\end{tabular} \\
 
+\paragraph{Majority Circuit (for 3 inputs)}
 
+p, q, r $\to$ 
+$\begin{cases}
+	$1 (or T) if at least 2 of p, q \& r are 1's$ \\
+	$0 (or F) otherwise$
+\end{cases}$
 
+\paragraph{Size}
+A logical circuit has size equal to the number of gates in it and depth equal to the length (or number of gates) of the longest path from an input to the final output.
 
+Given a boolean formula, what is the minimum size (or depth) of a circuit necessary to compute it?
+(depth is frequently assumed to be constant).
 
+Given a circuit C with inputs $p_1, p_2, ..., p_n$
 
+Can we test if C is always a contradiction? The answer is trivially yes, if we test all possible inputs. It would take $2^n$.
 
+\subsection{Algorithms}
+\begin{itemize}
+	\item Every logic formula can be represented as a combinational circuit
+	\item Can we represent a given formula by a "simple" circuit
+	\item Given a circuit (with inputs $p_1, p_2, ..., p_n$ can we test quickly if C is a contradiction? (we can test in $2^n steps$
+	\item \textbf{Algorithm}: A step-by-step procedure for solving a problem, precise enough to be carried out on a computer
+\end{itemize}
 
+%%% MISSED
 
+%%% Friday September 16th
+\section{Polytime algorithms P\# NP conjecture}
 
+\subsection{Definition}
+Given algorithm A its running time $t_A(n) =$ maximum number of steps the algorithm can require on inputs of size n
 
+A is a \textbf{polynomial time} algorithm if $t_A(n)$ is polynomially bounded ($t_A(n)=O(n^2)) \dbl$ fast, efficient
 
+P is class of problem which allow polynomial time algorithms.
 
+\paragraph{Examples}
+
+\begin{enumerate}
+	\item Evaluating the median of a set of numbers
+	\begin{itemize}
+		\item Problem: $x_1, x_2, .., x_n \leftarrow$ Input
+		\item Question: decide whether the median of the list is $\leq 1000$
+		\item Algorithm: 
+		\begin{itemize}
+			\item Sort the list going once through the list ($\leq n$ steps) we can find smallest $x_i$
+			\item Repeat to find the second smallest number and so on
+			\item Requires $O(n^2)$ time to sort
+			\item Check if $x_{\frac{n}{2}} ( x_{\frac{n}{2}})$ is at most 1000 (roughly $n^2$ steps polytime).
+		\end{itemize}
+	\end{itemize}
+	\item Multiplication
+		\begin{itemize}
+			\item Input: $2 n$ digit numbers
+			\item Output: $a \times b$
+			\\ roughly $n^2$ steps
+		\end{itemize}
+	\item Problem Factoring
+		\begin{itemize}
+			\item Input: a composite number C
+			\item Output: Find natural numbers $a, b > 1, c = a \times b$
+			\item Brute-Force search: Try all prime numbers up to C. Time: $10^{n/2} \to$ exponential time algorithm
+			\item RSA ran contests until 2007 offering prizes for factoring (roughly 20 computer years for factoring 200 digit numbers)
+		\end{itemize}
+\end{enumerate}
+
+\subsection{NP problems (non-deterministic polynomial time)}
+
+\begin{itemize}
+\item
+A \textbf{decision problem} is a problem with a yes/no answer.
+Example: 
+	\begin{itemize}
+	\item Input: a combinatorial circuit (with n inputs)
+	\item Output: Is C \textbf{not} a contradiction?
+	\end{itemize}
+\item
+A decision problem is in the class NP if a "yes" answer always has a certificate which can be verified in polynomial time.
+\item
+A problem is in NP when the answer is positive. A magician can quickly convince you that it is e.g. "testing that a circuit is not a contradiction" is in NP.
+\item
+If there exists a set of values for inputs so that the circuit outputs 1 (or T) then given this collection of inputs verifying that it works is fast.
+\end{itemize}
+
+\paragraph{Examples}
+\begin{enumerate}
+\item Factoring:
+	\begin{itemize}
+	\item Input: n digit number
+	\item output: Is this number composite and if it is, factor it.
+	\end{itemize}
+\item Traveling Salesman problem:
+	\begin{itemize}
+	\item Input: Collection of n cities and distances between them
+	\item Travelling salesman tour: An ordering of cities $c_1 \to c_2 \to ... \to c_n$ visiting each city once
+	\item Question: Is there a tour of total length $\leq 1000$ miles $\to$ is in NP
+	\end{itemize}
+\end{enumerate}
+
+\subsection{$P \neq NP$}
+
+There exist problems which cannot be solved efficiently but for which a positive answer can be verified efficiently. There exists problems for which brute-force search is essentially the best possible strategy. If there are problems where you need a magician, then it is NP.
+
+If there exists a problem in NP but not in P (if the conjecture is true) then testing if a circuit is a contradiction, travelling salesman problem, and a very large class of similar problems are all not in P
+
+If P = NP then airline scheduling, protein folding, packing boxes, finding short proof for theorems all can be done efficiently but certain cryptography becomes impossible.
+
+The universal opinion is that $P \neq NP$
+
+\subsection{Scott Aovonson's reasons for $P \neq NP$}
+
+Empirical: Problems in NP remain heuristically hard, however problems which are now known to be in P (linear programming, primality testing) but efficient heuristics existed long before.
+
+%%%%% Monday September 19th
+
+\section{Proof Techniques: Predicate calculus}
+
+\paragraph{Reminder}
+
+A proof is a sequence of implications deriving a conclusion q from a premise p: $p \to q$
+
+\begin{itemize}
+\item Direct Proof: $p \to p_1 \to p_2 \to p_3 .\to ... \to p_k \to q$
+\item Proof by contradiction: $p \to q \dbl (\neg q \to \neg p)$
+\item Case Analysis: $(p \wedge q \to r) \dbl (p \to r) \wedge (q \to r)$ See below
+\item Counter Examples: See below
+\end{itemize}
+
+\paragraph{Case Analysis}
+\begin{itemize}
+\item Proposition: For positive integer n: $3 \nmid n \to 3 \mid n^2 + 2$\\
+	($a\mid b \to$ "a divides b" there exists an integer c, b = ac)
+	Proof: Divide n by 3 with remainder
+\end{itemize}
+
+%% missed the proof
+
+\paragraph{Couter Example}
+	\begin{itemize}
+		\item Proposition: $n^2 + n + 1$ is prime for every positive integer n $\leq$ 10
+		\item $4^2 + 4 + 1 = 21 = 7 \cdot 3$
+		\item This is a counter example: the statement is false
+		\item Mathematical Notation
+		\begin{itemize}
+		\item $p \to q \wedge r \to p \to q$
+		\item $\neg(p \to q) \to \neg(p \to q \wedge r)$ 
+		\item q is a counter example to the implication "$n^2 + n + 1$ is prime for all integers n " 			\item "$n^2+ n + 1$ is prime" $\leftarrow$ P(n) predicate proposition depending on a variable
+		$\forall n \in \mathbb{Z}(P(n))$\\
+		Note: $\forall$  means "for all" e.g. "For all n in the set of integers the predicate "$n^2 + n + 1$"is prime" is true
+		\item "There exists an integer n so that $n^2 + n + 1$ is not prime" is noted $\exists n \in \mathbb{Z}(Q(n))$ where Q(n) "$n^2 + n + 1$ is not prime" i.e. $Q(n) \neg P(n)$
+		\end{itemize}
+\end{itemize}
+
+\paragraph{Goldback's conjecture}
+Every even integer bigger than 2 is expressible as a sum of 2 primes.
+\begin{itemize}
+\item $\forall n \in$ "even integers", $n > 2 \to (\exists a, b \in \{primes\} (n = a + b))$)
+\item
+"71 is prime"
+\item
+$\forall a, b \in \mathbb{N} ( a \cdot b = 71) \to ((a = 1) \wedge (b=71))$
+\end{itemize}
+
+\paragraph{Limits}
+\begin{itemize}
+\item
+"f(x) as a limit L as x $\to$ a" "$lim_{x \to a} f(x) = L$" As x approaches a f(x) becomes closer and closer to L"
+\item
+"For every $\epsilon > 0$, there exists $\delta > 0$ so that if $| x - a | < \delta then |f(x) - L |< \epsilon$"
+\item
+"$\forall \epsilon > 0 (\exists \delta > 0 (|x-a|<\delta \to |f(x) - L | < \epsilon))$
+\item
+"$lim_{x \to \infty} f(x) = L" \forall \epsilon > 0 (\exists X \cdot (\forall x > X (|f(x) - L| < \epsilon)))$
+\end{itemize}
+
+\paragraph{P(n) :  "$n^2 + n + 1$ is prime"}
+\begin{itemize}
+\item
+$\neg(\forall n \in A : P(n)) \dbl \exists n \in A (\neg P(n))$
+\item
+$\forall n \in A : P(n) \dbl \neg(\exists n \in A (\neg P(n))$
+\end{itemize}
+\paragraph{"$\sin x$ does not have a limit as $x \to \infty$"}
+\begin{align*}
+\neg(\exists L : lim_{x \to \infty} \sin x = L)
+&\dbl \forall L : (\neg (lim(\sin x) = L)\\
+&\dbl \forall L (\neg(\forall \epsilon > 0 (\exists X (\forall x > X (|\sin x - L| <\epsilon)))))\\
+&\dbl \forall L (\exists \epsilon > 0 (\neg (\exists X (\forall x > X (|\sin x - L| <\epsilon)))))\\
+&\dbl \forall L (\exists \epsilon > 0 (\neg (\exists X (\forall x > X (|\sin x - L| <\epsilon)))))\\
+&\dbl \forall L (\exists \epsilon > 0 (\forall X (\exists x > X(|\sin{x} -L | \geq \epsilon))))\\
+\end{align*}
 
 \end{document}
