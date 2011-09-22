@@ -519,4 +519,66 @@ $\forall n \in A : P(n) \dbl \neg(\exists n \in A (\neg P(n))$
 &\dbl \forall L (\exists \epsilon > 0 (\forall X (\exists x > X(|\sin{x} -L | \geq \epsilon))))\\
 \end{align*}
 
+%%% Wednesday September 21st
+
+\subsection{Divisibility Problem}
+We want to prove the following theorem:
+\begin{itemize}
+\item Any collection of n+1 numbers chosen from the set \{1,2,...,2n\} contains two numbers so that one is divisible by the other.
+\item $\forall n \in \mathbb{N} (\forall s \subseteq \{1,2,...,2n\} (|S| = n + 1) \to \exists a,b \in S ((a | b) \wedge (a + b)))$
+\end{itemize}
+
+\paragraph{Reminder: the pigeonhole principle} 
+
+If $n+1$ objects are placed into n boxes then some box contains $\geq 2$ objects. To apply the principle we want to partition $\{1,2,...,2n\}$ into n subjects. 
+
+\paragraph{Partition} We say that a collection $A_1, A_2, ... A_k$ of subsets of a set B is a \textbf{partition} of B if
+\begin{enumerate}
+	\item $\forall i,j : 1 \leq i < \leq k \qquad A_i \cap A_j = \emptyset$ (no element of B belongs to two different parts)
+	\item $A_1 \cup A_2 \cup ... \cup A_k = B$
+\end{enumerate}
+
+Example: \{1,2,3,4,5,6,7,8\} \qquad \{1,2,4,6,8\} , \{3, 5\} , \{7\}
+
+\paragraph{Proof} By the pigeonhole principle it suffices to find a partition $A_1, A_2, ... A_n$ of \{1,2,...,2n\} so that $(\forall i (\forall a,b \in A_i (a|b \vee b|a)))$
+
+Here is a construction:
+$A_i = \{(2i + 1), 2(2i -1), 4(2i -1), ..., 2^m(2i-1)\}$ up to maximum m: $2^m (2i-1) \leq 2n$
+\begin{enumerate}
+\item $A_i$ satisfies the desired property for all i
+\item $A_1, A_2, .., A_n$ is a partition of \{1,2,...,2n\} \\
+Ever positive integer can be uniquely written in a form $2^m(2i - 1)$ for some $i \geq 1, m \geq 0$
+\end{enumerate}
+
+Note: Is it true for some n:
+"Every collection of n numbers chosen from \{1,2,...,2n\} contains 2 numbers one dividing the other"?
+
+Counter-example: $n = 2 \quad \{1,2,3,4\} \to \{3,4\}$
+
+%%% missed big chunk here
+
+
+\subsection{Strangers and Clubs}
+
+For a collection of people any two of them either have met or haven't . A club is a group of people who have pairwise met each other. A group of strangers is a group of people who pairwise have not met each other
+
+Theorem: In any collection of 6 people rhwew is either a club of 3 people or a group of 3 strangers.
+
+Proof Let x be one of the people in the collection. The following cases apply
+\begin{enumerate}
+	\item x has at least 3 acquaintances
+	\begin{enumerate}
+		\item Some two of acquaintances of x, say y \& z know each other. Then \{x, y, z\} form a club.
+		\item No two acquaintances of x know each other. Then they form a group of strangers.
+	\end{enumerate}
+	\item x has at most 2 acquaintances there one ate least 3 people
+\end{enumerate}
+
+\subsection{Social Choice Function}
+3 candidates A, B \& C:
+\begin{itemize}
+	\item 49\% of electorate A > B > C
+	\item 48 \% of electorate B > A > C
+	\item 3\% of electorate C > B > A
+\end{itemize}
 \end{document}
