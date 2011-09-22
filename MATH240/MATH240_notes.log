@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  19 SEP 2011 12:28
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  22 SEP 2011 14:39
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -424,22 +424,38 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 439.
 
 [9] [10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 523.
- [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 523.
+Overfull \hbox (0.41986pt too wide) in paragraph at lines 543--544
+ []\OT1/cmr/bx/n/10 Proof[] \OT1/cmr/m/n/10 By the pi-geon-hole prin-ci-ple it 
+suf-fices to find a par-ti-tion $\OML/cmm/m/it/10 A[]; A[]; :::A[]$ \OT1/cmr/m/
+n/10 of \OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 1,2,...,2n\OMS/cmsy/m/n/10 g \OT1/cmr
+/m/n/10 so that $(\OMS/cmsy/m/n/10 8\OML/cmm/m/it/10 i\OT1/cmr/m/n/10 (\OMS/cms
+y/m/n/10 8\OML/cmm/m/it/10 a; b \OMS/cmsy/m/n/10 2
+ []
+
+[11]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 584.
+ [12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 584.
  (./MATH240_notes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 523.
-Package rerunfilecheck Info: File `MATH240_notes.out' has not changed.
-(rerunfilecheck)             Checksum: 41D61895E5BED4218E8CDAC0ADF608BF;1534.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 584.
+
+
+Package rerunfilecheck Warning: File `MATH240_notes.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `MATH240_notes.out':
+(rerunfilecheck)             Before: 771D9F43939E426AE37A4A6559317180;1676
+(rerunfilecheck)             After:  DDE4F6337EB9763796A065F25B7269EB;1745.
  ) 
 Here is how much of TeX's memory you used:
- 5853 strings out of 493747
- 84899 string characters out of 3143546
+ 5872 strings out of 493747
+ 85104 string characters out of 3143546
  167542 words of memory out of 3000000
- 8961 multiletter control sequences out of 15000+200000
+ 8965 multiletter control sequences out of 15000+200000
  11503 words of font info for 45 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 41i,12n,43p,351b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,11n,43p,351b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -455,10 +471,10 @@ ive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/
 2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/20
 10/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on MATH240_notes.pdf (11 pages, 195448 bytes).
+Output written on MATH240_notes.pdf (12 pages, 201234 bytes).
 PDF statistics:
- 307 PDF objects out of 1000 (max. 8388607)
- 276 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
- 193 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 339 PDF objects out of 1000 (max. 8388607)
+ 306 compressed objects within 4 object streams
+ 84 named destinations out of 1000 (max. 500000)
+ 209 words of extra memory for PDF output out of 10000 (max. 10000000)
 
