@@ -574,11 +574,707 @@ Proof Let x be one of the people in the collection. The following cases apply
 	\item x has at most 2 acquaintances there one ate least 3 people
 \end{enumerate}
 
-\subsection{Social Choice Function}
+\section{Social Choice Function}
+
+\subsection{Definition}
 3 candidates A, B \& C:
 \begin{itemize}
 	\item 49\% of electorate A > B > C
 	\item 48 \% of electorate B > A > C
 	\item 3\% of electorate C > B > A
 \end{itemize}
+
+Given a collection of voters $v_1, v_2, ..., v_n$ and several candidates A, B, C, D, ...
+
+Each voter ranks the candidates according to his preferences:
+
+$A >^{v_2} B >^{v_2} C >^{v_2} D \qquad >^{v_i} is the ordering produced by the i^{th} voter$
+
+\paragraph{Permutation}
+
+(A, D, B, C) of the set of candidates \{A, B, C, D \}
+
+Social choice function takes as an input voter's ordering and produces a consensus ordering and produces a consensus ordering $f(>^{v_1},>^{v_2},,...,>^{v_n}) = \quad >$
+
+What conditions should a good SCF satisfy?
+\begin{enumerate}
+	\item \textbf{Unanimity}: If every voter prefers $\alpha$ to $\beta$ then the consensus ordering must rank $\alpha$ above $\beta$ \\
+	$(\forall \vee (\alpha >^{v} \beta)) \to (\alpha > \beta)$
+	\item \textbf{Independence on irrelevant alternatives (IAA)}
+	The final relative ordering of $\alpha$ and $\beta$ should depend only on relative orderings of $\alpha$ and $\beta$ (If a candidate withdraws from election this doesn't affect the order of others). 
+\end{enumerate}
+
+Which social choice functions satisfy these properties?
+
+What happens with majority? $\alpha > \beta$ if more than half of the voters prefer $\alpha$ to $\beta$:
+\begin{itemize}
+	\item $v_1 : A >^{v_1} B >^{v_1} C $
+	\item $v_2 : C >^{v_2} A >^{v_2} B $
+	\item $v_3 : B >^{v_3} C >^{v_3} A $
+\end{itemize}
+
+How does this work? There is a conflict here...
+
+Dictatorship: For some fixed voter d we have ($\alpha > \beta$) if and only if ($\alpha >^d \beta$)
+
+\subsection{Arrow's impossibility Theorem (1951)} 
+The only social choice function satisfying unanimity and IIA is a dictatorship.
+
+\paragraph{Proof}
+
+Unanimity $\wedge$ IIA $\to$ dictatorship
+
+Let $>$ satisfy these two properties $\beta$ is called a polarizing candidate if every voter ranks him.her at the very top or the very bottom of the list.
+
+\textbf{Claim} A polarizing candidate ranks first or last in the consensus ordering $>$
+
+\textbf{Proof} Suppose not $\alpha > \beta > \gamma $ where $\beta$ is a polarizing candidate
+
+\begin{tabular}{| l | l | l | l | }
+  $\beta$ & $\beta$ & $\alpha$  & $\gamma$\\
+  $\alpha$ & $\gamma$ & $\gamma$  & $\alpha$\\
+  $\gamma$ & $\alpha$ & $\beta$  & $\beta$\\
+\end{tabular}
+
+Switch $\alpha$ and $\gamma$ in voter's preferences so that every voter prefers $\gamma$ to $\alpha$. We should still have $\alpha > \beta > \gamma$ because relative positions of $\alpha$ and $\beta$ and relative positions of $\beta$ and $\gamma$ are unchanged. By unanimity we should now have $\gamma > \alpha$ (contradiction QED)
+
+
+Choose a candidate $\beta$
+
+\begin{tabular}{| l | l | l | l | }
+  $\beta$ & $\beta$ & $\alpha$  & $\gamma$\\
+  $\alpha$ & $\gamma$ & $\gamma$  & $\alpha$\\
+  $\beta$ & $\beta$ & $...$  & $\beta$\\
+  $v_1$ & $v_2$ & $...$  & $v_n$\\
+\end{tabular}
+$\to$
+\begin{tabular}{| l | l | l | l | }
+  $\beta$ & $-$ & $-$  & $-$\\
+  $\alpha$ & $\gamma$ & $\gamma$  & $\alpha$\\
+  $-$ & $\beta$ & $...$  & $\beta$\\
+  $v_1$ & $v_2$ & $...$  & $v_n$\\
+\end{tabular}
+
+%%% missed
+
+So there exists a voter $v^*$ so that
+\begin{tabular}{| l | l | l | l | }
+  $\beta$ & $-$ & $-$  & $-$\\
+  $\alpha$ & $\gamma$ & $\gamma$  & $\alpha$\\
+  $-$ & $\beta$ & $...$  & $\beta$\\
+  $v_1$ & $v_2$ & $...$  & $v_n$\\
+\end{tabular}
+
+Goddammit. Disregard this last section (the whole theorem). I will fix it later.
+
+\section{Proofs}
+
+\subsection{The well-ordering principle}
+\begin{itemize}
+	\item \textbf{The well-ordering principle} \\
+	Every non empty subset of non-negative integers has a smallest element.
+	\item \textbf{The induction principle}\\
+	 "P(n) is true for all natural numbers b"
+\end{itemize}
+
+\subsubsection{Proofs using the well-ordering principle}
+
+\paragraph{Claim}
+There exists subsets of non-negative rational numbers with no smallest element.
+
+$\{x \in \mathbb{Q} | x > 1\}$ ($\mathbb{Q}$ is the set of rational numbers\}
+
+Suppose $x_0<x_1$, $x_0 \in \mathbb{Q}$ is a smallest element of this set $x_0 = \frac{m}{n} \quad m > n$
+
+(missed)
+%$1 < x^1 = $
+\paragraph{Proving the irrationality of $\sqrt{2}$}
+\begin{itemize}
+	\item \textbf{Theorem} $\sqrt{2}$ is irrational.
+	\item \textbf{Proof} Suppose $\sqrt{2}$ is rational (Proof by contradiction) \\
+		$c = \{m \in \mathbb{N} | \exists n \in \mathbb{N} (\sqrt{2} = m / n)\}$ \\
+		Our assumption is equivalent to the statement $C \neq \emptyset$ \\
+		By the well-ordering principle there exists $m_0$ the smallest element of C \\
+		$\sqrt{2} = \frac{m_0}{n_0} \to 2 = \frac{m_0^2}{n_0^2} \to 2n_0^2 = m_0^2 \to m_0 = 2m' \to 2n_0^2 = 4m'^2 \to n_0^2 = 2m'^2 \to n_0 = 2n' \to (2n')^2  = 2m'^2 \to 2n'^2 = m'^2 \to \sqrt{2}n' = m' \to \sqrt{2} = \frac{m'}{n'} \to m \in C$ but $m' < m_0$
+	\item	There is a contradiction as $m_0$ was chosen to be the smallest element of C.
+\end{itemize}
+
+\subsubsection{Method}
+Structure of the proofs using well-ordering principle: \\
+"P(n) is true for all positive integeres n" (In our theorem P(m) := "$\neg(\exists n \in \mathbb{N} \quad \sqrt{2} = \frac{m}{n})$"
+	\begin{enumerate}
+		\item $C = \{ n \in \mathbb{N} |$ P(n) is False $\}$
+		\item Assume for a contradiction that $C \neq \emptyset$
+		\item By the well-ordering principle we can choose $n_0$ the smallest element of C
+		\item Obtain the contradiction to this choice (for example show that $n_0 \notin C$)
+	\end{enumerate}
+
+Theorem
+Every positive integer bigger than 1 can be expressed as a product of prime numbers (being prime counts).
+
+Statement
+P(n) = "If n > 1, then n can be expressed as product of prime numbers
+
+C = $\{n \in \mathbb{N} : n > 1$ n can be expressed as such a product\}
+
+Choose $n_0$ to be a smallest element of C (We are using proof by contradiction)
+
+\begin{itemize}
+	\item Case 1: $n_0$ is prime \\
+	This can't happen. $n_0$ by itself would be a valid product
+	\item Case 2: $n_0$ is not prime \\
+	      $n_0 = ab \qquad 1 < a,b < n_0 \qquad a,b \in \mathbb{N}$ \\
+	      Therefore as $a, b \notin C$, so $a = p_1p_2p_3...p_k \quad p_i$ is prime and 
+	      						$b = q_1q_2 ... q_i \quad q_j$ is prime \\
+	       $n = p_1p_2p_3...p_k . q_1q_2q_3...q_k \quad$ So n is a product of primes \\
+	       $n \notin C \to$ contradiction
+\end{itemize}
+
+\paragraph{What is the sum of the first n odd (+) integers?}
+
+1 + 3+ 5 +... + (2n-1)
+
+\begin{align*}
+1 &= 1
+1 + 3 &= 4
+1 + 3 + 5 &= 9
+1+ 3 + 5 + 7 &= 16
+\end{align*}
+It looks like the answer is $n^2$ (but this is not enough to prove it)
+
+\paragraph{Theorem:} $1 + 3 + 5 + 7 + ... + (2n-1) = n^2$
+
+\textbf{Proof}: Suppose for a contradiction that $n_0$ is the smallest positive integer for which this formula is false
+
+$1 + 3 + 5 + ... + 2n -1 \neq n_0$
+
+The formula is true for $n_0 -1 \qquad (n_0 \neq 1)$
+
+$1 + 3 + 5 + ... + 2(n_0 -1) -1 = (n_0 - 1)^2$
+
+So $1 + 3 + 5  + ...+ (2n-1) = (n_0 -1)^2 + 2n_0 -1 = n_0^2 \to$ contradiction!
+
+\subsection{Induction}
+
+\paragraph{Method}
+"P(n) is true for all n $\in \mathbb{N}$ if
+\begin{enumerate}
+	\item Base of induction: "P(1) is true"
+	\item Induction steps: "P(n-1) implies P(n) for all $n \geq 2$ \\
+	(Equivalently  "P(n) implies P(n+1) for all $n \geq 1$"
+\end{enumerate}
+
+\subsubsection{A few examples}
+
+\paragraph{Sum of n first Integers}
+\begin{itemize}
+	\item \textbf{Theorem}: $1 + 2 + ... +n = \frac{n(n+1)}{2}$
+	\item \textbf{Proof}: By induction on n
+	\item \textbf{Base case n =1}: $1 = \frac{1}{1+1}/2 = 1$
+	\item \textbf{Induction step:} $P(n) \to P(n+1) for n \geq 1$\\
+			$1 + 2 + ... + n = \frac{n(n+1)}{2}$
+			$P(n+1): 1 + 2 + ... +n + (n+1) = \frac{n(n+1)}{2} + (n + 1) = (n + 1) \cdot ( \frac{n}{2} + 1) = \frac{(n+1) \cdot (n + 2)}{2} \Box$
+\end{itemize}
+
+\paragraph{$2^n \geq n^2$}
+\begin{itemize}
+	\item \textbf{Theorem}: $2^n \geq n^2 \forall n \geq 4$
+	\item Base case: $n = 4, 2^4 = 16 = 4^2$
+	\item Induction step: $(2^n \geq n^2) \to (2^{n+1} \geq (n+1)^2)$
+		\begin{align*}
+		2^{n+1} &= 2^n \cdot 2 \\
+		&\geq 2n^2 = n^2 + n^2 \\
+		&\geq n^2 + 4n \qquad (n \geq 4) \\
+		&\geq n^2 + 2n + 1 = (n + 1)^2 \qquad (2n \geq 1) \\
+		\end{align*}
+\end{itemize}
+
+\paragraph{A flawed induction proof}
+\begin{itemize}
+	\item Theorem: All horses are the same colour
+	\item Base Case: One horse is the same colour as its self
+	\item Induction step: Any n horse are the same colour. Any n + 1 horses are the same colour.
+\end{itemize}
+
+Flaw: P(n) does not imply P(n+1)
+%%% Write this later
+
+\section{Number Theory}
+
+\paragraph{Definition}
+Studies properties of integers: divisibility, primes. an integer a divides an integer b $if \exists x \in \mathbb{Z} (xa=b)$
+
+
+Division with remainder: for any two integers $a > 0$ and b there exists integers q and d  so that $b = qa + r \to$ r is the remainder with $0 \leq r \leq a$
+
+We write $a | b$, if and only if $r = 0$
+
+A positive integer $p > 1$ is prime if the only positive integers dividing p are 1 and p
+
+An integer $n > 1$ is composite if it is not prime
+
+Expression of a positive as product of primes is called prime factorization. We have shown that every integer greater than 1 admits a prime factorization.
+
+\paragraph{The fundamental theorem of arithmetic} Every integer greater than 1 admits unique prime factorization
+
+\textbf{Proof using contradiction}: Suppose some n admits at least two distinct prime factorizations. Choose the minimum such n.
+
+$n = p_1p_2p_3...p_k = q_q1_2...q_l$
+
+We may assume that $p_1$ is the smallest prime among all the primes $p_i$ and $q_j$
+
+Suppose $p_1 = q_1$ then $\frac{n}{p_i} = p_2...p_i = q_2 ... q_l$
+It is a smaller number admitting two different factorizations
+
+So $p_1 < q_1 so q1 = xp_1 + r \qquad 0 \leq r \leq p_1$
+
+$pn = (xp_1 + r )q_2 ... q_i also we may assume q_2, q_3 , ... q_l \neq p_1$
+
+$p_1 | n$ 
+
+$n = xp_1p_2...q_l + rq_2 .... q_l$
+
+$n is divisible by p_1$
+
+$n > m > 1 m = rq_2...q_l$ is divisible by p
+
+$m < n$ as $x > 0$ because $q_1 > p_1 > r$
+
+We will sow that m also has two different prime factorizations 
+
+$m = p_1m = p_1r_1r_2...r_s \to$ there exists a prime factorization of m which includes 
+
+A contradiction to the choice of..
+
+% missed
+
+
+%%% Friday September 30th 2011
+
+\subsection{Primes}
+
+\paragraph{Fundamental theorem of arithmetic} Every integer greater than 1 can be uniquely expressed as a product of primes
+
+$a=p_1^{r1}p_2^{r_2}...p_k^{r_k}$
+$b = p_1^{s_1}p_2^{s_2}...p_k^{s_k}$
+
+$1200 = 2^4\cdot 3 \cdot 5^2$
+
+$[ab = p_1^{r_1 + s_1} p_2^{r_2 + s_2} ... p_k^{r_k + s_k}]$
+
+$a | b$ if and only if $r_i \leq s_i$ for all $1 \leq i \leq k$
+
+\begin{itemize}
+    \item \textbf{Theorem} $\sqrt{2}$ is irrational
+    \item \textbf{Proof}: Suppose $\sqrt{2}$ is not \\
+    then $\sqrt{2} = \frac{m}{n} = 2 = \frac{m^2}{n^2}$ \\
+    ($m = 2^r p_1^{r_1} \ldots p_i^{r_k}$)\\
+    ($m = 2^s p_1^{s_1} \ldots p_i^{s_k}$)\\
+    $(2n^2 = m^2$)\\
+    ($2n^2 = 2^{2s+1} p_1^{2s_1} \ldots p_k^{2s_k}$)\\
+    ($2m^2 = 2^{2r} p_1^{2r_1} \ldots p_k^{2r_k}$)\\
+    Contradiction as ($2s+1 \neq 2r$)
+    \item \textbf{Theorem:} $\sqrt{n}$ is rational for any integer n if and only if $n = k^2$ for some k
+\end{itemize}
+
+Proof: Exercise. Modify the proof for $\sqrt{2}$
+
+\begin{itemize}
+    \item \textbf{Theorem}: If a prime $p | ab$ then either p | a or p| b
+    \item \textbf{Proof}: if p is not present in the prime factorization of either a or b, then it is not present in the prime factorization of $a \cdot b \cdot m$ and so $p \nmid a b \Box$
+    \item Is this true when p is not prime? Suppose we have $p_1 \cdot p_2$ instead of $p_1$ then $p_1 | a$ or $p_1 | b \qquad$ $p_2 | 1$ or $p_2 | b$
+\end{itemize}
+
+--------------
+
+$2,3,5,7,11,13,17,19,23,29,31,37,41,43$
+\begin{enumerate}
+    \item There are infinitely many prime numbers.
+    \item Prime numbers are not everywhere dense in natural numbers. There are large gaps
+\end{enumerate}
+
+\begin{itemize}
+    \item \textbf{Theorem} For any positive integer k there exists two consecutive prime numbers with difference $\geq k$
+    \item \textbf{Proof} It suffices to exhibit a sequence of $\geq k$ consecutive composit numbers\\
+            $n! = 1 \cdot 2 \cdot 3 \cdot 4 \cdot ... \cdot (n-1) \cdot n$\\
+            Let $n = k + 1$\\
+            $n! + 2, n! + 3, n! + 4, n! + 5,..., n! + n \to k$ consecutive integers all composite
+            $n! + m$ is composite for all $2 \leq m \leq n \qquad m | n! + m \leftarrow m| n! \qquad 2 \leq m \leq n! + m$
+    \item \textbf{Twin prime conjecture} There exist infinitely many pairs $p, p+2$ so that they are both primes. (This question has been asked more than 2000 years ago.)
+    \item \textbf{The prime number theorem:} For a number n let $\pi(n)$ denote the number of primes $\leq n$. Then \\
+            $\pi(n) ~ \frac{n}{\ln n} \qquad lim_{n \to \infty} \frac{\pi(n)}{n / \ln n} = 1$ \\
+            Average gaps between primes are $\tilde \ln n$ 
+    \item \textbf{Conjecture} For every positive integer n there exists a prime p $n^2 \leq p \leq (n+1)^2$
+    \begin{enumerate}
+        \item It is possible to efficiently test whether a number is prime or composite.
+        \item It is believed not to be possible to efficiently produce prime factorisations.
+    \end{enumerate}
+\end{itemize}
+
+\subsection{Greatest common divisors and linear combinations}
+
+\paragraph{Die Hard 3 Problem} A jug containing precisely 4 gallons of water deactivates the bomb. He has a 3 gallon, a 5 gallon jug and 5 minutes. Given an a-gallon jug and a b-gallon jug, what ammounts can we get?
+
+$a \leq b$ let (x,y) record current amounts of water in jugs of size a and b respectively
+
+Here is an example of our approach
+\begin{enumerate}
+    \item (a,0) - fill in the first jug
+    \item (0,a) - pour first jug into the second
+    \item (a,a) - fill in the first one again
+    \item (2a-b, b) - pour first into second
+    \item (2a-b, 0) - empty the second jug
+    \item (0, 2a-b)
+    \item (a, 2a-b)
+    \item (0, 3a-b) $\to$ John Mclane survives
+\end{enumerate}
+
+\subsection{Linear Combinations}
+\begin{itemize}
+    \item A linear combination of a and b is an integer expressible as $sa + tb$ where both s and t are integers.
+    \item \textbf{Claim 1} The amounts of water in jugs are always linear combinations of a and b.\\
+    (By induction on the number of operations performed)\\
+    \item \textbf{Question:} Which numbers can we express as linear combinations of a and b?
+\end{itemize}
+
+
+%%%% Monday  October 3rd
+
+
+\paragraph{Theorem} The amount of water in jugs is always a linear combination of a and b.
+
+Let $L = \{m : m = sa+tb$ for some $s, t \in \mathbb{Z}$
+
+\begin{enumerate}
+    \item $0, a, b \in L$
+		$0 = o \cdot a + 0 \cdot b$
+		$a = 1 \cdot a + 0 \cdot b$
+	\item $j_1, j_2 \in L$ then $j_1 + j_2 \in L, -j \in L$\\
+\end{enumerate}
+
+\paragraph{Proof}
+By induction on \# steps performed
+\begin{itemize}
+	\item Base case (0 steps): $(0,0) \qquad 0 \in L$
+	\item Induction step: Assume that after n steps we have amounts $j_1, j_2$ and $j_1, j_2 \in L$. we want to show that after the next step the amounts are still a linear combination.\\
+	$(j_1, j_2) \to (0, j_2)$ or $(j_1, 0)$ or $(a, j_2)$ or $(j_1, b)$ or $(0, j_1 + j_2)$ or $(j_1 + j_2, 0)$ or $(j_1 + j_2 - b, b)$ or $(a, j_1 + j_2 -a)$\\
+	$j_1 + j_2 - b \in L$ and $j_1 + j_2 - a$
+	\item Theorem If $a \leq b$, $c \leq b$. Then if c is a linear combination of a and b, it is possible to measure exactly c liters.
+	\item Proof: $c = sa + tb$ for some $s, t \in \mathbb{Z}$
+	\begin{itemize}
+		\item Case 1: $c = b$
+		\item Case 2: $c < b$ We may assume that $s > 0, t \leq 0$\\
+			  $c = (s + kb)a + (t - ka)b = sa + tb + kba - kab$\\
+              Choose k large so that $s + kb > 0$\\
+              $c = sa -tb \to$ fill in the jug with capacity a s times repeatedly and pour it into a jug with capacity b as soon as the jug with capacity b becomes full pour it out\\
+              $sa = t'b + c'$\\
+              $sa = tb + c$\\
+              $0 \leq c, c' <b$\\
+              $c' = sa - t'b \to$ amount we poured out \\
+              $s \to$ total amount we took\\
+              In the end we have amounts $(0, c')$\\
+              \textbf{Example:}\\
+              $b = 5, a = 3, c = 4$\\
+              $4 = 3 \times 3 - 5$\\
+	          $(0,0) \to (3,0) \to (0,3) \to (3,3) \to (1,5) \to (1,0) \to (0,1) \to (3,1) \to (0,4)$\\
+              There are many more ways to achieve the same result.
+        \end{itemize}
+\end{itemize}
+\paragraph{What about $b=6, a=3, c=4$} 
+Do there exist integers s and t such as 3s + 6t = 4?
+d is a common divisor of a and b if d | a and d|b\\
+\paragraph{Definition}
+    If d is a \textbf{common divisor} of a \& b then every linear combination of a \& b is divisible by d.
+
+The largest common divisor of a and b is denoted by gcd(a, b) and is called the \textbf{greatest common divisor}.
+
+\paragraph{Theorem}
+    $gcd(a, b)$ is the smallest positive linear combination of a and b. 
+\paragraph{Proof}
+    $d = gcd(a,b)$, let m be the smallest positive linear combination of an and b \\
+    $m = sa + tb$. We want to show that d = m.
+    \begin{enumerate}
+        \item $d \leq m$\\
+            $d | m$ Because d is a common divisor of a and b and m is a linear combination\\
+            $d \leq m$ as they are both positive
+        \item $m \leq d$\\
+            It is enough to show that m is a common divisor of a and b.\\
+            We'll show $m | a$ (showing $m | b$ is exactly the same).\\
+            \textbf{Proof}: 
+            \begin{itemize}
+                \item Suppose not ${m \nmid a}$ dividing with remainder \\
+                    $a = qm + r \qquad 0 < r <m$ ($r \neq 0$ because $m \nmid a$) % btw I have no idea how to make the not divide bar)
+                \item $r = a - qsa - qtb = a(1-qs) + (-qt)b$ \\
+                \item r is a linear combination of a \& b, contradicting the choice of m.   
+            \end{itemize}
+\end{enumerate}
+
+\paragraph{Corollary}
+    An integer c is a linear combination of a and b if and only if gcd(a,b) | c \\
+    \textbf{Proof}:
+    \begin{itemize}
+        \item If $c = sa + tb$ then $gcd(a,b) | sa$ and $gcd(a,b) | tb$ so $gcd(a,b) | c$
+        \item On the other hand, we know $gcd(a, b) = s'a + t'b$ for some $s', t' \in \mathbb{Z}$
+        \item If $c = d gcd(a, b) then c = d(s'a + t'b) = (ds')a + (dt')b$
+    \end{itemize}
+
+
+
+%%% wednesday october 5th
+
+\paragraph{Midterm information}
+    \begin{itemize}
+        \item \textbf{Material}: 
+        \begin{enumerate}
+            \item Logic and Proofs
+            \item Number theory (up to modular arithmetic at the end of the week)
+        \end{enumerate}
+    \end{itemize}
+
+\subsection{Greatest common divisors}
+Let a and b be positive integers.
+$c = gcd(a,b)$ is the largest integer c such as $c | a$ \& $c | b$.
+
+\begin{itemize}
+    \item \textbf{Theorem}:gcd(a, b) is the smallest positive linear combination of a \& b.
+    \item \textbf{Corollary}: c is a linear combination of a \& b if and only if $gcd(a, b) | c$
+    \item \textbf{Theorem}:
+        \begin{enumerate}
+            \item $gcd(a, b)$ is divisible by every common divisor of a \& b
+            \item $gcd(ka, kb) = k \cdot gcd(a, b)$ for any positive integer k
+            \item $gcd(a, b) = 1, \quad gcd(a,c) = 1 \to gcd(a,bc) = 1$\\
+                    If a and b do not have a common divisor and a and c do not have a common divisor then a and bc do not have anything in common either.
+            \item $gcd(a, b) = 1, a | bc \to a | c$
+            \item $a = qb + r \to gcd(a, b) = gcd(b, r)$
+        \end{enumerate}
+\end{itemize}
+
+\paragraph{Proof of 3}
+
+$s_1 a + t_1b = 1 \qquad s_2a + t_2c = 1$
+
+It suffices to show that 1 is a linear combination of a and bc.
+
+$1 = (s_1 \cdot a + t_1 \cdot b)(s_2 \cdot a + t_2 \cdot c) = a(s_1 \cdot s_2 \cdot a + s_1 \cdot t_2 \cdot c + s_2 \cdot t_1 \cdot b) + bc( t_1 \cdot t_2 \qquad)$ (can also be derived from prime decomposition)
+
+\paragraph{Proof of 5}
+
+$d_1 = gcd(a,b) \qquad d_2 = gcd(b,r)$
+
+\begin{itemize}
+    \item $d_1 \leq d_2$ It is enough to show that $d_1 | b$ and $d_1 | r$\\
+        $d_1 | b$ is trivial since $d_1$ is gcd(a, b) \\
+        $r = a - qb$ a is divisble by $d_1$ and b is divisible by $d_1$ therefore $d_1$ divides r
+    \item $d_2 \leq d_1$ It is enough to show that $d_2 | a$ and $d_2 | b$\\
+        $d_2| b$ is trivial \\
+        $a = r + qb$ since $d_2$ is a divisor of r and b then $d_2$ is a linear combination of r and b and $d_2 | a$ 
+\end{itemize}
+
+\section{Euclid's algorithm}
+
+\subsection{Computing gcd with prime factorization}
+    \begin{itemize}
+        \item $a = p_1^{r_1} \cdot p_2^{r_2} ... p_k^{r_k}$
+        \item $b = p_1^{s_1} \cdot p_2^{s_2} ... p_k^{s_k} = p_1^{r_1} \cdot p_2^{r_2} ... p_k^{s_k}$ 
+        \item $gcd(a, b) = p_1^{min(r_1, s_1)} \cdot p_2^{min(r_2, s_2)} ... p_k^{min(r_k, s_k)}$
+
+        \item \textbf{Example}: $1200 = 2^4 \cdot 3 \cdot 5^2$
+        \item $280= 2^3 \cdot 5 \cdot 7$ $a = p_1^{r_1} \cdot p_2^{r_2} ... p_k^{s_k}$=
+        \item $gcd(1200, 280) = 2^3 \cdot 5 = 40$
+    \end{itemize}
+
+\subsection{Computing gcd with Euclid's algorithm}
+$a = qb + r \qquad gcd(a,b) = gcd(b, r)\\
+gcd(962, 230) = \qquad 962 = 4 \cdot 230 + 42\\
+gcd(230, 42) = \qquad 230 = 5 \cdot 42 + 20\\
+gcd(42, 20) = \qquad 42 = 20 \cdot + 2\\
+gcd(20, 2) =\\
+2
+$
+
+\subsection{Statement of Euclid's algorithm}
+GCD(a, b) \\
+\textbf{Input}: integers a \& b (in binary)\\
+\textbf{Steps}:\\
+\begin{enumerate}
+    \item $a \geq b$
+    \item Divide with remainder $a = qb + r, 0 \leq r < b$
+    \item $If r = 0 \to \textbf{output}: b$
+    \item Otherwise, run GCD(b,r)
+\end{enumerate}
+
+\subsection{Analysis of Euclid's algorithm}
+    \begin{enumerate}
+        \item It is valid by part 5 of the preceding theorem ($a = qb + r \to gcd(a, b) = gcd(b, r)$)
+        \item It terminates in at most a + b  $\to$ in each recursive step we replace a by r.\\
+            So the sum of the inputs decreases.
+        \item Is it efficient (polytime)?\\
+            We want to show that it terminates in $O((log a + log b)^k)$
+        \begin{itemize}
+            \item \textbf{Claim}: $a = qb + r \qquad 0 \leq r \leq b, a \geq b$ then $ab \geq 2br$
+            \item \textbf{Proof}: We need to show that $a\geq 2r$ \\
+                $q \geq 1 \to a \geq b+r \to a \geq r+r = 2r$
+            \item The claim implies that the product of the inputs is reduced by at least a factor of 2 in each step. \\
+                So there are at most $\log(ab)$ steps in recursion \\
+                $\log (ab) = \log a + \log b \to$ \textbf{linear algorithm}
+        \end{itemize}
+    \end{enumerate}
+
+\subsection{Expressing gcd(a,b) as a linear combination of a \& b}
+$gcd(962, 230) = \qquad 962 = 4 \cdot 230 + 42\\
+gcd(230, 42) = \qquad 230 = 5 \cdot 42 + 20\\
+gcd(42, 20) = \qquad 42 = 20 \cdot + 2\\
+gcd(20, 2) =\\
+2
+$
+
+\begin{align*}
+2 &= 42 - 2 \cdot 20 \\
+&= 42 - 2 \cdot (230 - 5 \cdot 42)\\
+&= 11 \cdot 42 - 2 \cdot 230\\
+&= 11 \cdot (962 - 4 \cdot 230) - 2 \cdot 230\\
+&= 11 \cdot 962 - 46 \cdot 230
+\end{align*}
+
+%%% Friday October 7th
+
+\begin{verbatim}
+Wesley's notes. Will format later.
+
+== Euclid's Algorithm ==
+
+The algorithm takes at most <> iterations to terminate.
+
+Each individual step can also be performed quickly. (Division with remainder)
+
+Arithmetic operations: additions, multiplication, division with remainder take time polynomial in input size.
+
+Input is usually in binary.
+
+=== Adding ===
+
+<>
+
+<>
+
+<>
+
+Adding a & b takes <>
+
+=== Multiplication ===
+
+Multiplication is similar. At most <>
+
+=== Division ===
+
+Division with remainder can also be done efficiently
+
+Each individual step can also be performed quickly. (Division with remainder)
+
+Aritmetic operations addition, multiplication, division with remainder take time polynomial in input size.
+
+\end{verbatim}
+
+
+\subsection{Homework problem}:
+
+Show that deciding whether $ax^2 + by = c$ has an integer solution for given $a, b \leq c$ in NP.
+
+Size of the input; $log_2{a} + log_2{b} + log_2{c}$
+
+Certificate $x \& y$ such that $ax^2 + by = c$
+
+\paragraph{Essence of the problem}: If there exists x \& y which solve the solution, then there exist $x_0, y_0$ so that $ax_0 + b \cdot y \cdot b_{y_0}  = c$ and $x_0$ and $y_0$ are not too large 
+
+$x_0y_0 = 0((a+b+c)^n)$
+
+\paragraph{General diophantine equation}:
+
+$P(x_1, x_2, ..., x_k) = 0 \qquad$ where P is polynomial with integer coefficients.
+
+E.g. $x_1x_2x_3 - 5x_1 + 1000 = 0$
+
+Not in NP in general, there is no systemic algorithm to figure out if it has a solution or not.
+
+Euclid's algorithm takes at most $log_2{a} + log_2{b}$ steps (but maybe it always terminates in 5 or $\log(\log a)$
+
+In worst case scenario is takes $\Omega(log_2{a} + log_2{b})$ steps
+
+\textbf{Example}: Fibonacci numbers: $F_1 = 1, F_2 = 1, F_3 = 2, F_4 = 3$
+
+1, 1, 2, 3, 5, 8, 13, 21 $ \to F_n = F_{n-1} + F_{n-2}$
+
+Running Euclid's algorithm to compute $gcd(F_n, F_n+1)$
+
+$F_n = F_{n-1}+ F_{n-2}$
+
+$F_{n-1} = F_{n_2} + F_{n-3}$
+
+$F_n = {{1 + \sqrt{5}}/2^{n+1}}/\sqrt{5}$
+
+%1 + \sqrt{5}%/2 = 1.6....$
+
+\section{Modular arithmetic}
+
+\subsection{Notation}
+
+We say that $a$ is \textbf{congruent} to $b$ \textbf{modulo} $m$ if $m | a - b$. We note it $a \equiv b (mod m)$
+
+$rem(a, m)$: the remainder of $a$ after division by $m$
+
+$a = km + rem(a, m)$
+
+$0 \leq rem(a, m) < m$
+
+\textbf{Fact}: $a \equiv b (mod m)$ if and only if $rem(a, m) = rem(b, m)$
+\textbf{Proof}: 
+$a = k_1m + rem(a, m)$
+
+$b = k_2m + rem(b, m)$
+
+$0 \leq rem(a, m), rem(b, m) < m$
+
+If $rem(a, m) = rem(b, m)$ then $a - b = (k_1 - k_2)m$. Therefore $a =b(mod m)$
+
+$a - b = (k_1 - k_2)m + (rem(a, m ) - rem(b, m)$
+
+Therefore r$em(a, m) = rem(b, m) = 0$.
+
+In many senses you can operate with congruences as with equations.
+
+\textbf{Theorem}: (Properties of congruences)
+\begin{enumerate}
+    \item \textbf{Reflexitivity} $a \equiv a (\mod m)$
+    \item \textbf{Symmetry} $a \equiv b (\mod m)$ if and only if $b \equiv a (\mod m)$
+    \item \textbf{Transitivity} if $a \equiv b (\mod m) \quad \& \quad b \equiv c (\mod m)$ then $a \equiv c (\mod m)$
+\end{enumerate}
+
+Suppose $a \equiv b (\mod m), c \equiv d (\mod m)$:
+
+Then:
+\begin{enumerate}
+    \item $a + b \equiv b + d (\mod m)$
+    \item $ac \equiv bd (\mod m)$
+\end{enumerate}
+
+\textbf{Proof}: 
+1, 2, 3: is based on the preceding fact
+3. If $rem(a, m) = rem(b, m) and rem(b, m) = rem(c, m), then rem(a, m) = rem(c, m).
+4. $m | {a - b}$, $m | c - d$ therefore $m | (a-b) + (c-d) = (a + c) - (b + d)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
