@@ -24,69 +24,72 @@
 \contentsline {section}{\numberline {4}Polytime algorithms P\# NP conjecture}{8}{section.4}
 \contentsline {subsection}{\numberline {4.1}Definition}{8}{subsection.4.1}
 \contentsline {paragraph}{Examples}{9}{section*.9}
-\contentsline {subsection}{\numberline {4.2}NP problems (non-deterministic polynomial time)}{9}{subsection.4.2}
-\contentsline {paragraph}{Examples}{9}{section*.10}
-\contentsline {subsection}{\numberline {4.3}$P \not =NP$}{10}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Scott Aovonson's reasons for $P \not =NP$}{10}{subsection.4.4}
-\contentsline {section}{\numberline {5}Proof Techniques: Predicate calculus}{10}{section.5}
-\contentsline {paragraph}{Reminder}{10}{section*.11}
-\contentsline {paragraph}{Case Analysis}{10}{section*.12}
-\contentsline {paragraph}{Couter Example}{10}{section*.13}
-\contentsline {paragraph}{Goldback's conjecture}{11}{section*.14}
-\contentsline {paragraph}{Limits}{11}{section*.15}
-\contentsline {paragraph}{P(n) : "$n^2 + n + 1$ is prime"}{11}{section*.16}
-\contentsline {paragraph}{"$\qopname \relax o{sin}x$ does not have a limit as $x \to \infty $"}{11}{section*.17}
-\contentsline {subsection}{\numberline {5.1}Divisibility Problem}{11}{subsection.5.1}
-\contentsline {paragraph}{Reminder: the pigeonhole principle}{12}{section*.18}
-\contentsline {paragraph}{Partition}{12}{section*.19}
-\contentsline {paragraph}{Proof}{12}{section*.20}
-\contentsline {subsection}{\numberline {5.2}Strangers and Clubs}{12}{subsection.5.2}
-\contentsline {section}{\numberline {6}Social Choice Function}{12}{section.6}
-\contentsline {subsection}{\numberline {6.1}Definition}{12}{subsection.6.1}
-\contentsline {paragraph}{Permutation}{13}{section*.21}
-\contentsline {subsection}{\numberline {6.2}Arrow's impossibility Theorem (1951)}{13}{subsection.6.2}
-\contentsline {paragraph}{Proof}{13}{section*.22}
-\contentsline {section}{\numberline {7}Proofs}{14}{section.7}
-\contentsline {subsection}{\numberline {7.1}The well-ordering principle}{14}{subsection.7.1}
-\contentsline {subsubsection}{\numberline {7.1.1}Proofs using the well-ordering principle}{14}{subsubsection.7.1.1}
-\contentsline {paragraph}{Claim}{14}{section*.23}
-\contentsline {paragraph}{Proving the irrationality of $\sqrt {2}$}{14}{section*.24}
-\contentsline {subsubsection}{\numberline {7.1.2}Method}{14}{subsubsection.7.1.2}
-\contentsline {paragraph}{What is the sum of the first n odd (+) integers?}{15}{section*.25}
-\contentsline {paragraph}{Theorem:}{15}{section*.26}
-\contentsline {subsection}{\numberline {7.2}Induction}{15}{subsection.7.2}
-\contentsline {paragraph}{Method}{15}{section*.27}
-\contentsline {subsubsection}{\numberline {7.2.1}A few examples}{16}{subsubsection.7.2.1}
-\contentsline {paragraph}{Sum of n first Integers}{16}{section*.28}
-\contentsline {paragraph}{$2^n \geq n^2$}{16}{section*.29}
-\contentsline {paragraph}{A flawed induction proof}{16}{section*.30}
-\contentsline {section}{\numberline {8}Number Theory}{16}{section.8}
-\contentsline {paragraph}{Definition}{16}{section*.31}
-\contentsline {paragraph}{The fundamental theorem of arithmetic}{17}{section*.32}
-\contentsline {subsection}{\numberline {8.1}Primes}{17}{subsection.8.1}
-\contentsline {paragraph}{Fundamental theorem of arithmetic}{17}{section*.33}
-\contentsline {subsection}{\numberline {8.2}Greatest common divisors and linear combinations}{18}{subsection.8.2}
-\contentsline {paragraph}{Die Hard 3 Problem}{18}{section*.34}
-\contentsline {subsection}{\numberline {8.3}Linear Combinations}{19}{subsection.8.3}
-\contentsline {paragraph}{Theorem}{19}{section*.35}
-\contentsline {paragraph}{Proof}{19}{section*.36}
-\contentsline {paragraph}{What about $b=6, a=3, c=4$}{19}{section*.37}
-\contentsline {paragraph}{Definition}{20}{section*.38}
-\contentsline {paragraph}{Theorem}{20}{section*.39}
-\contentsline {paragraph}{Proof}{20}{section*.40}
-\contentsline {paragraph}{Corollary}{20}{section*.41}
-\contentsline {paragraph}{Midterm information}{20}{section*.42}
-\contentsline {subsection}{\numberline {8.4}Greatest common divisors}{20}{subsection.8.4}
-\contentsline {paragraph}{Proof of 3}{21}{section*.43}
-\contentsline {paragraph}{Proof of 5}{21}{section*.44}
-\contentsline {section}{\numberline {9}Euclid's algorithm}{21}{section.9}
-\contentsline {subsection}{\numberline {9.1}Computing gcd with prime factorization}{21}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}Computing gcd with Euclid's algorithm}{21}{subsection.9.2}
-\contentsline {subsection}{\numberline {9.3}Statement of Euclid's algorithm}{22}{subsection.9.3}
-\contentsline {subsection}{\numberline {9.4}Analysis of Euclid's algorithm}{22}{subsection.9.4}
-\contentsline {subsection}{\numberline {9.5}Expressing gcd(a,b) as a linear combination of a \& b}{22}{subsection.9.5}
-\contentsline {subsection}{\numberline {9.6}Homework problem}{23}{subsection.9.6}
-\contentsline {paragraph}{Essence of the problem}{23}{section*.45}
-\contentsline {paragraph}{General diophantine equation}{23}{section*.46}
-\contentsline {section}{\numberline {10}Modular arithmetic}{24}{section.10}
-\contentsline {subsection}{\numberline {10.1}Notation}{24}{subsection.10.1}
+\contentsline {subsection}{\numberline {4.2}P problems}{9}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}NP problems (non-deterministic polynomial time)}{9}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}The magician}{10}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}Definition}{10}{subsubsection.4.3.2}
+\contentsline {subsection}{\numberline {4.4}$P \not =NP$}{10}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Scott Aoronson's reasons for $P \not =NP$}{11}{subsubsection.4.4.1}
+\contentsline {section}{\numberline {5}Proof Techniques: Predicate calculus}{11}{section.5}
+\contentsline {paragraph}{Reminder}{11}{section*.10}
+\contentsline {paragraph}{Case Analysis}{11}{section*.11}
+\contentsline {paragraph}{Counter Example}{11}{section*.12}
+\contentsline {paragraph}{Goldback's conjecture}{12}{section*.13}
+\contentsline {paragraph}{Limits}{12}{section*.14}
+\contentsline {paragraph}{Negation}{12}{section*.15}
+\contentsline {paragraph}{"$\qopname \relax o{sin}x$ does not have a limit as $x \to \infty $"}{12}{section*.16}
+\contentsline {subsection}{\numberline {5.1}Divisibility Problem}{12}{subsection.5.1}
+\contentsline {paragraph}{Reminder: the pigeonhole principle}{13}{section*.17}
+\contentsline {paragraph}{Partition}{13}{section*.18}
+\contentsline {paragraph}{Proof}{13}{section*.19}
+\contentsline {subsection}{\numberline {5.2}Strangers and Clubs}{13}{subsection.5.2}
+\contentsline {section}{\numberline {6}Social Choice Function}{13}{section.6}
+\contentsline {subsection}{\numberline {6.1}Definition}{13}{subsection.6.1}
+\contentsline {paragraph}{Permutation}{14}{section*.20}
+\contentsline {subsection}{\numberline {6.2}Arrow's impossibility Theorem (1951)}{14}{subsection.6.2}
+\contentsline {paragraph}{Proof}{14}{section*.21}
+\contentsline {section}{\numberline {7}Proofs}{15}{section.7}
+\contentsline {subsection}{\numberline {7.1}The well-ordering principle}{15}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}Proofs using the well-ordering principle}{15}{subsubsection.7.1.1}
+\contentsline {paragraph}{Claim}{15}{section*.22}
+\contentsline {paragraph}{Proving the irrationality of $\sqrt {2}$}{15}{section*.23}
+\contentsline {subsubsection}{\numberline {7.1.2}Method}{15}{subsubsection.7.1.2}
+\contentsline {paragraph}{What is the sum of the first n odd (+) integers?}{16}{section*.24}
+\contentsline {paragraph}{Theorem:}{16}{section*.25}
+\contentsline {subsection}{\numberline {7.2}Induction}{16}{subsection.7.2}
+\contentsline {paragraph}{Method}{16}{section*.26}
+\contentsline {subsubsection}{\numberline {7.2.1}A few examples}{17}{subsubsection.7.2.1}
+\contentsline {paragraph}{Sum of n first Integers}{17}{section*.27}
+\contentsline {paragraph}{$2^n \geq n^2$}{17}{section*.28}
+\contentsline {paragraph}{A flawed induction proof}{17}{section*.29}
+\contentsline {section}{\numberline {8}Number Theory}{17}{section.8}
+\contentsline {paragraph}{Definition}{17}{section*.30}
+\contentsline {paragraph}{The fundamental theorem of arithmetic}{18}{section*.31}
+\contentsline {subsection}{\numberline {8.1}Primes}{18}{subsection.8.1}
+\contentsline {paragraph}{Fundamental theorem of arithmetic}{18}{section*.32}
+\contentsline {subsection}{\numberline {8.2}Greatest common divisors and linear combinations}{19}{subsection.8.2}
+\contentsline {paragraph}{Die Hard 3 Problem}{19}{section*.33}
+\contentsline {subsection}{\numberline {8.3}Linear Combinations}{20}{subsection.8.3}
+\contentsline {paragraph}{Theorem}{20}{section*.34}
+\contentsline {paragraph}{Proof}{20}{section*.35}
+\contentsline {paragraph}{What about $b=6, a=3, c=4$}{20}{section*.36}
+\contentsline {paragraph}{Definition}{21}{section*.37}
+\contentsline {paragraph}{Theorem}{21}{section*.38}
+\contentsline {paragraph}{Proof}{21}{section*.39}
+\contentsline {paragraph}{Corollary}{21}{section*.40}
+\contentsline {paragraph}{Midterm information}{21}{section*.41}
+\contentsline {subsection}{\numberline {8.4}Greatest common divisors}{21}{subsection.8.4}
+\contentsline {paragraph}{Proof of 3}{22}{section*.42}
+\contentsline {paragraph}{Proof of 5}{22}{section*.43}
+\contentsline {section}{\numberline {9}Euclid's algorithm}{22}{section.9}
+\contentsline {subsection}{\numberline {9.1}Computing gcd with prime factorization}{22}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Computing gcd with Euclid's algorithm}{22}{subsection.9.2}
+\contentsline {subsection}{\numberline {9.3}Statement of Euclid's algorithm}{23}{subsection.9.3}
+\contentsline {subsection}{\numberline {9.4}Analysis of Euclid's algorithm}{23}{subsection.9.4}
+\contentsline {subsection}{\numberline {9.5}Expressing gcd(a,b) as a linear combination of a \& b}{23}{subsection.9.5}
+\contentsline {subsection}{\numberline {9.6}Homework problem}{24}{subsection.9.6}
+\contentsline {paragraph}{Essence of the problem}{24}{section*.44}
+\contentsline {paragraph}{General diophantine equation}{24}{section*.45}
+\contentsline {paragraph}{Back to Euclid}{25}{section*.46}
+\contentsline {section}{\numberline {10}Modular arithmetic}{25}{section.10}
+\contentsline {subsection}{\numberline {10.1}Notation}{25}{subsection.10.1}
