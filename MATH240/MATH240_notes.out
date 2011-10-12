@@ -18,32 +18,35 @@
 \BOOKMARK [2][-]{subsection.3.3}{Algorithms}{section.3}% 18
 \BOOKMARK [1][-]{section.4}{Polytime algorithms P\043 NP conjecture}{}% 19
 \BOOKMARK [2][-]{subsection.4.1}{Definition}{section.4}% 20
-\BOOKMARK [2][-]{subsection.4.2}{NP problems \(non-deterministic polynomial time\)}{section.4}% 21
-\BOOKMARK [2][-]{subsection.4.3}{P =NP}{section.4}% 22
-\BOOKMARK [2][-]{subsection.4.4}{Scott Aovonson's reasons for P =NP}{section.4}% 23
-\BOOKMARK [1][-]{section.5}{Proof Techniques: Predicate calculus}{}% 24
-\BOOKMARK [2][-]{subsection.5.1}{Divisibility Problem}{section.5}% 25
-\BOOKMARK [2][-]{subsection.5.2}{Strangers and Clubs}{section.5}% 26
-\BOOKMARK [1][-]{section.6}{Social Choice Function}{}% 27
-\BOOKMARK [2][-]{subsection.6.1}{Definition}{section.6}% 28
-\BOOKMARK [2][-]{subsection.6.2}{Arrow's impossibility Theorem \(1951\)}{section.6}% 29
-\BOOKMARK [1][-]{section.7}{Proofs}{}% 30
-\BOOKMARK [2][-]{subsection.7.1}{The well-ordering principle}{section.7}% 31
-\BOOKMARK [3][-]{subsubsection.7.1.1}{Proofs using the well-ordering principle}{subsection.7.1}% 32
-\BOOKMARK [3][-]{subsubsection.7.1.2}{Method}{subsection.7.1}% 33
-\BOOKMARK [2][-]{subsection.7.2}{Induction}{section.7}% 34
-\BOOKMARK [3][-]{subsubsection.7.2.1}{A few examples}{subsection.7.2}% 35
-\BOOKMARK [1][-]{section.8}{Number Theory}{}% 36
-\BOOKMARK [2][-]{subsection.8.1}{Primes}{section.8}% 37
-\BOOKMARK [2][-]{subsection.8.2}{Greatest common divisors and linear combinations}{section.8}% 38
-\BOOKMARK [2][-]{subsection.8.3}{Linear Combinations}{section.8}% 39
-\BOOKMARK [2][-]{subsection.8.4}{Greatest common divisors}{section.8}% 40
-\BOOKMARK [1][-]{section.9}{Euclid's algorithm}{}% 41
-\BOOKMARK [2][-]{subsection.9.1}{Computing gcd with prime factorization}{section.9}% 42
-\BOOKMARK [2][-]{subsection.9.2}{Computing gcd with Euclid's algorithm}{section.9}% 43
-\BOOKMARK [2][-]{subsection.9.3}{Statement of Euclid's algorithm}{section.9}% 44
-\BOOKMARK [2][-]{subsection.9.4}{Analysis of Euclid's algorithm}{section.9}% 45
-\BOOKMARK [2][-]{subsection.9.5}{Expressing gcd\(a,b\) as a linear combination of a \046 b}{section.9}% 46
-\BOOKMARK [2][-]{subsection.9.6}{Homework problem}{section.9}% 47
-\BOOKMARK [1][-]{section.10}{Modular arithmetic}{}% 48
-\BOOKMARK [2][-]{subsection.10.1}{Notation}{section.10}% 49
+\BOOKMARK [2][-]{subsection.4.2}{P problems}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.3}{NP problems \(non-deterministic polynomial time\)}{section.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.3.1}{The magician}{subsection.4.3}% 23
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Definition}{subsection.4.3}% 24
+\BOOKMARK [2][-]{subsection.4.4}{P =NP}{section.4}% 25
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Scott Aoronson's reasons for P =NP}{subsection.4.4}% 26
+\BOOKMARK [1][-]{section.5}{Proof Techniques: Predicate calculus}{}% 27
+\BOOKMARK [2][-]{subsection.5.1}{Divisibility Problem}{section.5}% 28
+\BOOKMARK [2][-]{subsection.5.2}{Strangers and Clubs}{section.5}% 29
+\BOOKMARK [1][-]{section.6}{Social Choice Function}{}% 30
+\BOOKMARK [2][-]{subsection.6.1}{Definition}{section.6}% 31
+\BOOKMARK [2][-]{subsection.6.2}{Arrow's impossibility Theorem \(1951\)}{section.6}% 32
+\BOOKMARK [1][-]{section.7}{Proofs}{}% 33
+\BOOKMARK [2][-]{subsection.7.1}{The well-ordering principle}{section.7}% 34
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Proofs using the well-ordering principle}{subsection.7.1}% 35
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Method}{subsection.7.1}% 36
+\BOOKMARK [2][-]{subsection.7.2}{Induction}{section.7}% 37
+\BOOKMARK [3][-]{subsubsection.7.2.1}{A few examples}{subsection.7.2}% 38
+\BOOKMARK [1][-]{section.8}{Number Theory}{}% 39
+\BOOKMARK [2][-]{subsection.8.1}{Primes}{section.8}% 40
+\BOOKMARK [2][-]{subsection.8.2}{Greatest common divisors and linear combinations}{section.8}% 41
+\BOOKMARK [2][-]{subsection.8.3}{Linear Combinations}{section.8}% 42
+\BOOKMARK [2][-]{subsection.8.4}{Greatest common divisors}{section.8}% 43
+\BOOKMARK [1][-]{section.9}{Euclid's algorithm}{}% 44
+\BOOKMARK [2][-]{subsection.9.1}{Computing gcd with prime factorization}{section.9}% 45
+\BOOKMARK [2][-]{subsection.9.2}{Computing gcd with Euclid's algorithm}{section.9}% 46
+\BOOKMARK [2][-]{subsection.9.3}{Statement of Euclid's algorithm}{section.9}% 47
+\BOOKMARK [2][-]{subsection.9.4}{Analysis of Euclid's algorithm}{section.9}% 48
+\BOOKMARK [2][-]{subsection.9.5}{Expressing gcd\(a,b\) as a linear combination of a \046 b}{section.9}% 49
+\BOOKMARK [2][-]{subsection.9.6}{Homework problem}{section.9}% 50
+\BOOKMARK [1][-]{section.10}{Modular arithmetic}{}% 51
+\BOOKMARK [2][-]{subsection.10.1}{Notation}{section.10}% 52

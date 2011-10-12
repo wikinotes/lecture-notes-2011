@@ -375,7 +375,7 @@ P is class of problem which allow polynomial time algorithms.
 			\item Sort the list going once through the list ($\leq n$ steps) we can find smallest $x_i$
 			\item Repeat to find the second smallest number and so on
 			\item Requires $O(n^2)$ time to sort
-			\item Check if $x_{\frac{n}{2}} ( x_{\frac{n}{2}})$ is at most 1000 (roughly $n^2$ steps polytime).
+			\item Check if $x_{\frac{n}{2}}$ is at most 1000 (roughly $n^2$ steps polytime).
 		\end{itemize}
 	\end{itemize}
 	\item Multiplication
@@ -387,44 +387,55 @@ P is class of problem which allow polynomial time algorithms.
 	\item Problem Factoring
 		\begin{itemize}
 			\item Input: a composite number C
-			\item Output: Find natural numbers $a, b > 1, c = a \times b$
-			\item Brute-Force search: Try all prime numbers up to C. Time: $10^{n/2} \to$ exponential time algorithm
+			\item Output: Find natural numbers $a, b > 1$ such that $c = a \times b$
+			\item Brute-Force search: Try all prime numbers up to c. Time: $10^{n/2} \to$ exponential time algorithm
 			\item RSA ran contests until 2007 offering prizes for factoring (roughly 20 computer years for factoring 200 digit numbers)
 		\end{itemize}
 \end{enumerate}
 
-\subsection{NP problems (non-deterministic polynomial time)}
+\subsection{P problems}
+A \textbf{polytime algorithm} is an algorithm whose running time is in order p(n) for some polynomial p.
 
-\begin{itemize}
-\item
-A \textbf{decision problem} is a problem with a yes/no answer.
+A \textbf{decision problem} is a problem with a yes/no answer.\\
 Example: 
 	\begin{itemize}
-	\item Input: a combinatorial circuit (with n inputs)
-	\item Output: Is C \textbf{not} a contradiction?
+	\item Input: a combinatorial circuit C (with n inputs)
+	\item Output: Is C \textbf{not} a contradiction? In other words, will C output T.
 	\end{itemize}
-\item
-A decision problem is in the class NP if a "yes" answer always has a certificate which can be verified in polynomial time.
-\item
-A problem is in NP when the answer is positive. A magician can quickly convince you that it is e.g. "testing that a circuit is not a contradiction" is in NP.
-\item
-If there exists a set of values for inputs so that the circuit outputs 1 (or T) then given this collection of inputs verifying that it works is fast.
+
+Given a decision problem D, D is in class P if there exists a polytime algorithm which solves D. It is considered to be "fast" or "efficient".
+
+\subsection{NP problems (non-deterministic polynomial time)}
+
+A decision problem is in the class NP if a "yes" answer always has a certificate which can be verified in polynomial time. In other words, if there is an easy way to check that the answer is yes \textbf{when} the answer is yes.
+
+\subsubsection{The magician}
+
+Suppose that King Arthur poses a yes/no problem to his magician Merlin. To answer such a question seems to require a tremendous amount of toil. On the other hand, if the answer to the problem is yes, there is a piece of evidence or \textbf{certificate} to quickly verify the yes-ness.
+
+Examples
+\begin{itemize}
+	\item In the circuit example above, if there exists a set of values for inputs so that the circuit outputs 1 (or T) then given this collection of inputs, we can easily verify that the circuit is not contradictory. 
+	\item Traveling salesman problem:
+		\begin{itemize}
+			\item Input: Collection of n cities where the ith city is located at $(x_i, y_i)$ and the distances between them
+			\item Output: A tour such that each city is visited exactly once and the total length $\leq 1000$ miles
+			\item Checking each possible tour amounts to (a) fixing some city from which to start then (b) choosing a second city (999 choices) and a third city (998 choices and so on. Thus the number of tours is $999!$. This requires a tremendous amount of computation that is way beyond polynomial time.
+			\item If however, you somehow come up with a tour (use magic), you can easily test if it matches the requirements by computing the sum of distances between two adjacent cities i.e.\\ $\sqrt{(x_{1000} - x_1)^2 + (y_{1000} - y_1)^2} + \sum{\sqrt{(x_{i} - x_{i+1})^2 + (y_{i} - y_{i+1})^2}} \leq 1000$
+			\item It doesn't matter if Merlin didn't heck all 999! possible tours, only that he found one that worked and that we could prove quickly that it did work
+		\end{itemize}
+	\item Factoring
+		\begin{itemize}
+			\item Input: n digit number
+			\item Output: Is this number composite and if it is, factor it.
+			\item If the magician comes up with a set of factors, it is easy to check if the factors are prime and easy to check if their product is the n-digit number.
+		\end{itemize} 	
 \end{itemize}
 
-\paragraph{Examples}
-\begin{enumerate}
-\item Factoring:
-	\begin{itemize}
-	\item Input: n digit number
-	\item output: Is this number composite and if it is, factor it.
-	\end{itemize}
-\item Traveling Salesman problem:
-	\begin{itemize}
-	\item Input: Collection of n cities and distances between them
-	\item Travelling salesman tour: An ordering of cities $c_1 \to c_2 \to ... \to c_n$ visiting each city once
-	\item Question: Is there a tour of total length $\leq 1000$ miles $\to$ is in NP
-	\end{itemize}
-\end{enumerate}
+\subsubsection{Definition}
+A decision problem D is in class NP if there is a polytime algorithm M (called the checking algorithm) and a polynomial p which given an input and some "extra information" called certificate can verify that x is indeed in L.
+
+It is easy to see that $P \subseteq NP$ i.e. every P-class decision problem is in class NP since if A is a polytime algorithm which solves the decision problem D, then it will also suit as the checking algorithm in the definition of NP. We do not even need a certificate to prove it.
 
 \subsection{$P \neq NP$}
 
@@ -436,10 +447,13 @@ If P = NP then airline scheduling, protein folding, packing boxes, finding short
 
 The universal opinion is that $P \neq NP$
 
-\subsection{Scott Aovonson's reasons for $P \neq NP$}
+\subsubsection{Scott Aoronson's reasons for $P \neq NP$}
 
-Empirical: Problems in NP remain heuristically hard, however problems which are now known to be in P (linear programming, primality testing) but efficient heuristics existed long before.
+Empirical: Problems in NP remain heuristically hard, however problems which are now known to be in P (linear programming, primality testing) but efficient heuristics existed long before. 
 
+(N.B. I don't know what this is supposed to mean. Here's a Scott Aoranson quote though:
+
+If P = NP, then the world would be a profoundly different place than we usually assume it to be. There would be no special value in "creative leaps," no fundamental gap between solving a problem and recognizing the solution once it's found. Everyone who could appreciate a symphony would be Mozart; everyone who could follow a step-by-step argument would be Gauss... )
 %%%%% Monday September 19th
 
 \section{Proof Techniques: Predicate calculus}
@@ -457,26 +471,27 @@ A proof is a sequence of implications deriving a conclusion q from a premise p: 
 
 \paragraph{Case Analysis}
 \begin{itemize}
-\item Proposition: For positive integer n: $3 \nmid n \to 3 \mid n^2 + 2$\\
-	($a\mid b \to$ "a divides b" there exists an integer c, b = ac)
-	Proof: Divide n by 3 with remainder
+\item \textbf{Proposition}: For positive integer n: $3 \nmid n \to 3 \mid n^2 + 2$\\
+	($a\mid b \to$ "a divides b" there exists an integer c, b = ac)\\
+	\textbf{Proof}: Divide n by 3 with remainder such as $n = 3q + r \qquad q \in \mathbb{N}, 0 < r < 3$
+	\begin{itemize}
+		\item $r = 1 \to n = 3q + 1 \\ n^2 + 2 = 9q^2 + 1 + 6q + 2 = 3 \cdot (3q^2 + 2q + 1)$ \\ therefore divisible by 3  
+		\item $r = 2 \to n = 3q + 2 \\ n^2 + 2 = 9q^2 + 4 + 12q + 2 = 3 \cdot (3q^2 + 6q + 2)$ \\ therefore divisible by 3  
+	\end{itemize}
 \end{itemize}
 
-%% missed the proof
-
-\paragraph{Couter Example}
+\paragraph{Counter Example}
 	\begin{itemize}
 		\item Proposition: $n^2 + n + 1$ is prime for every positive integer n $\leq$ 10
 		\item $4^2 + 4 + 1 = 21 = 7 \cdot 3$
 		\item This is a counter example: the statement is false
 		\item Mathematical Notation
 		\begin{itemize}
-		\item $p \to q \wedge r \to p \to q$
-		\item $\neg(p \to q) \to \neg(p \to q \wedge r)$ 
+		\item $p \to q \wedge r \to p \to q$ if $\neg(p \to q) \to \neg(p \to q \wedge r)$ 
 		\item q is a counter example to the implication "$n^2 + n + 1$ is prime for all integers n " 			\item "$n^2+ n + 1$ is prime" $\leftarrow$ P(n) predicate proposition depending on a variable
 		$\forall n \in \mathbb{Z}(P(n))$\\
 		Note: $\forall$  means "for all" e.g. "For all n in the set of integers the predicate "$n^2 + n + 1$"is prime" is true
-		\item "There exists an integer n so that $n^2 + n + 1$ is not prime" is noted $\exists n \in \mathbb{Z}(Q(n))$ where Q(n) "$n^2 + n + 1$ is not prime" i.e. $Q(n) \neg P(n)$
+		\item "There exists an integer n so that $n^2 + n + 1$ is not prime" is noted $\exists n \in \mathbb{Z}(Q(n))$ where Q(n) "$n^2 + n + 1$ is not prime" i.e. $Q(n) = \neg P(n)$
 		\end{itemize}
 \end{itemize}
 
@@ -485,38 +500,38 @@ Every even integer bigger than 2 is expressible as a sum of 2 primes.
 \begin{itemize}
 \item $\forall n \in$ "even integers", $n > 2 \to (\exists a, b \in \{primes\} (n = a + b))$)
 \item
-"71 is prime"
-\item
-$\forall a, b \in \mathbb{N} ( a \cdot b = 71) \to ((a = 1) \wedge (b=71))$
+In predicate calculus, "71 is prime" is equivalent to the notation: \\ $\forall a, b \in \mathbb{N} ( a \cdot b = 71) \to ((a = 1) \wedge (b=71))$
 \end{itemize}
 
 \paragraph{Limits}
+Various ways to say the same thing:
 \begin{itemize}
-\item
-"f(x) as a limit L as x $\to$ a" "$lim_{x \to a} f(x) = L$" As x approaches a f(x) becomes closer and closer to L"
-\item
-"For every $\epsilon > 0$, there exists $\delta > 0$ so that if $| x - a | < \delta then |f(x) - L |< \epsilon$"
-\item
-"$\forall \epsilon > 0 (\exists \delta > 0 (|x-a|<\delta \to |f(x) - L | < \epsilon))$
-\item
-"$lim_{x \to \infty} f(x) = L" \forall \epsilon > 0 (\exists X \cdot (\forall x > X (|f(x) - L| < \epsilon)))$
+\item "As x approaches a, f(x) becomes closer and closer to L"
+\item "f(x) has a limit L as x $\to$ a" 
+\item "$lim_{x \to a} f(x) = L$"
+\item "For every $\epsilon > 0$, there exists $\delta > 0$ so that if $| x - a | < \delta$ then $|f(x) - L |< \epsilon$"
+\item "$\forall \epsilon > 0 \quad (\exists \delta > 0 \quad (|x-a|<\delta \to |f(x) - L | < \epsilon))$
+\item "$lim_{x \to \infty} f(x) = L" \dbl \quad \forall \epsilon > 0 \quad (\exists X : \quad (\forall x > X \quad (|f(x) - L| < \epsilon)))$
 \end{itemize}
 
-\paragraph{P(n) :  "$n^2 + n + 1$ is prime"}
+\paragraph{Negation}
 \begin{itemize}
 \item
-$\neg(\forall n \in A : P(n)) \dbl \exists n \in A (\neg P(n))$
+$\neg(\forall n \in A : P(n)) \dbl \exists n \in A \quad (\neg P(n))$
 \item
-$\forall n \in A : P(n) \dbl \neg(\exists n \in A (\neg P(n))$
+$\forall n \in A : P(n) \dbl \neg(\exists n \in A \quad (\neg P(n)))$
+\item
+This is very useful in proofs, since proving $(\forall n \quad (p(n))$ might be hard if we consider all
+values of n, whereas checking that there can't be a value of n such that p(n) does
+not hold could be easier.
 \end{itemize}
 \paragraph{"$\sin x$ does not have a limit as $x \to \infty$"}
 \begin{align*}
 \neg(\exists L : lim_{x \to \infty} \sin x = L)
 &\dbl \forall L : (\neg (lim(\sin x) = L)\\
-&\dbl \forall L (\neg(\forall \epsilon > 0 (\exists X (\forall x > X (|\sin x - L| <\epsilon)))))\\
-&\dbl \forall L (\exists \epsilon > 0 (\neg (\exists X (\forall x > X (|\sin x - L| <\epsilon)))))\\
-&\dbl \forall L (\exists \epsilon > 0 (\neg (\exists X (\forall x > X (|\sin x - L| <\epsilon)))))\\
-&\dbl \forall L (\exists \epsilon > 0 (\forall X (\exists x > X(|\sin{x} -L | \geq \epsilon))))\\
+&\dbl \forall L \quad (\neg(\forall \epsilon > 0 \quad (\exists X \quad (\forall x > X \quad (|\sin x - L| <\epsilon)))))\\
+&\dbl \forall L \quad (\exists \epsilon > 0 \quad (\neg (\exists X  \quad (\forall x > X \quad (|\sin x - L| <\epsilon)))))\\
+&\dbl \forall L \quad (\exists \epsilon > 0 \quad (\forall X \quad (\exists x > X \quad (|\sin{x} -L | \geq \epsilon))))\\
 \end{align*}
 
 %%% Wednesday September 21st
@@ -525,7 +540,7 @@ $\forall n \in A : P(n) \dbl \neg(\exists n \in A (\neg P(n))$
 We want to prove the following theorem:
 \begin{itemize}
 \item Any collection of n+1 numbers chosen from the set \{1,2,...,2n\} contains two numbers so that one is divisible by the other.
-\item $\forall n \in \mathbb{N} (\forall s \subseteq \{1,2,...,2n\} (|S| = n + 1) \to \exists a,b \in S ((a | b) \wedge (a + b)))$
+\item $\forall n \in \mathbb{N} \quad (\forall S \subseteq \{1,2,...,2n\} \quad ((|S| = n + 1) \to \exists a,b \in S \quad ((a | b) \wedge (a \neq b))))$
 \end{itemize}
 
 \paragraph{Reminder: the pigeonhole principle} 
@@ -534,16 +549,17 @@ If $n+1$ objects are placed into n boxes then some box contains $\geq 2$ objects
 
 \paragraph{Partition} We say that a collection $A_1, A_2, ... A_k$ of subsets of a set B is a \textbf{partition} of B if
 \begin{enumerate}
-	\item $\forall i,j : 1 \leq i < \leq k \qquad A_i \cap A_j = \emptyset$ (no element of B belongs to two different parts)
+	\item $\forall i,j : 1 \leq i < j \leq k \qquad A_i \cap A_j = \emptyset$ (no element of B belongs to two different parts)
 	\item $A_1 \cup A_2 \cup ... \cup A_k = B$
 \end{enumerate}
 
-Example: \{1,2,3,4,5,6,7,8\} \qquad \{1,2,4,6,8\} , \{3, 5\} , \{7\}
+Example: \{1,2,3,4,5,6,7,8\} can be partitioned into \{1,2,4,6,8\} , \{3, 5\} , \{7\}
 
-\paragraph{Proof} By the pigeonhole principle it suffices to find a partition $A_1, A_2, ... A_n$ of \{1,2,...,2n\} so that $(\forall i (\forall a,b \in A_i (a|b \vee b|a)))$
+\paragraph{Proof} By the pigeonhole principle it suffices to find a partition $A_1, A_2, ... A_n$ of \{1,2,...,2n\} so that\\
+$(\forall i \quad (\exists a,b \in A_i \quad (a | b \vee b | a)))$
 
 Here is a construction:
-$A_i = \{(2i + 1), 2(2i -1), 4(2i -1), ..., 2^m(2i-1)\}$ up to maximum m: $2^m (2i-1) \leq 2n$
+$A_i = \{(2i - 1), 2(2i -1), 4(2i -1), ..., 2^m(2i-1)\}$ up to maximum m: $2^m (2i-1) \leq 2n$
 \begin{enumerate}
 \item $A_i$ satisfies the desired property for all i
 \item $A_1, A_2, .., A_n$ is a partition of \{1,2,...,2n\} \\
@@ -562,7 +578,7 @@ Counter-example: $n = 2 \quad \{1,2,3,4\} \to \{3,4\}$
 
 For a collection of people any two of them either have met or haven't . A club is a group of people who have pairwise met each other. A group of strangers is a group of people who pairwise have not met each other
 
-Theorem: In any collection of 6 people rhwew is either a club of 3 people or a group of 3 strangers.
+Theorem: In any collection of 6 people there is either a club of 3 people or a group of 3 strangers.
 
 Proof Let x be one of the people in the collection. The following cases apply
 \begin{enumerate}
@@ -571,7 +587,7 @@ Proof Let x be one of the people in the collection. The following cases apply
 		\item Some two of acquaintances of x, say y \& z know each other. Then \{x, y, z\} form a club.
 		\item No two acquaintances of x know each other. Then they form a group of strangers.
 	\end{enumerate}
-	\item x has at most 2 acquaintances there one ate least 3 people
+	\item x has at most 2 acquaintances. There are at least 3 people that x does not know. Now the argument is in case 1 with acquaintances replaced by strangers.
 \end{enumerate}
 
 \section{Social Choice Function}
@@ -579,29 +595,29 @@ Proof Let x be one of the people in the collection. The following cases apply
 \subsection{Definition}
 3 candidates A, B \& C:
 \begin{itemize}
-	\item 49\% of electorate A > B > C
-	\item 48 \% of electorate B > A > C
-	\item 3\% of electorate C > B > A
+	\item 49\% of electorate $A > B > C$
+	\item 48 \% of electorate $B > A > C$
+	\item 3\% of electorate $C > B > A$
 \end{itemize}
 
 Given a collection of voters $v_1, v_2, ..., v_n$ and several candidates A, B, C, D, ...
 
 Each voter ranks the candidates according to his preferences:
 
-$A >^{v_2} B >^{v_2} C >^{v_2} D \qquad >^{v_i} is the ordering produced by the i^{th} voter$
+$A >^{v_2} B >^{v_2} C >^{v_2} D \qquad $where $>^{v_i} $ is the ordering produced by the $i^{th}$ voter
 
 \paragraph{Permutation}
 
 (A, D, B, C) of the set of candidates \{A, B, C, D \}
 
-Social choice function takes as an input voter's ordering and produces a consensus ordering and produces a consensus ordering $f(>^{v_1},>^{v_2},,...,>^{v_n}) = \quad >$
+Social choice function takes as an input voter's ordering and produces a consensus ordering $f(>^{v_1},>^{v_2},,...,>^{v_n}) = \quad >$
 
 What conditions should a good SCF satisfy?
 \begin{enumerate}
 	\item \textbf{Unanimity}: If every voter prefers $\alpha$ to $\beta$ then the consensus ordering must rank $\alpha$ above $\beta$ \\
-	$(\forall \vee (\alpha >^{v} \beta)) \to (\alpha > \beta)$
+	$(\forall v \quad (\alpha >^{v} \beta)) \to (\alpha > \beta)$
 	\item \textbf{Independence on irrelevant alternatives (IAA)}
-	The final relative ordering of $\alpha$ and $\beta$ should depend only on relative orderings of $\alpha$ and $\beta$ (If a candidate withdraws from election this doesn't affect the order of others). 
+	The final relative ordering of $\alpha$ and $\beta$ (higher, lower or indifferent) should depend only on relative orderings of $\alpha$ and $\beta$ by every individual (If a candidate withdraws from election this doesn't affect the order of others). 
 \end{enumerate}
 
 Which social choice functions satisfy these properties?
@@ -615,10 +631,10 @@ What happens with majority? $\alpha > \beta$ if more than half of the voters pre
 
 How does this work? There is a conflict here...
 
-Dictatorship: For some fixed voter d we have ($\alpha > \beta$) if and only if ($\alpha >^d \beta$)
+\textbf{Dictatorship}: For some fixed voter d we have ($\alpha > \beta$) if and only if ($\alpha >^d \beta$) i.e. society prefers $\alpha$ to $\beta$ whenever d strictly prefers $\alpha$ to $\beta$
 
 \subsection{Arrow's impossibility Theorem (1951)} 
-The only social choice function satisfying unanimity and IIA is a dictatorship.
+\textbf{Theorem:} Any constitution that respects independence of irrelevant alternatives and unanimity is a dictatorship.
 
 \paragraph{Proof}
 
@@ -828,15 +844,15 @@ It is a smaller number admitting two different factorizations
 
 So $p_1 < q_1 so q1 = xp_1 + r \qquad 0 \leq r \leq p_1$
 
-$pn = (xp_1 + r )q_2 ... q_i also we may assume q_2, q_3 , ... q_l \neq p_1$
+$pn = (xp_1 + r )q_2 ... q_i$ also we may assume $q_2, q_3 , ... q_l \neq p_1$
 
 $p_1 | n$ 
 
 $n = xp_1p_2...q_l + rq_2 .... q_l$
 
-$n is divisible by p_1$
+$n$ is divisible by $p_1$
 
-$n > m > 1 m = rq_2...q_l$ is divisible by p
+$n > m > 1 m = r \cdot q_2...q_l$ is divisible by p
 
 $m < n$ as $x > 0$ because $q_1 > p_1 > r$
 
@@ -1182,19 +1198,24 @@ Show that deciding whether $ax^2 + by = c$ has an integer solution for given $a,
 
 Size of the input; $log_2{a} + log_2{b} + log_2{c}$
 
-Certificate $x \& y$ such that $ax^2 + by = c$
+Certificate $x \& y$ exist such that $ax^2 + by = c$.
 
-\paragraph{Essence of the problem}: If there exists x \& y which solve the solution, then there exist $x_0, y_0$ so that $ax_0 + b \cdot y \cdot b_{y_0}  = c$ and $x_0$ and $y_0$ are not too large 
+\paragraph{Essence of the problem}: If there exists x \& y which solve the solution, then there exist some $x_0, y_0$ so that $ax_0^2 + b \cdot y_0  = c$ and $x_0$ and $y_0$ are not too large 
 
-$x_0y_0 = 0((a+b+c)^n)$
+With $x_0$ and $y_0$ of polynomial size of some power of fixed size k
+
+$x_0 and y_0 = O((a+b+c)^k)$
 
 \paragraph{General diophantine equation}:
+It is not always the case that a certificate is of reasonable size. Famous example:
 
 $P(x_1, x_2, ..., x_k) = 0 \qquad$ where P is polynomial with integer coefficients.
 
 E.g. $x_1x_2x_3 - 5x_1 + 1000 = 0$
 
 Not in NP in general, there is no systemic algorithm to figure out if it has a solution or not.
+
+\paragraph{Back to Euclid}
 
 Euclid's algorithm takes at most $log_2{a} + log_2{b}$ steps (but maybe it always terminates in 5 or $\log(\log a)$
 
@@ -1208,7 +1229,7 @@ Running Euclid's algorithm to compute $gcd(F_n, F_n+1)$
 
 $F_n = F_{n-1}+ F_{n-2}$
 
-$F_{n-1} = F_{n_2} + F_{n-3}$
+$F_{n-1} = F_{n-2} + F_{n-3}$
 
 $F_n = {{1 + \sqrt{5}}/2^{n+1}}/\sqrt{5}$
 
@@ -1258,9 +1279,10 @@ Then:
 \end{enumerate}
 
 \textbf{Proof}: 
-1, 2, 3: is based on the preceding fact
-3. If $rem(a, m) = rem(b, m) and rem(b, m) = rem(c, m), then rem(a, m) = rem(c, m).
-4. $m | {a - b}$, $m | c - d$ therefore $m | (a-b) + (c-d) = (a + c) - (b + d)
+\begin{itemize}
+	\item 1, 2, 3: is based on the preceding fact
+	\item 3. If $rem(a, m) = rem(b, m)$ and $rem(b, m) = rem(c, m)$, then $rem(a, m) = rem(c, m)$.
+	\item 4. $m | {a - b}$, $m | c - d$ therefore $m | (a-b) + (c-d) = (a + c) - (b + d)$
 
 
 
