@@ -422,7 +422,7 @@ Examples
 			\item Output: A tour such that each city is visited exactly once and the total length $\leq 1000$ miles
 			\item Checking each possible tour amounts to (a) fixing some city from which to start then (b) choosing a second city (999 choices) and a third city (998 choices and so on. Thus the number of tours is $999!$. This requires a tremendous amount of computation that is way beyond polynomial time.
 			\item If however, you somehow come up with a tour (use magic), you can easily test if it matches the requirements by computing the sum of distances between two adjacent cities i.e.\\ $\sqrt{(x_{1000} - x_1)^2 + (y_{1000} - y_1)^2} + \sum{\sqrt{(x_{i} - x_{i+1})^2 + (y_{i} - y_{i+1})^2}} \leq 1000$
-			\item It doesn't matter if Merlin didn't heck all 999! possible tours, only that he found one that worked and that we could prove quickly that it did work
+			\item It doesn't matter if Merlin didn't check all 999! possible tours, only that he found one that worked and that we could prove quickly that it did work
 		\end{itemize}
 	\item Factoring
 		\begin{itemize}
