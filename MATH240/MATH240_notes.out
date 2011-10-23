@@ -16,7 +16,7 @@
 \BOOKMARK [2][-]{subsection.3.1}{Boolean Logic}{section.3}% 16
 \BOOKMARK [2][-]{subsection.3.2}{Logic Gates}{section.3}% 17
 \BOOKMARK [2][-]{subsection.3.3}{Algorithms}{section.3}% 18
-\BOOKMARK [1][-]{section.4}{Polytime algorithms P\043 NP conjecture}{}% 19
+\BOOKMARK [1][-]{section.4}{Polytime algorithms and the P = NP conjecture}{}% 19
 \BOOKMARK [2][-]{subsection.4.1}{Definition}{section.4}% 20
 \BOOKMARK [2][-]{subsection.4.2}{P problems}{section.4}% 21
 \BOOKMARK [2][-]{subsection.4.3}{NP problems \(non-deterministic polynomial time\)}{section.4}% 22
@@ -50,3 +50,10 @@
 \BOOKMARK [2][-]{subsection.9.6}{Homework problem}{section.9}% 50
 \BOOKMARK [1][-]{section.10}{Modular arithmetic}{}% 51
 \BOOKMARK [2][-]{subsection.10.1}{Notation}{section.10}% 52
+\BOOKMARK [2][-]{subsection.10.2}{Multiplicative inverses}{section.10}% 53
+\BOOKMARK [2][-]{subsection.10.3}{Fermat's Little Theorem}{section.10}% 54
+\BOOKMARK [2][-]{subsection.10.4}{Side-Note: The proof on the midterm exam}{section.10}% 55
+\BOOKMARK [2][-]{subsection.10.5}{Applications of Fermat's Little Theorem}{section.10}% 56
+\BOOKMARK [2][-]{subsection.10.6}{Testing primality}{section.10}% 57
+\BOOKMARK [3][-]{subsubsection.10.6.1}{Fermat's test}{subsection.10.6}% 58
+\BOOKMARK [3][-]{subsubsection.10.6.2}{Miller-Rabin's test}{subsection.10.6}% 59

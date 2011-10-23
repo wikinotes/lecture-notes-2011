@@ -74,4 +74,25 @@ Such methods are available both for qualitative (e.g. I like fast food very much
 \item UCB admission Data: See whether women were discriminated against for college admission. It looks like the women were discriminated against indeed: 1197 men for 557 women. Maybe the data was not chosen correctly. 44.3\% of men who applied were accepted whereas 30.3\% women were accepted, the result already seems less outrageous. Then, they looked at the data per program
 \end{itemize}
 
+\section{Probabilities}
+\subsection{Exercises}
+
+2\% of units are defective
+An inspection procedure which is non destructive gives 2 \% false positives and 5 \% false negatives
+
+If the inspection fails, the lot sold to salvage firm. This firm applies a corrective prodcedure that corrects 90 \% of defectives.
+
+You buy a unit from the salvage firm. It is good. What's the probability that it was originally defective?
+
+								2\%	/                                   98\%     \\
+								  Defective				Non-defective
+							98\%	  /             \\ 2\%                         5\% /                  \\ 95 \%
+					Tested defective	     tested okay          tested def                     tested okay
+					.90/			\\.10		1./	\\		1/	\\0			1/	\\0
+					G			B		G	B		G	B			G	B
+										(because we're interested in the salvage firm)	
+p(def | G) = \frac{.02 \times .98 \times .90}{.02 \times .98 \times .90 + .98 \times .05 \times 1} = 441 / 1666 = 26.47\%
+										
+										
+
 \end{document}

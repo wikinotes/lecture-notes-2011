@@ -21,11 +21,12 @@
 
 \title{MATH 240 - Discrete Structures}
 \author{McGill University \\ Fall 2011}
-\date{}
+\date{Last Updated: \today}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \begin{document}
-\lhead{Brought to you by WikiNotes. Join our \href{http://www.facebook.com/home.php?sk=group_166578420027385&ap=1}{facebook group} or take a look at our website on \href{http://www.wikinotes.ca}{wikinotes.ca}\newline}
+\lhead{Brought to you by WikiNotes. Like our \href{https://www.facebook.com/wikinotes.ca}{facebook page} or take a look at our website on \href{http://www.wikinotes.ca}{wikinotes.ca}
+\newline\line(1,0){500}}
 
 \maketitle
 \tableofcontents
@@ -158,6 +159,8 @@ Some examples:
 \end{itemize}
 
 \subsection{Truth Tables}
+
+Making tables in \LaTeX \quad is so tedious. Check out Wesley's notes.
 
 \subsection{Rules of Logic}
 
@@ -354,7 +357,7 @@ Can we test if C is always a contradiction? The answer is trivially yes, if we t
 %%% MISSED
 
 %%% Friday September 16th
-\section{Polytime algorithms P\# NP conjecture}
+\section{Polytime algorithms and the P $\neq$ NP conjecture}
 
 \subsection{Definition}
 Given algorithm A its running time $t_A(n) =$ maximum number of steps the algorithm can require on inputs of size n
@@ -818,10 +821,9 @@ Flaw: P(n) does not imply P(n+1)
 \section{Number Theory}
 
 \paragraph{Definition}
-Studies properties of integers: divisibility, primes. an integer a divides an integer b $if \exists x \in \mathbb{Z} (xa=b)$
+Studies properties of integers: divisibility, primes. an integer a divides an integer b if \\ ($ \exists x \in \mathbb{Z} : \quad (xa=b)$
 
-
-Division with remainder: for any two integers $a > 0$ and b there exists integers q and d  so that $b = qa + r \to$ r is the remainder with $0 \leq r \leq a$
+Division with remainder: for any two integers $a > 0$ and b there exists integers q and d  so that \\ $b = qa + r \to$ r is the remainder with $0 \leq r \leq a$
 
 We write $a | b$, if and only if $r = 0$
 
@@ -829,30 +831,31 @@ A positive integer $p > 1$ is prime if the only positive integers dividing p are
 
 An integer $n > 1$ is composite if it is not prime
 
-Expression of a positive as product of primes is called prime factorization. We have shown that every integer greater than 1 admits a prime factorization.
+Expression of a positive integer as product of primes is called prime factorization.
 
 \paragraph{The fundamental theorem of arithmetic} Every integer greater than 1 admits unique prime factorization
 
 \textbf{Proof using contradiction}: Suppose some n admits at least two distinct prime factorizations. Choose the minimum such n.
 
-$n = p_1p_2p_3...p_k = q_q1_2...q_l$
+$n = p_1 \cdot p_2 \cdot p_3 \cdot ... \cdot p_k = q_1\cdot q_2 \cdot ...\cdot q_l$
 
 We may assume that $p_1$ is the smallest prime among all the primes $p_i$ and $q_j$
 
-Suppose $p_1 = q_1$ then $\frac{n}{p_i} = p_2...p_i = q_2 ... q_l$
+Suppose $p_1 = q_1$ then $\displaystyle\frac{n}{p_i} = p_2 \cdot ... \cdot p_k = q_2 \cdot ... \cdot q_l$
+
 It is a smaller number admitting two different factorizations
 
-So $p_1 < q_1 so q1 = xp_1 + r \qquad 0 \leq r \leq p_1$
+$p_1 < q_1$ so $q1 = xp_1 + r \qquad 0 \leq r \leq p_1$
 
-$pn = (xp_1 + r )q_2 ... q_i$ also we may assume $q_2, q_3 , ... q_l \neq p_1$
+$n = (xp_1 + r )q_2 ... q_i$ also we may assume $q_2, q_3 , ... q_l \neq p_1$
 
 $p_1 | n$ 
 
-$n = xp_1p_2...q_l + rq_2 .... q_l$
+$n = xp_1\cdot q_2 \cdot ... \cdot q_l + r \cdot q_2 \cdot .... \cdot q_l$
 
 $n$ is divisible by $p_1$
 
-$n > m > 1 m = r \cdot q_2...q_l$ is divisible by p
+$n > m > 1 \qquad m = r \cdot q_2...q_l$ is divisible by $p_1$
 
 $m < n$ as $x > 0$ because $q_1 > p_1 > r$
 
@@ -862,6 +865,7 @@ $m = p_1m = p_1r_1r_2...r_s \to$ there exists a prime factorization of m which i
 
 A contradiction to the choice of..
 
+(missed)
 % missed
 
 
@@ -884,11 +888,11 @@ $a | b$ if and only if $r_i \leq s_i$ for all $1 \leq i \leq k$
     \item \textbf{Theorem} $\sqrt{2}$ is irrational
     \item \textbf{Proof}: Suppose $\sqrt{2}$ is not \\
     then $\sqrt{2} = \frac{m}{n} = 2 = \frac{m^2}{n^2}$ \\
-    ($m = 2^r p_1^{r_1} \ldots p_i^{r_k}$)\\
-    ($m = 2^s p_1^{s_1} \ldots p_i^{s_k}$)\\
+    ($m = 2^r p_1^{r_1} \ldots p_k^{r_k}$)\\
+    ($n = 2^s p_1^{s_1} \ldots p_k^{s_k}$)\\
     $(2n^2 = m^2$)\\
     ($2n^2 = 2^{2s+1} p_1^{2s_1} \ldots p_k^{2s_k}$)\\
-    ($2m^2 = 2^{2r} p_1^{2r_1} \ldots p_k^{2r_k}$)\\
+    ($m^2 = 2^{2r} p_1^{2r_1} \ldots p_k^{2r_k}$)\\
     Contradiction as ($2s+1 \neq 2r$)
     \item \textbf{Theorem:} $\sqrt{n}$ is rational for any integer n if and only if $n = k^2$ for some k
 \end{itemize}
@@ -896,8 +900,8 @@ $a | b$ if and only if $r_i \leq s_i$ for all $1 \leq i \leq k$
 Proof: Exercise. Modify the proof for $\sqrt{2}$
 
 \begin{itemize}
-    \item \textbf{Theorem}: If a prime $p | ab$ then either p | a or p| b
-    \item \textbf{Proof}: if p is not present in the prime factorization of either a or b, then it is not present in the prime factorization of $a \cdot b \cdot m$ and so $p \nmid a b \Box$
+    \item \textbf{Theorem}: If a prime $p | ab$ then either $p | a$ or $p| b$
+    \item \textbf{Proof}: if p is not present in the prime factorization of either a or b, then it is not present in the prime factorization of $a \cdot b $ and so $p \nmid a b$
     \item Is this true when p is not prime? Suppose we have $p_1 \cdot p_2$ instead of $p_1$ then $p_1 | a$ or $p_1 | b \qquad$ $p_2 | 1$ or $p_2 | b$
 \end{itemize}
 
@@ -911,15 +915,15 @@ $2,3,5,7,11,13,17,19,23,29,31,37,41,43$
 
 \begin{itemize}
     \item \textbf{Theorem} For any positive integer k there exists two consecutive prime numbers with difference $\geq k$
-    \item \textbf{Proof} It suffices to exhibit a sequence of $\geq k$ consecutive composit numbers\\
+    \item \textbf{Proof} It suffices to exhibit a sequence of $\geq k$ consecutive composite numbers\\
             $n! = 1 \cdot 2 \cdot 3 \cdot 4 \cdot ... \cdot (n-1) \cdot n$\\
             Let $n = k + 1$\\
-            $n! + 2, n! + 3, n! + 4, n! + 5,..., n! + n \to k$ consecutive integers all composite
+            $n! + 2, n! + 3, n! + 4, n! + 5,..., n! + n \to k$ consecutive integers all composite\\
             $n! + m$ is composite for all $2 \leq m \leq n \qquad m | n! + m \leftarrow m| n! \qquad 2 \leq m \leq n! + m$
     \item \textbf{Twin prime conjecture} There exist infinitely many pairs $p, p+2$ so that they are both primes. (This question has been asked more than 2000 years ago.)
     \item \textbf{The prime number theorem:} For a number n let $\pi(n)$ denote the number of primes $\leq n$. Then \\
-            $\pi(n) ~ \frac{n}{\ln n} \qquad lim_{n \to \infty} \frac{\pi(n)}{n / \ln n} = 1$ \\
-            Average gaps between primes are $\tilde \ln n$ 
+            $\pi(n) \cong \frac{n}{\ln n} \qquad lim_{n \to \infty} \frac{\pi(n)}{n / \ln n} = 1$ \\
+            Average gaps between primes are $\cong \ln n$ 
     \item \textbf{Conjecture} For every positive integer n there exists a prime p $n^2 \leq p \leq (n+1)^2$
     \begin{enumerate}
         \item It is possible to efficiently test whether a number is prime or composite.
@@ -942,7 +946,7 @@ Here is an example of our approach
     \item (2a-b, 0) - empty the second jug
     \item (0, 2a-b)
     \item (a, 2a-b)
-    \item (0, 3a-b) $\to$ John Mclane survives
+    \item (0, 3a-b) $\to$ John Mclane survives $3 \cdot 3 - 5 = 4!$
 \end{enumerate}
 
 \subsection{Linear Combinations}
@@ -1283,6 +1287,363 @@ Then:
 	\item 1, 2, 3: is based on the preceding fact
 	\item 3. If $rem(a, m) = rem(b, m)$ and $rem(b, m) = rem(c, m)$, then $rem(a, m) = rem(c, m)$.
 	\item 4. $m | {a - b}$, $m | c - d$ therefore $m | (a-b) + (c-d) = (a + c) - (b + d)$
+\end{itemize}
+
+%% Wednesday 12/10/11
+
+\paragraph{Reminder: Congruences}
+
+$a \equiv b (mod m)$ if $m | a - b$
+
+\begin{enumerate}
+    \item $a \equiv b (mod m)$ if and only if a and b have the same remainde after division by m
+    \item $a \equiv b (mod m) \quad c \equiv d (mod m)$ then \\
+        $a + c \equiv b + d (mod m) \\
+        a \cdot c \equiv b \cdot d (mod m) \\$
+        \textbf{Proof:} $ac - bd = ac - bc + bc - bd = c(a-b) + b(c-d)$ \\
+        Since $(a-b)$ and $(c-d)$ are divisible by m then $(ac - bd)$ is divisible by m
+\end{enumerate} 
+
+
+\subsection{Multiplicative inverses}
+
+\paragraph{What about division for congruences?}
+\textbf{Turing's code}:\\
+Select $p$: a large prime number.\\
+Let a message be represented by a number $0 \leq m \leq p$.\\
+Choose a key $k$ which also is going to be $0 \leq k \leq p$, transmit the remainder of $mk$ after division by $p$.
+
+$0 \leq m^* \leq p$\\
+$m^* = m (mod p)$
+
+\textbf{Two questions}:
+\begin{enumerate}
+    \item Can our counterpart decode $m$ from $p, m^*, k$?
+    \item How vulnerable is this code? ( How easy is it to figure out k?)
+\end{enumerate}
+
+We say that $\bar{k}$ is a multiplicative inverse for $k$ modulo $p$
+
+$\bar{k} \cdot k = a (mod p)$
+
+If we have a multiplicative inverse, then we can decode $m$.
+\begin{align*}
+m^* &\equiv mk (mod p) \\
+m^* \bar{k} &\equiv m(k \cdot \bar{k}) \equiv m (mod p)
+\end{align*}
+
+So m is just the remainder of $m^*\bar{k}$ after division by p
+
+\paragraph{Theorem} 
+
+If p is a prime, k is non divisible by p, then there exists a multiplicative inverse for k (mod p).
+
+\textbf{Proof}:
+We want to find $\bar{k}$ such that:\\
+$\quad k\bar{k} - 1 = tp\\
+\quad k\bar{k} - tp = 1 \to$ linear combination of $k$ and $p$ equal to 1\\
+
+We can find such $\bar{k}$ and $t$ if and only if $gcd(k, p)$ = 1.
+
+Why is the greatest common divisor of k and p?
+
+$gcd(k,p) | p \quad$ so $gcd(k,p) = 1$ or $gcd(k,p) = p\qquad$ Second is impossible as $p \nmid k$
+
+\textbf{Example}:\\
+\\
+Find a multiplicative inverse for 10 modulo 17.\\
+\\
+We need to express 1 as a linear combination of 10 and 17.
+
+We use Euclid's algorithm:
+
+$17 = 10 + 7$ (remainder of the division of 17 by 10)\\
+$10 = 7 + 3\\
+7 = 2 * 3 + 1\\$
+
+We track-back to get:
+
+$1 = 7 - 2 \cdot 3 \\
+1 = 7 - 2 \cdot (10 -7) = 3 \cdot 7 - 2 \cdot 10 \\
+1 = 3 \cdot (17 - 10) - 2 \cdot 10 = 3 \cdot 17 - 5 \cdot 10 \\$
+
+$-5$ is a multiplicative inverse for 10\\
+$-5 \equiv -5 + 17 (mod 17) \equiv 12 (mod 17)$
+
+\paragraph{Decoding Turing's code}:
+
+$p = 17, k = 10, m = 3$\\
+We send $m^*$ remainder $3 \cdot 10 = 30$ after division by $17 \to 13$\\
+Counterparty receives \textbf{13}.
+
+$13 \cdot 12 = 156 = 17 \cdot 9 + 13$
+
+\paragraph{Corollary}
+
+If p is a prime, 
+
+$p + k \qquad xk \equiv yk (mod p) \quad$ then $x \equiv (mod p)$
+
+\paragraph{Proof}
+
+$(xk)\bar{k} \equiv (yk)\bar{k} (mod p)$ where $\bar{k}$ is multiplicative
+
+$x(k\bar{k}) \equiv y(k\bar{k}) (mod p)$
+
+$x \equiv y (mod p)$ Q.E.D.
+
+If $p \neq 2$, $2x \equiv 2y (mod p)$ then $x \equiv y$
+
+\textbf{Note:} Cancellation does not work on modulo composite numbers.\\
+\begin{itemize}
+    \item $2 \neq 0 (mod 4)$\\
+    \item $2 \times 2 \equiv 0 (mod 4)$
+\end{itemize}
+
+\subsection{Fermat's Little Theorem}
+
+Let p be a prime $p \nmid k$
+
+\quad then $k^{p-1} \equiv 1 (mod p)$.
+(e.g. $2^{1000}$ has remainder 1 after division by 101)
+
+\textbf{Proof:} $1,2,..., p-1$ for every number i in this collection. Let $r_i$ be the remainder of $k_i$ after the division by p 
+
+$\quad (r \equiv k_i (mod p) \quad 0 \leq r_i < p$
+
+We get a collection of members, $r_1, r_2, r_3, ... , r_{p-1}$.
+
+\begin{itemize}
+    \item $1 \leq r_i \leq p -1$ because $p \nmid k_i$ for $i = 1,2,...,p-1$
+    \item $r_i \neq r_j$ for $i \neq j \qquad k_i \neq k_j$ for $i \neq j \qquad i \leq i,j < p -1$\\
+        So $r_1, r_2, ..., r_{p-1} = {1, 2, ..., p-1}$ (perhaps in different order)\\
+        $r_1, r_2, .. r_{p -1} = 1 \cdot 2 \cdot ... \cdot (p-1) = (p-1)!$
+        On the other hand, $r_i \equiv k_i (mod p)$\\
+        $(p-1)! = r_1, r_2, .. r_{p -1} \equiv (1 \cdot k) (2 \cdot k)(3 \cdot k) .... (p-1) k = k^{p-1} \cdot (p-a)!$\\
+        $(p-1)! = k^{p-1} \cdot (p-1)! (mod p)$\\
+        We can cancel (p-1)! as long as $p \nmid (p-1)!$\\
+        The product of numbers all smaller than p. So none of them is divisible by p, therefore the product is not.\\
+        Cancelling $(p-1)!$ gives the theorem.
+\end{itemize}
+
+\textbf{Corollary}: $k \cdot k^{p-2}$ is a multiplicative inverse for $k$ modulo $p$ if $p \nmid k$.
+
+\textbf{Fermat's test} if $2m \nmid t^{m-1} -1$ then $m$ is composite or $m$ = 2.
+
+% Monday October 17th
+
+\subsection{Side-Note: The proof on the midterm exam}
+
+$\displaystyle gcd\left(\frac{a}{gcd(a,b)}, \frac{b}{gcd(a,b)}\right)$
+
+\textbf{Incorrect proof}:
+
+You cannot just say $\displaystyle gcd(\frac{a}{gcd(a,b)}, b) = 1$, as it can be greater than 1.
+
+If $a = 16$ and $b = 24$, then $gcd(\frac{16}{8}, 24) = 2$.
+
+\textbf{Proof 1}:
+
+For every positive integer k, $\displaystyle gcd(ka, kb) = k \cdot gcd(a,b)$
+
+$\displaystyle gcd(a,b) gcd(\frac{a}{gcd(a,b)}, \frac{b}{gcd(a,b)}) = gcd(\frac{gcd(a,b) \cdot a }{gcd(a,b)}, \frac{gcd(a,b) \cdot b }{gcd(a,b)}) = gcd(a,b)\\
+\to gcd(\frac{a}{gcd(a,b)}, \frac{b}{gcd(a,b)}) = 1$
+
+\textbf{Proof 2}: By contradiction
+
+Suppose $d = \displaystyle gcd\left(\frac{a}{gcd(a,b)}, \frac{b}{gcd(a,b)}\right)> 1$
+
+$\displaystyle d | gcd\left(\frac{a}{gcd(a,b)}\right) \qquad d|gcd\left(\frac{b}{gcd(a,b)}\right)$
+
+$\displaystyle d \cdot gcd(a,b) | a \qquad d\cdot gcd(a,b) | b$
+
+$\displaystyle d \cdot gcd(a,b)$ is a common divisor of $a \& b \to$ Contradiction $\blacksquare$
+
+\textbf{Proof 3}
+
+$a = {p_1}^{r_1} \cdot {p_2}^{r_2} \cdot ... \cdot {p_k}^{r_k}$
+
+$b = {p_1}^{s_1} \cdot {p_2}^{s_2} \cdot ... \cdot {p_k}^{s_k}$
+
+$\displaystyle gcd(a,b) = {p_1}^{min(r_1, s_1)} \cdot {p_2}^{min(r_2, s_2)} \cdot ... \cdot {p_k}^{min(r_k, s_k)}$
+
+$\displaystyle \frac{a}{gcd(a,b)} = {p_1}^{r_1 - min(r_1, s_1)} \cdot {p_2}^{r_2 - min(r_2, s_2)} \cdot ... \cdot {p_k}^{r_k - min(r_k, s_k)} $
+
+$\displaystyle \frac{b}{gcd(a,b)} ={p_1}^{s_1 - min(r_1, s_1)} \cdot {p_2}^{s_2 - min(r_2, s_2)} \cdot ... \cdot {p_k}^{s_k - min(r_k, s_k)}$
+
+$\displaystyle gcd\left(\frac{a}{gcd(a,b)}, \frac{b}{gcd(a,b)}\right) = p_1^{min(r_1 - min(r_1, s_1), s_1 - min(r_1,s_1))} \cdot ... \cdot p_k^{min(r_k - min(r_k, s_k), s_k - min(r_k,s_k))}$
+
+$\forall (1 \leq i \leq k) \begin{cases}
+r_i \leq s_i \to min(r_i - min(r_i, s_i), s_i - min(r_i,s_i)) = min(r_i - r_i, s_i - r_i) = min (0, s_i -r_i) = 0\\
+s_i \leq r_i \to min(r_i - min(r_i, s_i), s_i - min(r_i,s_i)) = min(r_i - s_i, s_i - s_i) = min (r_i - s_i, 0) = 0\\
+\end{cases}$
+
+$\displaystyle gcd\left(\frac{a}{gcd(a,b)}, \frac{b}{gcd(a,b)}\right) = p_1^0 \cdot p_2^0 ... \cdot p_k^0 = 1$
+
+\subsection{Applications of Fermat's Little Theorem}
+
+\textbf{Theorem}: If $p$ is prime, $p \nmid a$ then $a^{p-1} \not\equiv 1 (mod p)$
+
+\textbf{Corollary}: $a^{p-2}$ is a multiplicative inverse for $a (mod p)$\\
+(Our previous method computed multiplicative inverse for $a$ by expressing 1 as a linear combination of $p \& a$.)
+
+\textbf{Example 1}: Multiplicative inverse for 5 (modulo 17)\\
+
+How can we compute $5^{15} (mod 17)$ quickly?
+\begin{enumerate}
+\item Let's first compute $5^5 (mod 17)$:\\
+\quad $5^2 = 25 \equiv 8 (mod 17)$\\
+\quad $5^4 = (5^2)^2 \equiv 8^2 = 64 = 3 \cdot 17 + 13 \equiv 13 (mod 17)$\\
+\quad $5^4 \cdot 5 = 13 \cdot 5 = 65 \equiv 14 (mod 17)$
+\quad $5^5 = 5^4 \cdot 5 \equiv 135 = 65 \equiv 14 (mod 17)$
+
+\item Compute $(5^5)^3 = 14^3 (mod 17)$\\
+$14^3 \equiv (-3)^3 = -27 \equiv 10 \equiv 17 -10 = 7 (mod 17)$
+\end{enumerate}
+
+\textbf{Conclusion}: $7 \cdot 5 \equiv 1 (mod 17)$
+
+\textbf{Example 2}: Compute $3^{100} (mod 7)$
+\begin{flalign*}
+3^6 &\equiv 1 (mod 7) &\\
+(3^6)^k &\equiv 1^k = 1 (mod 7) &\\
+100 &= 6k + r = 6 \cdot 16 + 4 &\\
+3^{6k + r } &\equiv 1 \cdot 3^r = 3^r (mod 7) &\\
+3^100 &\equiv 3^4 (mod 7) = 81 (mod 7) = 4 (mod 7) &\\
+\end{flalign*}
+% This is how to align left in an align environment, tried it, works :)
+
+\textbf{Example 3}: Compute $3^{100} (mod 21)$
+
+\begin{flalign*}
+3^{100} &\equiv r (mod 21 = 7 \cdot 3) \to 0 \leq r < 21 &\\ 
+21|3^100 - r &\to 3|r &\\
+r = 3s &\to 0 \leq s \leq 6 &\\
+3^{100} &\equiv 3^4 \equiv 81 = 77 + 4 \equiv 4 (mod 7)&\\
+3^{100} &\equiv r(mod 7) &\\
+r &\equiv 4 (mod 7)&\\
+r &= 3s \equiv 4 (mod 7)&\\
+\end{flalign*}
+
+$\to$ Solve $3s \equiv 4 (mod 7)$\\
+Find multiplicative inverse for $3 (mod 7)$
+
+\begin{flalign*}
+3^5 &\equiv (3^2)^3 \cdot 3 \equiv 9^2 \cdot 3 \equiv 2^2 \cdot 3 \equiv 42 \equiv 5 (mod 7)&\\
+s &= 5 \cdot 3s \equiv 4 \cdot 5 = 20 \equiv 6 (mod 7)&\\
+s &= 6&\\
+\end{flalign*}
+
+\textbf{Answer}: $3^{100} \equiv 3 \cdot 6 \equiv 18 (mod 21)$
+
+In our computations, we implicitly relied on number,the fact that if we know the remainder of a number ($3^100$) modulo 3 and modulo 7, then we can compute the remainder modulo $3 \cdot 7 = 21$.
+
+
+\subsection{Testing primality}
+
+\subsubsection{Fermat's test}
+
+\textbf{Corollary}: If $2^{n-1} \not\equiv 1 (mod n)$ then $n$ is not prime or $n = 2$.
+
+\textbf{Algorithm}: Fermat's test 
+\begin{enumerate}
+\item Compute $2^{n-1} (mod n)$
+\item If the remainder of $2^{n-1} (mod n)$ is not 1 (and $n \neq 2$), output "$n$ is composite".
+\end{enumerate}
+
+\textbf{Issues with this algorithm}:
+\begin{enumerate}
+\item We want to efficiently compute the remainder of $2^{n-1} (mod n)$
+\item We don't have guarantees that this algorithm detects all composite numbers.\\
+In fact, $2^{560} \equiv 1 (mod 561)$ and 561 is composite.
+\end{enumerate}
+
+% Wednesday October 19th
+
+\textbf{Questions}:
+
+\begin{enumerate}
+\item Is this algorithm efficient (polytime)?
+\item Does it recognize all composite numbers?
+\end{enumerate}
+
+\textbf{Answers}
+
+\begin{enumerate}
+\item We can compute $2^{n-1} (mod n)$ (the remainder of $2^{n-1}$ after division by $n$) in time polynomial in $log_2n$
+
+\textbf{Procedure}: 
+\begin{enumerate}
+\item Write down binary representation of $n-1$\\
+$n-1: \quad n-1 = 2^{k_1} + 2^{k_2} + ... 2^{k_r} \qquad k_1 > k_2 > ...> k_r$\\
+$2^{n-1} = 2^{2^{k_1}} \cdot 2^{2^{k_2}} \cdot ... \cdot 2^{2^{k_r}} \qquad k_1 \leq log_2n, \quad r \leq log_2n$
+\item Computing $2^{2^k}$ quickly: $\to$ Using at most $O((\log_2n)^3)$ elementary operations\\
+\quad $2^{2 \cdot 2 \cdot 2 \cdot ... \cdot 2} = ((((2^2)^2)^2)^2)$\\
+Thus we can square a number efficiently (in time $\leq (log_2n)^2)$ and we need to repeat this procedure $k \in log_2n$ time).\\
+(We work with congruence classes modulo n and so never perform arithmetic with numbers larger than n).\\
+This procedure takes time $\leq O(log_2n^4)$.
+\end{enumerate}
+
+\textbf{Example}: Use Fermat's test for $n = 35$.
+
+Compute $2^{34} (mod \ 35)$
+\begin{flalign*}
+&34 = 32 + 2 & \\
+&2^{34} (mod \ 35) = 2^{32} \cdot 2^2 (mod \ 35) = 2^{2^5} \cdot 2^2 (mod \ 35) &\\
+1: \quad&2^2 = \mathbf{4} (mod \ 35) &\\
+2: \quad&4^2 = \mathbf{16} (mod \ 35)&\\
+3: \quad &16^2 = 256 = 7 \cdot 35 + \mathbf{11} (mod \ 35) &\\
+4: \quad &11^2 = 121 = 3 \cdot 35 + \mathbf{16} (mod \ 35) &\\
+5: \quad &16^2 = 256 = \mathbf{11} (mod \ 35) &\\
+&2^{34} = 2^{32} \cdot 2^2 \equiv 11 \cdot 4 = 44 \equiv 9 (mod \ 35)  &\\
+\end{flalign*}
+
+\item Fermat's test does not detect all composite numbers (example: $n = 561$)\\
+$2^{560} \equiv 1 (mod \ 3 \cdot 11 \cdot 17 = 561) for all a: gcd(a, 561) = 1$\\
+$3 \cdot 11 \cdot 17 | 2^{560} -1 \to 3 | 2^{560} -1 \qquad 11|2^{560} -1 \qquad 17|2^{560} -1$\\
+$2^{560}\equiv 1 (mod \ 3)$
+\\
+$
+2^{10} = 1 (mod \ 11)\\
+2^{560} = 2^{10 \cdot 56} = (2^{10})^{56} \equiv 1^{56} = 1 (mod \ 11)
+2^{16} \equiv 1 (mod 17)\\
+2^{560} \equiv 2^{16 \cdot 35} \equiv 1^{35} = 1 (mod \ 17)\\
+\to a^{560} \equiv 1 (mod \ 3 \cdot 11 \cdot 17 = 561)\\
+$
+A number n with the property that n is composite but $a^{n-1} \equiv 1 (mod \ n)$ for all $a$ such that $gcd(a, n) = 1$ is called a \textbf{Carmichael number}. There are infinitely many of such numbers.
+\end{enumerate}
+
+\subsubsection{Miller-Rabin's test}
+
+
+\paragraph{Definition}
+Miller-Rabin's test is an improvement of Fermat's test
+\begin{description}
+\item[] if $n-1$ is even test if $\displaystyle n \ | \ a^{\frac{n-1}{2}}-1$ or $\displaystyle n \ | \ a^{\frac{n-1}{2}} + 1$
+\item[] if $\displaystyle \frac{n-1}{2}$ is even instead of working with $\displaystyle a^{\frac{n-1}{2}} -1$ repeat the procedure again.
+\item[] If none of the terms in the factorization is divisible by n $\to$ n is composite. 
+\end{description}
+
+\textbf{Example:}\\
+\begin{flalign*}
+561 | a^{560} - 1 &= (a^{280})^2 - 1 = (a^{280} - 1) (a^{280} + 1) &\\
+&= ((a^{140})^2 - 1) (a^{280} + 1) = (a^{140} - 1)(a^{140} + 1)(a^{280} + 1) &\\
+&= (a^{70} - 1)(a^{70} + 1)(a^{140} + 1)(a^{280} + 1) &\\
+&= (a^{35} - 1)(a^{35} + 1)(a^{70} + 1)(a^{140} + 1)(a^{280} + 1) &\\
+\end{flalign*}
+For $a = 2$, none of the factors is divisible by 561.
+
+At least $\frac{3}{4}$ of all numbers $2 \leq a \leq n$ work for Miller-Rabin's test.\\
+Performing the test once has probability $ \displaystyle \frac{3}{4}$ of success, but performing the test twice has probability of failure $\displaystyle 1 - (\frac{1}{4})^2$. More generally, performing the test k times has probability of failure $\displaystyle (\frac{1}{4})^k$
+
+\textbf{Probabilistic algorithms}$\leftarrow$ typically easy to implement.
+
+If Generalized Riemann's Hypothesis is true, then testing all numbers a between 1 and $c(\log n)^2$ always works.
+
+
+
+
+
 
 
 
