@@ -57,3 +57,14 @@
 \BOOKMARK [2][-]{subsection.10.6}{Testing primality}{section.10}% 57
 \BOOKMARK [3][-]{subsubsection.10.6.1}{Fermat's test}{subsection.10.6}% 58
 \BOOKMARK [3][-]{subsubsection.10.6.2}{Miller-Rabin's test}{subsection.10.6}% 59
+\BOOKMARK [1][-]{section.11}{Crytography}{}% 60
+\BOOKMARK [2][-]{subsection.11.1}{Diffie-Hallman encryption}{section.11}% 61
+\BOOKMARK [3][-]{subsubsection.11.1.1}{Diffie-Hellman key exchange}{subsection.11.1}% 62
+\BOOKMARK [3][-]{subsubsection.11.1.2}{Sending a message using K}{subsection.11.1}% 63
+\BOOKMARK [2][-]{subsection.11.2}{RSA encryption}{section.11}% 64
+\BOOKMARK [1][-]{section.12}{Combinatorics}{}% 65
+\BOOKMARK [2][-]{subsection.12.1}{Functions}{section.12}% 66
+\BOOKMARK [2][-]{subsection.12.2}{Compositions}{section.12}% 67
+\BOOKMARK [2][-]{subsection.12.3}{Counting}{section.12}% 68
+\BOOKMARK [2][-]{subsection.12.4}{Subsets, Binomial Theorem}{section.12}% 69
+\BOOKMARK [2][-]{subsection.12.5}{Binomial theorem}{section.12}% 70

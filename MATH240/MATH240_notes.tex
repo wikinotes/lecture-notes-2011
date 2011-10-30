@@ -1640,12 +1640,391 @@ Performing the test once has probability $ \displaystyle \frac{3}{4}$ of success
 
 If Generalized Riemann's Hypothesis is true, then testing all numbers a between 1 and $c(\log n)^2$ always works.
 
+%%Friday ?
+\section{Crytography}
+
+Alice wants to send Bob a message M, but is warned that a counterparty (Eve) might intercept the message.
+
+One way of performing this;
+\begin{itemize}
+    \item Alice encrypts M and sends f(M)
+    \item Bob receives f(M), decrypts it by computing $f^{-1}(f(M))$
+    \item If Even intercepts f(M), she sees gibberish
+\end{itemize}
+
+f is called the encryption key (lock).
+$f^{-1}$ is called the decryption key.
+
+\begin{enumerate}
+    \item f(M) should not contain any useful information about M. We should be really careful with the encryption procedure.\\
+    \textbf{Example 1}: Caesar's code (letter shifting)\\
+    \begin{itemize}
+        \item A $\to$ D
+        \item B $\to$ E
+        \item Z $\to$ C
+    \end{itemize}
+ \end{enumerate}% Where is the second enumeration?
+    Replace each letter by a letter three places further in the alphabet.\\
+    This can be broken by trying all 26 possible shifts outputs an optimal schedule by selecting latest starting requests\\
+    \textbf{Example 2}: Substitution ciphers\\
+    f({A, B, C, ..., Z} $\to$ {A, B, C, ..., Z} $\to$ a one-to-one function with a permutation of the alphabet\\
+    Replace every letter in a message by f(.)\\
+    With 26 letters, how many possible substitution ciphers are there? Answer: 26! ~ $10^{26}$\\
+    26 choices for f(A), 25 choices for f(B), 24 choices for f(C), ...\\
+    Substitution ciphers are still breakable by frequency analysis. Most common letters in order: E, T, A, O, U, I\\
+    We could try to match up letters according to their frequencies. The msot common combination of 2 consecutive letters $\to$ TH\\
+    Repeated letters: SS or TT\\
+    FZJRM YYJFP VGHLJ UFZJD MFFUJ VV\\
+    FZJ $\to$ most common letters $\to$ THE\\
+    \begin{itemize}
+        \item F, J $\to$ 5
+        \item V $\to$ 3
+        \item M, Y, Z, V $\to$ 2
+    \end{itemize}
+    \textbf{Example 3}: Unbreakable method (One-time pad)\\
+    Alice and Bob agree on a key K = 0110101110\\
+    Alice encodes the message M in binary and M = 1100010111 and then sends $M \oplus K$\\
+    \begin{flalign*}
+    M &= 1100010111 &\\
+    K &= 0110101110 &\\
+    M \oplus K &= 1010111001 &\\
+    \end{flalign*}
+    Since $(p \oplus q) \oplus q \leftrightarrow p$, Bob can retrieve the original message by performing $(M \oplus K) \oplus K$\\
+    For Eve, decoding the message amounts to guessing K and there is no statistical information present in $(M \oplus K)$.\\
+    This code becomes vulnerable is a key is repeated.\\
+    If Eve intercepts $M_1 \oplus K$ and $M_2 \oplus K$:\\
+    She can compute $(M_1 \oplus K) \oplus (M_2 \oplus) = M_1 \oplus M_2 \to$ vulnerable to statistical analysis\\
+%\end{enumerate} 
+
+Alice \& Bob need to exchange keys\\
+\begin{itemize}
+\item Exchanging keys over secure channel (i.e. meeting in person) Not always possible
+\item Exchaning keys over insecure channel.
+\end{itemize}
+
+\subsection{Diffie-Hallman encryption}
+Let p be a large prime number (100 digits). We will work using modulo p.\\
+\paragraph{Discrete logarithm problem} 
+$a^x \equiv b (modulo p)$\\
+Given a, b compute x.\\
+No fast algorithms are known for this problem.\\
+
+Our goal is to produce a key $k$ which Alice and Bob know but Eve cannot guess (or compute).\\
+Alice chooses some prime $p$, a small number $g$, and Alice's part of the key $a$.\\
+Alice calculates:\\
+\qquad $A = g^a$\\
+And sends $p$, $g$, and $A$ to Bob.\\
+Bob chooses Bob's part of the key $b$.\\
+Bob calculates:\\
+\qquad $B = g^b$\\
+And sends $B$ to Alice.\\
+Now both Alice and Bob have $p, g, A, B$. These variables can be publicly available.\\
+Alice can compute:\\
+\qquad $K = B^a = (g^b)^a = g^{ab}$\\
+Bob can compute:\\
+\qquad $K = A^b = (g^a)^b = g^{ab}$\\
+
+Note that Bob still does not know $a$ and Alice still does not know $b$, but they can both use a combination of both keys.\\
+Note: p is sent because the calculations are all done in base p\\
+
+% Monday  October 24th
+
+\textbf{Notation}: $x (mod \ n) \to$ the remainder of x after division by $n$
+
+\subsubsection{Diffie-Hellman key exchange}
+\begin{itemize}
+\item Alice:\\
+P is prime\\
+p is large (~$10^{100}$)\\
+g - "base"\\
+a - Alice's private key\\
+A = $g^a (mod \ p)$\\
+\item Alice sends to bob $\{ g, p, A\}$
+\item Bob:\\
+b - Bob's private key\\
+B = $g^b$
+\item A can be computerd efficiently even if $g^a$ itself is proibitively large.
+\item Now g, p, A, B are public information.
+\item Alice knows a, Bob knows b
+\item Alice and Bob can both compute $K = g^{ab} (mod \ p)$
+\item $K \equiv (g^b)^a \equiv B^a (mod \ p) \to$ Alice can compute $K$
+\item $K \equiv A^b \equiv (g^a)^b (mod \ p) \to$ Bob can compute $K$
+\item Knowing $\{g, p, g^a (mod \ p), g^b (mod \ p)\}$ it is impossible to compute $g^{ab}$ efficiently (assuming the discrete logarithm problem is hard).
+\end{itemize}
+
+\subsubsection{Sending a message using K}
+\begin{itemize}
+\item Alice has a message: $\quad 0 \leq m \leq p$
+\item Alice $\xrightarrow{m^* = mk(mod \ p)}$ Bob 
+\item Bob computes multiplicative inverse for $k (mod \ p)$.
+$\bar{K}K \equiv 1 (mod \ p)$
+\item Bob then computes $m^*K (mod \ p)$
+\item $mK\bar{K} \equiv m$
+\end{itemize}
+
+\subsection{RSA encryption}
+Also known as \textbf{Rivest-Shamir-Adleman}.\\
+Public key (Public lock) system:
+\begin{itemize}
+\item Bob runs an online store (Amazon) and wants to receive encrypted messages from multiple parties.
+\item Bob makes the public key available to all the parties so that there exists a simple procedure (which is also made public) to encode messages and send them to Bob, but only he can decrypt them.
+\item Bob generates two large prime numbers $p$ and $q$ and an exponent which is commonly denoted as e (let's use 3) so that $e \nmid q - 1 (e \ prime)$
+\item Bob computes $N = pq$ and makes $(e, N)$ available (the public key) 
+\item Alice (or anyone else who wants to send a message M) to Bob, $gcd(m, N) = 1, \quad 0 \leq m \leq N$
+\item Alice transmits $m^* = m^e = m^3 (mod \ N)$
+\item Bob can now decrypt $m$ from $m^*$
+\end{itemize}
+
+\begin{enumerate}
+\item Compute $k$: 
+\begin{flalign*}
+3k &\equiv 1 (mod \ (p - 1)(q - 1) &\\
+3k &= S(p-1)(q-1) + 1 &\\
+3k &= s(p - 1)(q - 1) = 1&\\
+\end{flalign*}
+( Express 1 = gcd(3, (p-1)(q-1)) as a linear combination of 3 and (p-1)(q-1))
+\item Compute $(m^*)^k (mod \ N) \to$ This will produce m
+\begin{flalign*}
+(m^*)^k &= m^{3k} = m^{s(p-1)(q-1)+1} &\\
+s(p-1)(q-1) &\equiv m(mod \ N) &\\
+\end{flalign*}
+Equivalently $m^{(p-1)(q-1)} \equiv 1 (mod \ N = pq)$\\
+We want to show:\\
+$pq | m^{(p-1)(q-1)} - 1 \leftrightarrow (p | m^{(p-1)(q-1)} - 1) \wedge (q | m^{(p-1)(q-1)} - 1))$
+
+$m^{(p-1)(q-1)} \equiv 1 (mod \ p) \quad \to m^{(p-1)(q-1)} \equiv (1)^{q-1} = 1 (mod \ p)$
+\end{enumerate}
+
+Why can't Eve do the same thing?\\
+Eve knows $pq$. If Eve can compute $(p-1)(q-1)$, she can use the same encryption procedure.
+
+Eve can then compute $pq - (p-1)(q-1) + 1 = p + q$
+
+One can compute $p + q$ from knowing these two numbers, and then compute $p$ and $q$.
+
+\textbf{Note}: You can calculate p and q from $pq$ and $p + q$ by solving for x in the quadratic equation:
+
+$x^2 - (p+q)x + pq = 0 = (x - p)(x- q)$
+
+Security of RSA is based on the fact that computing $p$ and $q$ from $N = pq$ is hard.
 
 
+\textbf{Example}: 
+$p = 5, q = 17, N = 85, e = 3$\\
+Public key (lock): (3, 85)\\
+Alice wants to transmit m = 7.\\
+$m* = 7^3 (mod \ 85) = 49 \times 7 = 343 (mod \ 85) = 3$\\
+Alice transmits 3\\
+Bob's decryption process:\\
+\begin{enumerate}
+\item Compute k: $\quad 3k \equiv 1 (mod \ (5 - 1)(17 - 1) = 64)$
+A typical way to do this is to use Euclid's algorithm on 84:\\
+$64 = 3 \cdot 21 + 1 \qquad 1 = 64 - 3 \cdot 21$\\
+$(-21) \cdot 3 \equiv 1 (mod \ 64)$\\
+$(64 - 21) \cdot 3 \equiv 1 (mod \ 64$\\
+$\to \mathbf{k = 43}$
+\item $3^{43} (mod \ 85)$\\
+$43 = 32 + 8 + 2 + 1 = 101011_2$\\
+$3^{43} = 3^{32} \cdot 3^8 \cdot 3^2 \cdot 3 (mod \ 85) $\\
+$3^1 = 3 (mod \ 85)$\\
+$3^2 = 3 \cdot 3 =  9 (mod \ 85)$\\
+$3^4 = 81 \equiv -4 (mod \ 85)$\\
+$3^8 \equiv (-4)^2 \equiv 16 (mod \ 85)$\\
+$3^{16} \equiv 16^2 = 256 \equiv 1 (mod \ 85)$\\
+$3^{32} \equiv 1^2 \equiv 1 (mod \ 85)$\\
+Going back to our message, we have:\\
+$3^{43} = 3^{32} \cdot 3^8 \cdot 3^2 \cdot 3 (mod \ 85) \equiv 1 \cdot 16 \cdot 9 \cdot 3 = 27 \cdot 16 = 432 = 85 \cdot 5 \cdot 85 + 7 \equiv 7 (mod \ 85)$\\
+We succesfully decoded our message.
+\end{enumerate}
 
 
+\section{Combinatorics}
 
+The art of couting
+\begin{itemize}
+\item how many 5 card poler hands are two pairs?
+\item how many bridge hands (13 cards) have all 4 aces in them and at least 6 cards in the same suit?
+\end{itemize}
 
+\subsection{Functions}
+A function from a set X to a set Y: $\quad f: X \to Y$ assings to every element of $X$ an element $y < f(x)$ in $Y$
+
+A function f
+\begin{itemize}
+    \item is \textbf{surjection} (on to) if every element of U is a value of the function f for some x\\
+    $\forall y \in Y (\exists x \in X (y = f(x)))$
+    \item is an \textbf{injection} (1-to-1) if every element of $Y$ is a value of f for at most one $x \in X$
+    $\forall x_1, x_2 \in X ((f(x_1) = f(x_2))\to(x_1 = x_2))$
+    \item is a \textbf{bijection} if it is both on to and 1-to-1
+    \item \textbf{Examples:} $f: \mathbb{R} \to \mathbb{R}$
+    \begin{itemize}
+        \item $f(x) = x$ i.e. identity function $\to$ bijection
+        \item $f(x) - x^2 \to$ neither injection or surjection
+        \item $f(x) = x^3 \to$ bijection
+        \item $f(x) = x^3 - x $ missed last example
+    \end{itemize} 
+\end{itemize}
+$f:X \to Y \qquad g: Y \to Z$
+
+\subsection{Compositions}
+We can define a \textbf{composition} $gf: X \to Z$
+
+$gf (x) = g(f(x))$
+
+If $f$ is a bijection and $g$ is a bijection then so is $gf$. Similarly, if $f$ is a surjection and $g$ is a surjection then so is $gf$; if $f$ is a injection and $g$ is a injection then so is $gf$.
+
+Given a function $f: X \to Y$ a function $f^{-1}: Y \to X$ is called an \textbf{inverse} of f if $f^{-1}f(x) = x$ for all $x \in X$ and $f(f^{-1}(y)) = y$ for all $y \in Y$.
+
+\textbf{Fact}: A function has an inverse if and only if it has a bijection
+
+\textbf{Example:} $f: \mathbb{R} \to \mathbb{R} \qquad f(x) = x + 1 \qquad f^y(x) = x -1$
+
+\subsection{Counting}
+If X is a finite set, $|X|$ denotes the number of elements in $X$. 
+
+We say that $|X| = k$ if there exists a bijection between $X$ and the set $[k] = {1, 2, ..., k}$.
+
+\textbf{Bijection rule}: If there exists a bijection $f: X \to Y$ for two finite sets, $X$ and $Y$ then $|X| = |Y|$.
+
+\textbf{Proof}: $|X| = k$ means existence of a bijection $g: X \to [k]$
+Consider a map $gf^{-1}: Y \to [k]$.
+This is a bijection, so $|Y| = k$.
+
+Suppose we have an alphabet with $k$ letters in it. How many distinct words of length n are there?
+How many sequences $(x_1, x_2, ..., x_n)$ where each $x_i \in [k]$ are there?
+
+\begin{itemize}
+\item If $n$ = 1: There are $k$ sequences.
+\item If $n$ = 2: There are $k^2$ sequences
+\item For general $n$: There are $k^n$ sequences.
+\end{itemize}
+
+\textbf{Product rule}: Let $X_1, X_2, X_3, ..., X_n$ sets, then the number of sequences $(x_1, x_2,...,x_n)$ such that $x_i \in X_i$ is $|X_1||X_2|...|X_n|$
+
+\textbf{Example}: Ordering pizza
+% one sec while I look up the latex on how to do that I think we can just use matrices...uh can you show me? It's been a while, haha.
+$\left\{\begin{array}{c}
+$thin crust$ \\
+$regular$ \\
+$stuffed crust$ \end{array}\right\} % works
+\left\{\begin{array}{c}
+$cheese$ \\
+$no cheese$ 
+\end{array}\right\} % works
+\left\{\begin{array}{c}
+$6 different toppings$
+\end{array}\right\} % works
+\to 36$ choices
+
+\textbf{Generalized product rule}: We want to count sequences $(x_1, x_2, x_3, ... k_m)$ so that 
+\begin{itemize}
+\item there are $k_1$ choices for the first element
+\item given the first element there are $k_2$ choices of the $2^{nd}$ element
+\item given the choices of first $i$ elements there are $k_{i+1}$ choices for the $(i+1)^st$ element
+\end{itemize}
+Then there are $k_1k_2k_3k_4...k_n$ sequences
+
+\textbf{Example:}
+Competition with 10 teams in it how many ways are there to assign gold, solver \& bronze medals?\\
+$10 \cdot 9 \cdot 8 = 720$ choices\\
+How many ordered sequences of $k$ distinct elements can be selected from an n-element set?\\
+$ \displaystyle n(n-1)(n-2)...(n-k+1) = \frac{n!}{(n-k)!}$
+
+\subsection{Subsets, Binomial Theorem}
+
+\textbf{Bijection rule}: If $f: X \to Y$ is a bijection, then $|X| = |Y|$
+
+\textbf{(Generalized) product rule}: $x_1,x_2,x_3..., x_n$. If given $x_1,x_2,x_3..., x_i$ there are $k_{i+1}$ ways of choosing $x_{i+1}$ then there are $k_1,k_2,..., k_n$ in total.
+
+\textbf{Example:} In how many ways can we put a pawn (P), a knicht (N) and a bishop (B) on a chessboard so that no two pieces share a row or a column?
+
+We can record the position of the pieces as the following sequence:
+
+$(r_p, c_p, r_n, c_n, r_b, c_b)$
+$\begin{cases}
+r_p:$ the number of a row in which we put a pawn$\\
+c_p:$ the number of the column of a pawn$\\
+\end{cases}
+$
+
+Note that all of the row numbers must be different and all of the column numbers must be different. Thus, we apply the product rule:
+
+Note that all of the row numbers must be different and all of the column numbers must be different. Thus, we apply the product rule:
+
+$8 \times 8 \times 7 \times 7 \times 6 \times 6 = (8 \cdot 7 \cdot 6)^2$
+
+\textbf{Ordered subsets}: There are $(n(n-1)...(n-k+1) = \frac{n!}{(n-k)!}$ ways of choosing k different elements \textbf{in order} from a set of size $n$.
+
+There are $n!$ ways of ordering elements of a set of size $n$.  These orderings are called \textbf{permutations}.
+
+A function $f: X \to Y$ is called \textbf{k-to-one} if there are exactly $k$ elements of $X$ mapped to every element of $Y$.
+
+\textbf{Division rule}: If $f: X \to Y$ is k-to-one, then $|X| = k|Y|$.
+
+\textbf{Example}: In how many ways two black rooks can be placed on a chessboard so that they don't share a row or a column?
+
+$(r_1, c_1, r_2, c_2) \to 8 \times 8 \times 7 \times 7 = 56^2$ 
+
+The two sequences $(1,1,2,2)$ and $(2,2,1,1)$ record the same position. 
+
+The function mapping sequences to positions of the rooks is 2-to-1, because the rooks are indistinguishable. Consequently,\\
+\textbf{Answer}: $56^2 \div 2$
+
+The number of $k$ element subset of a set of size $n$:
+
+\textbf{Notation}: ${n \choose k}$ - "n choose k"
+
+\textbf{Theorem}: ${n \choose k} = \frac{n!}{k!(n-k)!}$ 
+
+\textbf{Proof}: There are $\frac{n!}{(n-k)!}$ ordered subsets of an n-element set. Every ordered subset corresponds to an unordered one. There is a function which maps ordered subsets into unordered ones.
+All ordered subsets which correspond to the same unordered subset can be described as just orderings or permutations of this subset.
+
+Suppose we select an unordered 3-element subset $\{1,3,5\}$, then there are 6 ordered subsets corresponding to it namely $(1,2,5), (1,5,2) (2,1,5) (2,5,1) (5, 1, 2) (5,2,1)$
+
+So there are k!-to-1 functions.
+
+Therefore there are $\frac{k!}{(n-k)!k!}$ unordered subsets.
+
+\textbf{How many subsets in an n-element set}: The number of subsets of an n-element set is $2^n$. Can't we just do this by induction?
+Suppose $P(n) = 2^n$, then if you add one element, there's either a set including the last element, or not -> 2 choices so $2 \times 2^{n}$
+
+$S \to (x_1, x_2, ..., x_n)$
+\qquad $x_i = 
+\begin{cases}
+0 if  i \notin S \\
+1 if i \in S \\
+\end{cases}
+$
+
+If we look at subsets of $\{1, 2, 3\}$:
+\begin{itemize}
+\item $\{1, 3\} \to (1, 0, 1)$
+\item $\{2\} \to (0, 1, 0)$
+\item $\o \to (0, 0, 0)$
+\end{itemize}
+$2^n$  choices in total by the product rule.
+${n \choose 0} + {n \choose 1} + {n \choose 2} + ... + {n \choose n-1} + {n \choose n} = 2^n$
+
+\subsection{Binomial theorem}
+$(x + y)^n$ - Our goal is to understand coefficients in the expansion of $(x+y)$.
+
+\begin{flalign*}
+(x+y^1 &= x + y &\\
+(x+y)^2 &= x^2 + 2xy + y^2 &\\
+(x+y)^3 &= (x+y)(x+y)^2 = (x+y)(x^2 + 2xy + y^2) = x^3 + 3x^2y + 3xy^2 + y^3 &\\
+\end{flalign*}
+
+\textbf{Theorem}: $(x+y)^n = \sum_{k=0}^n ({n \choose k}x^k y^{n-k})
+= {n \choose 0}x^0y^n + {n \choose 1}x^1y^{n-1} + {n \choose 2}x^2y^{n-2} + .... + {n \choose n-1}x^{n-1}y + {n \choose n}x^ny^{0}$
+
+\textbf{Proof}:
+$(x+y)^n = \underbrace{(x+y)(x+y) ... (x+y)}\text{n times}$
+
+Every term in the expansion corresponds to a choice of one of the two summands in each of the $n$ factors.
+
+\textbf{How many terms will be equal to $x^k y^{n-k} ?$}
+
+These terms correspond to choices where we selected $x$ in exactly $k$ out of $n$ factors. There are exactly as many such selections as there are subsets of size k in the set of n factors which is ${n \choose k}$
 
 
 

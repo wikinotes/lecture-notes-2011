@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  19 OCT 2011 12:39
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  30 OCT 2011 19:35
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -398,6 +398,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 319--330
 
  []
 
+[8]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 360.
@@ -410,7 +411,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 360.
 
-[8] [9]
+[9] [10]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 443.
@@ -423,7 +424,6 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 443.
 
-[10]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 453.
@@ -467,13 +467,13 @@ Overfull \hbox (102.48999pt too wide) in paragraph at lines 1196--1196
 ith remainder take time polynomial in input size.[] 
  []
 
-
+[24]
 Overfull \hbox (86.74013pt too wide) in paragraph at lines 1196--1196
 []\OT1/cmtt/m/n/10 Aritmetic operations addition, multiplication, division with
  remainder take time polynomial in input size.[] 
  []
 
-[24] [25] [26]
+[25] [26]
 Underfull \hbox (badness 10000) in paragraph at lines 1341--1345
 
  []
@@ -514,32 +514,97 @@ Overfull \hbox (38.56067pt too wide) in paragraph at lines 1476--1480
  \OMS/cmsy/m/n/10 ^^T \OML/cmm/m/it/10 k\OT1/cmr/m/n/10 ) []$ 
  []
 
-
+[29]
 Underfull \hbox (badness 10000) in paragraph at lines 1490--1491
 
  []
 
-[29] [30] [31]
+[30] [31]
 Underfull \hbox (badness 10000) in paragraph at lines 1627--1628
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1663.
 [32]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1663.
+Underfull \hbox (badness 10000) in paragraph at lines 1659--1661
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1667--1679
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1684--1687
+
+ []
+
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 1691--1698
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1699--1700
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1706--1707
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1708--1711
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1712--1726
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1727--1729
+
+ []
+
+[34]
+Underfull \hbox (badness 10000) in paragraph at lines 1736--1742
+
+ []
+
+[35]
+Underfull \hbox (badness 10000) in paragraph at lines 1812--1819
+
+ []
+
+[36] [37] [38]
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 1975.
+
+[39]
+
+LaTeX Warning: Command \o invalid in math mode on input line 2003.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2042.
+[40]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2042.
  (./MATH240_notes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1663.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2042.
 Package rerunfilecheck Info: File `MATH240_notes.out' has not changed.
-(rerunfilecheck)             Checksum: BCF5E28D1C8F7A73E6B7C4602AEBD155;4097.
+(rerunfilecheck)             Checksum: AE50A49E62B3D145CBE954A9C4AF0A9B;4844.
  ) 
 Here is how much of TeX's memory you used:
- 6058 strings out of 493747
- 87168 string characters out of 3143546
- 172557 words of memory out of 3000000
- 9006 multiletter control sequences out of 15000+200000
+ 6094 strings out of 493747
+ 87622 string characters out of 3143546
+ 171557 words of memory out of 3000000
+ 9017 multiletter control sequences out of 15000+200000
  13537 words of font info for 53 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 41i,12n,43p,388b,491s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,14n,43p,388b,445s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -558,10 +623,10 @@ ive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2010/
 texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2
 010/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on MATH240_notes.pdf (32 pages, 310699 bytes).
+Output written on MATH240_notes.pdf (40 pages, 340033 bytes).
 PDF statistics:
- 763 PDF objects out of 1000 (max. 8388607)
- 703 compressed objects within 8 object streams
- 226 named destinations out of 1000 (max. 500000)
- 473 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 880 PDF objects out of 1000 (max. 8388607)
+ 811 compressed objects within 9 object streams
+ 251 named destinations out of 1000 (max. 500000)
+ 561 words of extra memory for PDF output out of 10000 (max. 10000000)
 
