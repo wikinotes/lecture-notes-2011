@@ -11,7 +11,14 @@
 \usepackage{amssymb}
 \usepackage{epstopdf}
 \usepackage{fullpage}
+\usepackage{cancel}
+\usepackage{subfig}
 \usepackage[linktoc=section, colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows,%
+                petri,%
+                topaths}%
+\usepackage{verbatim}
 %\setlength{\parindent}{0pt}
 %\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 \setcounter{secnumdepth}{3}
@@ -1589,13 +1596,15 @@ This procedure takes time $\leq O(log_2n^4)$.
 Compute $2^{34} (mod \ 35)$
 \begin{flalign*}
 &34 = 32 + 2 & \\
-&2^{34} (mod \ 35) = 2^{32} \cdot 2^2 (mod \ 35) = 2^{2^5} \cdot 2^2 (mod \ 35) &\\
-1: \quad&2^2 = \mathbf{4} (mod \ 35) &\\
-2: \quad&4^2 = \mathbf{16} (mod \ 35)&\\
-3: \quad &16^2 = 256 = 7 \cdot 35 + \mathbf{11} (mod \ 35) &\\
-4: \quad &11^2 = 121 = 3 \cdot 35 + \mathbf{16} (mod \ 35) &\\
-5: \quad &16^2 = 256 = \mathbf{11} (mod \ 35) &\\
-&2^{34} = 2^{32} \cdot 2^2 \equiv 11 \cdot 4 = 44 \equiv 9 (mod \ 35)  &\\
+&2^{34} \ (mod \ 35) = 2^{32} \cdot 2^2 \ (mod \ 35) = 2^{2^5} \cdot 2^2 \ (mod \ 35) &\\
+1: \quad&2^2 = \mathbf{4} \ (mod \ 35) &\\
+2: \quad&4^2 = \mathbf{16} \ (mod \ 35)&\\
+3: \quad &16^2 = 256 = 7 \cdot 35 + \mathbf{11} \ (mod \ 35) &\\
+4: \quad &11^2 = 121 = 3 \cdot 35 + \mathbf{16} \ (mod \ 35) &\\
+5: \quad &(16^2)^2 \equiv \mathbf{11}^2 \ (mod \ 35) \equiv 16 \ (mod \ 35) &\\
+6: \quad &16^{2^3} = (16^{2^2})^2 \equiv \mathbf{16}^2 \ (mod \ 35) \equiv 11 \ (mod \ 35) &\\
+& 16^{2^3} = (2^4)^{2^3} = 2^{2^5} \equiv 11 \ (mod \ 35)&\\
+&2^{34} = 2^{32} \cdot 2^2 \equiv 11 \cdot 4 = 44 \equiv 9 \ (mod \ 35)  &\\
 \end{flalign*}
 
 \item Fermat's test does not detect all composite numbers (example: $n = 561$)\\
@@ -1649,7 +1658,7 @@ One way of performing this;
 \begin{itemize}
     \item Alice encrypts M and sends f(M)
     \item Bob receives f(M), decrypts it by computing $f^{-1}(f(M))$
-    \item If Even intercepts f(M), she sees gibberish
+    \item If Eve intercepts f(M), she sees gibberish
 \end{itemize}
 
 f is called the encryption key (lock).
@@ -1665,11 +1674,11 @@ $f^{-1}$ is called the decryption key.
     \end{itemize}
  \end{enumerate}% Where is the second enumeration?
     Replace each letter by a letter three places further in the alphabet.\\
-    This can be broken by trying all 26 possible shifts outputs an optimal schedule by selecting latest starting requests\\
+    This can be broken by trying all 26 possible shifts.\\
     \textbf{Example 2}: Substitution ciphers\\
-    f({A, B, C, ..., Z} $\to$ {A, B, C, ..., Z} $\to$ a one-to-one function with a permutation of the alphabet\\
+    f({A, B, C, ..., Z}) $\to$ {A, B, C, ..., Z} $\to$ a one-to-one function with a permutation of the alphabet\\
     Replace every letter in a message by f(.)\\
-    With 26 letters, how many possible substitution ciphers are there? Answer: 26! ~ $10^{26}$\\
+    With 26 letters, how many possible substitution ciphers are there? Answer: 26! roughly $10^{26}$\\
     26 choices for f(A), 25 choices for f(B), 24 choices for f(C), ...\\
     Substitution ciphers are still breakable by frequency analysis. Most common letters in order: E, T, A, O, U, I\\
     We could try to match up letters according to their frequencies. The msot common combination of 2 consecutive letters $\to$ TH\\
@@ -1693,7 +1702,7 @@ $f^{-1}$ is called the decryption key.
     For Eve, decoding the message amounts to guessing K and there is no statistical information present in $(M \oplus K)$.\\
     This code becomes vulnerable is a key is repeated.\\
     If Eve intercepts $M_1 \oplus K$ and $M_2 \oplus K$:\\
-    She can compute $(M_1 \oplus K) \oplus (M_2 \oplus) = M_1 \oplus M_2 \to$ vulnerable to statistical analysis\\
+    She can compute $(M_1 \oplus K) \oplus (M_2 \oplus K) = M_1 \oplus M_2 \to$ vulnerable to statistical analysis\\
 %\end{enumerate} 
 
 Alice \& Bob need to exchange keys\\
@@ -1705,7 +1714,7 @@ Alice \& Bob need to exchange keys\\
 \subsection{Diffie-Hallman encryption}
 Let p be a large prime number (100 digits). We will work using modulo p.\\
 \paragraph{Discrete logarithm problem} 
-$a^x \equiv b (modulo p)$\\
+$a^x \equiv b \ (mod \ p)$\\
 Given a, b compute x.\\
 No fast algorithms are known for this problem.\\
 
@@ -1743,7 +1752,7 @@ A = $g^a (mod \ p)$\\
 \item Bob:\\
 b - Bob's private key\\
 B = $g^b$
-\item A can be computerd efficiently even if $g^a$ itself is proibitively large.
+\item A can be computed efficiently even if $g^a$ itself is proibitively large.
 \item Now g, p, A, B are public information.
 \item Alice knows a, Bob knows b
 \item Alice and Bob can both compute $K = g^{ab} (mod \ p)$
@@ -1818,7 +1827,7 @@ Alice transmits 3\\
 Bob's decryption process:\\
 \begin{enumerate}
 \item Compute k: $\quad 3k \equiv 1 (mod \ (5 - 1)(17 - 1) = 64)$
-A typical way to do this is to use Euclid's algorithm on 84:\\
+A typical way to do this is to use Euclid's algorithm on 64:\\
 $64 = 3 \cdot 21 + 1 \qquad 1 = 64 - 3 \cdot 21$\\
 $(-21) \cdot 3 \equiv 1 (mod \ 64)$\\
 $(64 - 21) \cdot 3 \equiv 1 (mod \ 64$\\
@@ -1851,7 +1860,7 @@ A function from a set X to a set Y: $\quad f: X \to Y$ assings to every element 
 
 A function f
 \begin{itemize}
-    \item is \textbf{surjection} (on to) if every element of U is a value of the function f for some x\\
+    \item is \textbf{surjection} (on to) if every element of Y is a value of the function f for some x\\
     $\forall y \in Y (\exists x \in X (y = f(x)))$
     \item is an \textbf{injection} (1-to-1) if every element of $Y$ is a value of f for at most one $x \in X$
     $\forall x_1, x_2 \in X ((f(x_1) = f(x_2))\to(x_1 = x_2))$
@@ -1936,7 +1945,7 @@ $ \displaystyle n(n-1)(n-2)...(n-k+1) = \frac{n!}{(n-k)!}$
 
 \textbf{(Generalized) product rule}: $x_1,x_2,x_3..., x_n$. If given $x_1,x_2,x_3..., x_i$ there are $k_{i+1}$ ways of choosing $x_{i+1}$ then there are $k_1,k_2,..., k_n$ in total.
 
-\textbf{Example:} In how many ways can we put a pawn (P), a knicht (N) and a bishop (B) on a chessboard so that no two pieces share a row or a column?
+\textbf{Example:} In how many ways can we put a pawn (P), a knight (N) and a bishop (B) on a chessboard so that no two pieces share a row or a column?
 
 We can record the position of the pieces as the following sequence:
 
@@ -1985,14 +1994,14 @@ So there are k!-to-1 functions.
 
 Therefore there are $\frac{k!}{(n-k)!k!}$ unordered subsets.
 
-\textbf{How many subsets in an n-element set}: The number of subsets of an n-element set is $2^n$. Can't we just do this by induction?
-Suppose $P(n) = 2^n$, then if you add one element, there's either a set including the last element, or not -> 2 choices so $2 \times 2^{n}$
+\textbf{How many subsets in an n-element set}: The number of subsets of an n-element set is $2^n$. %Can't we just do this by induction?
+%Suppose $P(n) = 2^n$, then if you add one element, there's either a set including the last element, or not -> 2 choices so $2 \times 2^{n}$
 
 $S \to (x_1, x_2, ..., x_n)$
 \qquad $x_i = 
 \begin{cases}
-0 if  i \notin S \\
-1 if i \in S \\
+0 $ if  $i \notin S \\
+1 $ if $i \in S \\
 \end{cases}
 $
 
@@ -2000,7 +2009,7 @@ If we look at subsets of $\{1, 2, 3\}$:
 \begin{itemize}
 \item $\{1, 3\} \to (1, 0, 1)$
 \item $\{2\} \to (0, 1, 0)$
-\item $\o \to (0, 0, 0)$
+\item $\emptyset \to (0, 0, 0)$
 \end{itemize}
 $2^n$  choices in total by the product rule.
 ${n \choose 0} + {n \choose 1} + {n \choose 2} + ... + {n \choose n-1} + {n \choose n} = 2^n$
@@ -2025,6 +2034,1770 @@ Every term in the expansion corresponds to a choice of one of the two summands i
 \textbf{How many terms will be equal to $x^k y^{n-k} ?$}
 
 These terms correspond to choices where we selected $x$ in exactly $k$ out of $n$ factors. There are exactly as many such selections as there are subsets of size k in the set of n factors which is ${n \choose k}$
+
+\subsection{Relations involving binomial coefficients}
+\subsubsection{Pascal's triangle}
+
+${n \choose k} = \frac{n!}{(k!)(n-k)!}$ - the number of size $k$ subsets of a set of size $n$
+
+$(x + y)^n = \displaystyle \sum_{k=0}^n {n \choose k}x^ky^{n-k} = {n \choose 0}x^0y^n + {n \choose 1}xy^{n-1} + {n \choose 2}x^2y^{n-2} + \ldots + {n \choose n-1}x^{n-1}y + {n \choose n}x^ny^{0}$
+
+\begin{enumerate}
+\item $x = y = 1$\\
+$2^n = \displaystyle \sum_{k=0}^n {n \choose k} = {n \choose 0} + {n \choose 1} + ... + {n \choose n - 1} + {n \choose n}$\\
+Both the left and the right side of this equation count the number of all subsets of a set of sixteen.
+\item $x = -1, y = 1$\\
+$0 = \displaystyle \sum_{k=0}^n {n \choose k}(-1)^k = {n \choose 0} - {n \choose 1} + {n \choose 2} - {n \choose 3} + \ldots + (-1)^n {n \choose n}$
+Total number of subsets of even size: ${n \choose 1} + {n \choose 3} + \ldots$
+= Total number of subsets of odd size: ${n \choose 0} + {n \choose 2} + \ldots $
+
+The number of subsets of odd size is the same as the number of subsets of even size.
+
+\textbf{Bijective proof:}
+
+f: {subsets of odd size} $\to$ {subsets of even size}
+$f(A) = A \oplus {1} = 
+\begin{cases}
+A \cup {1} $ if $1 \notin A\\
+A - {1} $ if $ 1 \in A\\
+\end{cases}$
+
+If $(A)| = |A| \pm 1 \to$ maps subsets of odd size into subsets of even size.
+
+This is a bijection, because f has an inverse. In fact, f is an inverse of itself.
+
+$f(f(A)) = (A \oplus {1}) \oplus {1} = A$
+
+\item ${n \choose k} = {n \choose n - k}$ for all $0 \leq k \leq n$\\
+${n \choose k} \to x^ky^{n-k}$
+${n \choose n - k} \to x^{n-k}y^k$
+If we switch the roles of $x$ and $y$, these terms replace each other.
+
+\textbf{Bijective proof}: $X = {1, 2, ..., n}$
+
+Given a set of size $n$, $X = \{1,2,\ldots, n\}$ and a collection of k elements, is there a natural way of choosing $k$ elements?
+
+$f(A) = X-A \to$ the complement of A, subset of all elements in X but not in A
+
+The function maps sets of size $k$ into sets of size $n - k$ bijectively
+
+\item $\displaystyle {n \choose k} + {n \choose k - 1} = {n + 1 \choose k}$\\
+\textbf{Proof}:
+We want to show that this equality holds: $\displaystyle \frac{n!}{{k}!(n-k)!} + \frac{n!}{(k-1)! (n+1-k)!} = \frac{(n+1)!}{k!(n+1-k)!}$
+
+We multiply both sides by $k!(n+1-k)!$ and obtain:
+
+$\displaystyle n! \cdot (n+1-k) + k \cdot n! = (n+1)!$
+
+We divide by n!
+
+$\displaystyle  (n+1-k) + k = (n+1) \quad \dbl n+1 = n+1$
+
+The equality holds.
+
+\textbf{Bijective proof}:\\
+We need to describe a correspondence (bijective) between $k$ element subsets of a set of size $(n + 1$ and $k$ and $(k - 1)$ elemeBnt subsets of set of size $n$.
+
+[PICTURE OF AN OVAL THAT HAS N IN IT SURROUNDED BY ANOTHER OVAL THAT'S LABELED N + 1 WITH A POINT ALSO LABELED N + 1]
+
+If we consider an n-element set $x'$ inside of our $(n + 1)$-element set $x$, then intersection with X' produces a $k'$ or $(k-1)$ element subset of X' from a k-element subset of X.
+
+% python + latex = <3 
+\begin{tabular}{rccccccccccccccccccc}
+$n=0$:&    &    &    &    &    &    &    &    &    &  1\\\noalign{\smallskip\smallskip}
+$n=1$:&    &    &    &    &    &    &    &    &  1 &    &  1\\\noalign{\smallskip\smallskip}
+$n=2$:&    &    &    &    &    &    &    &  1 &    &  2 &    &  1\\\noalign{\smallskip\smallskip}
+$n=3$:&    &    &    &    &    &    &  1 &    &  3 &    &  3 &    &  1\\\noalign{\smallskip\smallskip}
+$n=4$:&    &    &    &    &    &  1 &    &  4 &    &  6 &    &  4 &    &  1\\\noalign{\smallskip\smallskip}
+$n=5$:&    &    &    &    &  1 &    &  5 &    & 10 &    & 10 &    &  5 &    &  1\\\noalign{\smallskip\smallskip}
+$n=6$:&    &    &    &  1 &    &  6 &    & 15 &    & 20 &    & 15 &    &  6 &    &  1\\\noalign{\smallskip\smallskip}
+$n=7$:&    &    &  1 &    &  7 &    & 21 &    & 35 &    & 35 &    & 21 &    &  7 &    &  1\\\noalign{\smallskip\smallskip}
+$n=8$:&    &  1 &    &  8 &    & 28 &    & 56 &    & 70 &    & 56 &    & 28 &    &  8 &    &  1\\\noalign{\smallskip\smallskip}
+$n=9$:&  1 &    &  9 &    & 36 &    & 84 &    & 126 &    & 126 &    & 84 &    & 36 &    &  9 &    &  1\\\noalign{\smallskip\smallskip}
+\end{tabular}
+
+$n^{th}$ row of the triangle lists binomial coefficients:
+
+${n \choose 0}, {n \choose 1}, {n \choose 2} \ldots {n \choose n}$ in order.
+
+\textbf{Example}
+\begin{flalign*}
+(x+y)^2 &= y^2 + 2xy + x^2 &\\
+(x+y)^3 &= y^3 +  3xy^2 + 3x^2y + x^3 &\\
+(x+y)^8 &= 1x^8  + 8xy^7 + 28 x^2y^6 + 56 x^3y^5 + 70x^4y^4 + 56x^5y^3 + 28x^2y^6+ 8xy^7 + y^8 &\\
+\end{flalign*}
+
+\begin{enumerate}
+\item The sum of the elements in $n^{th}$ row is $2^n$
+\item The sum of the squares of the elements in the $n^{th}$ row is:
+\begin{flalign*}
+0^{th} &: 1^2 = 1 = {0 \choose 0} &\\
+1^{st} &: 1^2 + 1^2 = 2 = {2 \choose 1}\\
+2^{nd} &: 1^2 + 2^2 + 1^2 = 6 = {4 \choose 2} &\\
+3^{th} &: 1^2 + 3^2 + 3^2 + 1^2= 20 = {6 \choose 3} &\\
+4^{th} &: 1^2 + 4^2 + 6^2 + 4^2 + 1^2 = 1 + 16 + 36 + 16 + 1 = 70 = {8 \choose 4} &\\
+\end{flalign*}
+\textbf{Proof}:
+$\displaystyle
+{n \choose 0}^2 + {n \choose 1}^2 + {n \choose 2}^2 + \ldots + {n \choose n}^2 = {2n \choose n}\\
+{n\choose k} = {n \choose n-k}, \qquad {n\choose k}^2 = {n \choose k}{n \choose k} = {n \choose k} {n \choose n-k}\\
+{n \choose 0}{n \choose n} + {n \choose 1}{n \choose n-1} + {n \choose 2}{n \choose n -2} + \ldots + {n \choose n}{n \choose 0} 
+= {2n \choose n}\\
+\ldots + {2n \choose n}x^ny^n + \ldots = (x + y)^{2n} = (x + y)^n(x + y)^n\\
+= {n \choose 0}x^0y^n + {n \choose 1}x^1y^{n-1} + \ldots {n \choose k}x^ky^{n-k} + \ldots + {n \choose n - k}x^{n-k}y^k + {n \choose n}x^ny^0$
+
+The term $x^my^n$ in the expansion of the right side is exactly the sum we want.
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+We want to show that the sum of each diagonal in the representation of Pascal's Triangle is the sum of the two previous diagonals. They are fibonacci numbers $F_{n+1} = F_n + F_{n-1}$
+
+1 - 1\\
+1 1 - 1, 2\\
+1 2 1 - 3, 5\\
+1 3 3 1 - 8, 13\\
+1 4 6 4 1 - 21, \\
+1 5 10 10 5 1 -\\
+1 6 15 20 15 6 1 -\\
+1 7 21 35 35 21 7 1\\
+1\\
+
+Proof: By induction $(S_n = F_{n+1})$
+
+Let $S_k$ denote the corresponding sum:
+
+\textbf{Base of the induction}: $S_o = 1_1S_1 = 1$
+
+\textbf{Induction step}: We want to show that $S_{n+1} = S_n + S_{n-1}$. Let us do the proof when $n$ is odd, $n=2k-1$ (The other case is similar).
+$S_{2k} = S_{2k-1} + S_{2k-2}$
+
+$S_{2k} = {2k \choose 0} + {2k - 1 \choose 1} + {2k - 2 \choose 2} + {2k - 3 \choose 3} + \ldots + {k + 1 \choose k + 1} + {k \choose k}$
+
+$S_{2k -1} = {2k - 1 \choose 0} + {2k - 2 \choose 1} + {2k - 3 \choose 2} + \ldots + {k \choose k - 1}$
+
+$S_{2k -2} = {2k - 2 \choose 0} + {2k - 3 \choose 1} + {2k - 4 \choose 2} + \ldots + {k \choose k - 2} + {k - 1 \choose k - 1}$
+
+We group the terms in $S_{2k}, S_{2k -1}, S{2k -2}$:
+\begin{itemize}
+\item ${2k \choose 0} + {2k - 1 \choose 0}$
+\item ${2k - 1 \choose 1} + {2k - 2 \choose 1} + {2k - 3 \choose 1}$
+\item $\ldots$
+\item ${k + 1 \choose k + 1} + {k \choose k - 1} + {k \choose k - 2}$
+\item ${k \choose k} + {k - 1 \choose k - 1}$
+\end{itemize}
+
+\subsection{Further Examples using Fibonacci Numbers}
+\begin{enumerate}
+\item How many ways are there to ascend a staircase with n steps taking 1 or 2 steps at a time?\\
+\textbf{Example}: For n = 3, the answer is 3; for n = 2, the answer is 2; for n = 1, the answer is 1\\
+In general, there are $F_{n+1}$ ways.\\
+Proof: 
+\begin{itemize}
+\item Base case: works for n = 1 and n = 2
+\item \textbf{Induction step}: We want to show there are $F_{n+2}$ ways to ascend a staircase with $(n+1)$ steps given that there are  $F_{k+1}$ ways of ascending a staircase with $k$ steps for $k \leq n$ (we will need this for $n$ steps, and $n+ 1$ steps.\\
+If we start with a single step then there are (by induction hypothesis) $F_{n+1}$ ways to go up the remaining n steps. If we start by taking two steps, we have $F_n$ ways to go up. We have $F_n +F_{n+1}$ ways in total $F+n + F_{n+1} = F_{n+2} \quad \blacksquare$
+\end{itemize}
+\item How many subsets of the set $\{1,2,3,\ldots ,n\}$ contain no two consecutive integers?\\
+$n = 1, 2 (\emptyset, \{1\})$\\
+$n = 2, 3 (\emptyset, \{1\}, \{2\})$\\
+$n = 3, 5 (\emptyset, \{1\}, \{2\}, \{3\}, \{1,3\})$\\
+General suspicion:\\
+$F_{n+2}$\\
+Proof by induction: We are done with the base case.\\
+
+\textbf{Induction step}: We want to prove the formula holds for ${1, 2, 3, \ldots, n + 1}$\\
+Let us divide all possible subsets which do not contain two integers into two classes:\\
+\begin{enumerate}
+\item Subsets which don't contain $n + 1$. There are $F_{n+2}$ such subsets by the induction hypothesis. 
+\item Subsets which contain $n + 1$. Those subsets do not contain $n$, and otherwise can contain any subset of ${1, 2, \ldots, n - 1}$ with no two consecutive elements. There are $F_{n+1}$ of those subsets by the induction hypothesis. We have $F_{n+2} + F_{n+1} = F_{n+3}$ subsets in total.
+\end{enumerate}
+\end{enumerate}
+
+\textbf{A formula for $F_n$}:
+
+$F_0 = 0, F_1 = 1, F_{n+1} = F_n + F_{n-1}$ for $n \geq 1$.
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
+
+Let us calculate $\frac{F_{n+1}}{F_n}$:
+
+\begin{tabular}{ l || l | l | l | l | l | l | l | }
+  - & $n = 1$ & $n = 2$ & $n = 3$ & $n = 4$ & $n = 5$ & $n = 6$ & $n = 7$ \\
+  \hline
+  $F_{n+1} \over F{n}$ & $\frac{1}{1} = 1 $ & $\frac{2}{1} = 2 $ & $\frac{3}{2} = 1.5 $ & $\frac{5}{3} = 1.666 $ & $\frac{8}{5} = 1.6 $ & $\frac{13}{8} = 1.625 $ & $\frac{21}{13} = 1.61... $\\
+\end{tabular}
+
+It is likely that $F_n \approx c\lambda^n$ where $\lambda \approx 1.6108...$ (the golden ratio).
+
+Suppose we had an exact equality. What would $\lambda$ be?
+\begin{flalign*}
+F_{n+1} &= F_n + F_{n-1}\\
+c\lambda^{n+1} &= c\lambda^n + c\lambda^{n-1}&\\
+\lambda^2 &= \lambda + 1 &\\
+\lambda^2 - \lambda - 1 &= 0 &\\
+\lambda_{1,2} &= \frac{1 \pm \sqrt{5}}{2} &\\
+\end{flalign*}
+
+%% Friday 4 november 2011
+
+\paragraph{Fibonacci numbers}
+
+$\lim_{n \to +\infty} \frac{F_{n+1}}{F_n}$
+
+Suppose $c\lambda^n$ satisfies $c\lambda^{n+!} = c\lambda^n + c\lambda^{n-1}$ then:
+
+$\lambda = \frac{1 \pm \sqrt{5}}{2} = 1.6108$
+
+$F_n = c_1(\frac{1 + \sqrt{5}}{2})^n + c_2(\frac{1 - \sqrt{5}}{2})^n$ satisfies the relation $F_{n+1} = F_n + F_{n-1}$
+
+for any choice of $c_1$ and $c_2$.
+
+$0 = F_0 = c_1 + c_2\\
+1 = F_1 = c_1(\frac{1 + \sqrt{5}}{2}) + c_2(\frac{1 - \sqrt{5}}{2}) \to  c_2 = -c_1\\
+1 = c_1(\frac{1 + sqrt{5}}{2} - \frac{1 - \sqrt{5}}{2})\\
+c_1 = \frac{1}{\sqrt{5}}, c_2 = \frac{-1}{\sqrt{5}}\\
+$
+
+Theorem: $F_n = \frac{1}{\sqrt{5}}[(\frac{1 + \sqrt{5}}{2})^n - (\frac{1 - \sqrt{5}}{2})^n]$
+
+One can use the binomial formula to explicit show that this expression is an integer.
+
+Explicit formulas for recursively defined sequences.
+
+$x_0 = a_0, x_1 = a_1, x_{n+1} = bx_n + cx_{n-1}$
+We are given $a_0$, $a_1$, $b$, and $c$. Our goal is to find a formula for $x_n$.
+
+(Which exponential function $x_n =  \lambda^n$ satisfies $x_{n+1} = bx_n + cx_{n-1}$?
+
+\begin{flalign*}
+ \lambda^{n+1} &= b \lambda^n + c \lambda^{n-1} &\\
+ \lambda^2 - b \lambda - c &= 0 \to \mathrm{quadratic equation} &\\
+ \lambda_{1,2} &= \frac{b \pm \sqrt{b^2 - 4c}}{2} &\\
+\end{flalign*}
+
+More generally $x_n = \alpha_1 \lambda_1^n + \alpha_2 \lambda_2^n $ satisfies the recurrence for all $\alpha_1, \alpha2$
+
+\textbf{Example}: $x_0 = 2, x_1 = 7, x_{n+1} = x_n + 2x_{n-1}$
+\begin{enumerate}
+\item Solve $\lambda^2 - \lambda - 2 = 0$\\
+$(\lambda + 1)(\lambda - 2) = 1 \qquad \to \lambda_1 = 2 \qquad \lambda_2 = -1$
+\item $x_n = d_12^n + d_2(-1)^n\\
+\begin{bmatrix}
+2 = x_0 = \alpha_1 + \alpha_2\\
+7 = x_1 = 2 \alpha_1 \alpha_2\\
+\end{bmatrix}
+\to 3d_1 = 9, d_1 = 3, d_2 = -1\\
+$Answer:$ x_n = 3 \cdot 2^n - (-1)^n ]\\
+x_2 = 7+22 = 11 = 3 \cdot 4 - (-1)^ 2
+$
+\end{enumerate}
+
+1, 1, 2, 3, 4, 8, 13, 21, 34, 55, 89, 144
+
+\textbf{Theorem}: $F_n$ is even if and only if $n$ is divisible by 3.
+
+\textbf{Proof}: Induction on n
+\begin{itemize}
+\item \textbf{Base case}: $n = 1, n = 2 \qquad \checkmark$
+\item \textbf{Induction step}: $F_{n+1} = F_{n} + F{n_1}$\\
+Cases:
+    \begin{enumerate}
+        \item $3|n+1 \to 3$ does not divide $n$ or $n-1$ so $F_n, F_{n-1}$ are odd, $F_{n+1}$ is even
+        \item $3 \nmid n + 1$ so exactly one of $n$ and $n-1$ is divisible by 3. By induction hypothesis, one of $F_n$ and $F_{n-1}$ is even, and another one is odd, so the sum is odd.
+    \end{enumerate}
+\item Second way of doing induction step
+$F_{n+1} = F_n + F_{n-1} = (F_{n-1} + F_{n-2}) + F_{n-1} = 2F_{n-1} + F_{n-2}$
+$F_{n+1} \equiv F_{n-2} \ (mod \ 2)$
+\end{itemize}
+
+\subsection{Inclusion-Exclusion I}
+
+Given $| A |$, $| B |$ we want to find $|A \cup B|$  
+
+If A and B are disjoint $(A \cap B = \emptyset)$ then $|A \cup B| = |A| + |B|$
+
+In general $|A \cup B| = | A | + | B | - | A \cap B |$
+
+Every element of A is "counted" in $| A |$ but not in $| B |$ or $| A \cap B |$.
+Same for elements of $B - A$. Elements of $A \cap B$ are counted twice with a positive sign and once with a negative sign.
+
+\paragraph{Three sets}:
+
+$| A \cup B \cup C | = | A | + | B | + | C | - | A \cap B | - | B \cap C | - | A \cap C | + | A \cap B \cap C |$
+
+\textbf{Examples}
+In a group of 40 students, 
+\begin{itemize}
+\item 10 take Art
+\item 22 take Biology
+\item 16 take Computer Science
+\item 4 take Art + Biology
+\item 8 take Biology + Computer Science % yeahhhhhh
+\item 4 take Art + Computer Science
+\item 2 take Art + Biology + Computer Science
+\end{itemize}
+How many students don't take either of  of three courses.
+
+The number of students taking at least one of those courses is $|A \cup B \cup C|$
+
+A = $\{$ all students taking Art $\}$
+B = $\{$ all students taking Biology $\}$
+C = $\{$ all students taking Computer Science $\}$
+
+$|A \cup B \cup C| = 10 + 22 + 16 - 6 - 8 - 4 + 2 - 32$
+
+\textbf{Answer} = 40 - 32 = 8 students not taking anything
+
+\subsection{Inclusion-Exclusion Principle II}
+
+$|A \cup B| = |A| + |B| - |A \cap B|$
+
+$|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| = |A \cap C| - |B \cap C| + |A \cap B \cap C|$
+
+\textbf{Example}: Suppose you have a group people
+$\begin{cases}
+$20 can play the flute$ \\
+$8 can play the piano$ \\
+$25 play the violin$ \\
+$20 play at least two instruments$ \\
+$6 play all three$ \\
+\end{cases}$
+
+How many people play at least one instrument?
+
+F = $\{$ people who can play the flute $\}$\\
+P = $\{$ people who can play the piano $\}$\\
+V = $\{$ people who can play the violin $\}$\\
+
+We are interested in $|F \cup P \cup V| = |F| + |P| + |V| - |F \cap P| - |F \cap V| - |V \cap P| + |V \cap P \cap F|$
+
+We know that $\left| |F \cap P| \cup |F \cap V| \cup |V \cap P| \right|= 20$
+
+Let us denote 
+$\begin{cases}
+A = F \cap P \\
+B = F \cap V \\
+C = V \cap P \\
+\end{cases}$
+
+$20 = |A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C|$
+
+How large is $|A \cap B| = |(F \cap P) \cap (F \cap V)| = |F \cap P \cap V|$
+
+Therefore,
+\begin{flalign*}
+20 &= |A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C| &\\
+20 &= |A \cup B \cup C| = |A| + |B| + |C| - |F \cap P \cap V| + |A \cap B \cap C| &\\
+\end{flalign*}
+$|F \cap P| + |F \cap V| + |V \cap P| = 20$
+
+Answer: 20 + 8 + 25 - 32 + 6 = 27
+
+\textbf{Another Example}:
+
+Make a 4 by 7 grid and locate p and q on the opposite ends of its diagonal i.e. p = (0,0) and q = (7,4). Travelling from p to q takes 11 blocks.
+\begin{enumerate}
+    \item How many optimal ways are there to travel from p to q (using exactly 11 blcoks)?\\\\
+        Every route we take corresponds to a sequence of 11 blocks in each of these blocks we drive up or to the right, driving up exactly 4 times.\\\\
+        \textbf{Answer}: $\displaystyle {11 \choose 4} = \frac{11!}{7! \ 4!} = \frac{11 \cdot 10 \cdot 9 \cdot 8}{4 \cdot 3 \cdot 2 \cdot 1} = 330$\\\\
+        First: UUUURRRRRRR\\
+        Second: RURUURRURRR\\
+    \item Suppose one street is blocked. How many was are there now to travel from p to q?\\
+        How many ways out of those routes used uv?
+        Ways to travel from v to q? $\displaystyle {5 \choose 2} = 10$\\
+        Routes from p to n and from v to q $\displaystyle \to ({5 \choose 2}{5 \choose 2} = 10 \times 10 = 100)$\\
+        Therefore, $330 - 100 = 230$
+    \item How many ways are there to travel from p to q (going up and to the right) avoiding streets uv, wx and yz knowing they have the following coordinates:
+    w = (2,1), x = (3,1), u = (3,2), v = (4,2), y = (5,2), z = (5,3)?\\
+    A = $\{$ all routes including uv$\}$\\
+    B = $\{$ all routes inclduing wx$\}$\\
+    C = $\{$ all routes inclduing yz$\}$\\
+    We are interested in $330 - |A \cup B \cup C|$\\
+    $\displaystyle |A| = 100 \\\\
+    |B| = {3 \choose 1}{7 \choose 3} = 105\\\\
+    |C| = {7 \choose 2}{3 \choose 1} = 63\\\\
+    |A \cap B| = pw , xu, vq = {3 \choose 1}{1 \choose 1}{5 \choose 2} = 30\\\\
+    |A \cap C| = pu, vy, zq = {5 \choose 2}{1 \choose 1}{3 \choose 1} = 30\\\\
+    |B \cap C| = pw, xy, zq = {3 \choose 1}{3 \choose 1}{3 \choose 1} = 27\\\\
+    |A \cap B \cap C| = {3 \choose 1}{3 \choose 1} = 9 $\\
+    \textbf{Answer} $= 330 - |A \cup B \cup C| = 330 - 100 - 105 - 63 + 30 + 30 + 27 - 9 = 140$
+\end{enumerate}
+
+For n sets: $|A_1 \cup A_2 \cup ... \cup A_n| = $ the sum of all the sets
+
+minus the sums of all pairwise intersections ${n \choose 2}$ terms 
+
+plus the size of all three way interesections ${n \choose 3}$ terms
+
+minus sum of the sizes of all four way intersections ${n \choose 4}$
+
+plus the sum of the sizes of all five way intersections ${n \choose 5}$.. etc
+\begin{flalign*}
+|A_1 \cup A_2 \cup ... \cup A_n| &= \sum_{i = 1}^n |A_i| - \sum_{1 \leq i < j \leq n} |A_i \cap A_j| &\\
+&+ \sum_{1 \leq i < j < k \leq n} |A_i \cup A_j \cap A_k| - \ldots + (-1)^{n-1} |A_1 \cap A_2 \ldots \cap A_n| &\\
+&= \sum_{I \subseteq\{1,2,..., n\} \quad I \neq \emptyset} (-1)^{|I| - 1}|\cap_{i \in I} A_i| &\\
+\end{flalign*}
+
+\textbf{Proof:}
+We need to show that every element of $A_1 \cup A_2 \cup \ldots \cup A_n$ is counted exactly once in the right side of our formula. Suppose the element we are considering belongs to exactly k of the sets. 
+
+It will appear with the coefficient $\displaystyle {k \choose 1} - {k \choose 2} + {k \choose 3} - {k \choose 4} + \ldots + (-1)^{k-1} {k \choose k} = 1 $
+
+Number of all odd subsets of the k-element set - number of all non-empty even subsets
+
+\subsection{Inclusion/Exclusion Principle III}
+$|A_1 \cup A_2 \cup ... \cup A_n| = \sum_{i = 1}^n |A_i| - \sum_{1 \leq i < j \leq n} |A_i \cap A_j| + \sum_{1 \leq i < j < k \leq n} |A_i \cup A_j \cap A_k| - \ldots + (-1)^{n-1} |A_1 \cap A_2 \ldots \cap A_n|$
+
+\textbf{Example}:
+
+A postman wants to deliver n letters to n houses. (There is exactly one letter addressed to each of the houses).
+
+How many ways are there for the postman to deliver every letter to deliver every letter to the wrong house? (Still 1 letter per house)
+
+Counting bijections [permutations] $f: \{1, 2, ..., n\} \to \{1, 2, ..., n\}$ so that $f(k) \neq k$ for all $k = 1, 2, ..., n$.
+
+\textbf{Derangements}: $D(n)$: \# of derangements of $\{1, 2, ... , n\}$
+
+D(1) = 0
+
+D(2) = 1
+
+D(3) = ?
+
+$A_1 = \{\#$ of permutations $\{1,2,3\}$ which preserve the position of $1\}$
+
+$A_2 = \{\#$ of permutations $\{1,2,3\}$ which preserve the position of $2\}$
+
+$A_3 = \{\#$ of permutations $\{1,2,3\}$ which preserve the position of $3\}$
+
+$D(3) = 3! - |A_1 \cup A_2 \cup A_3| = 3! - |A_1| - |A_2| - |A_3| + |A_1 \cap A_2| + |A_1 \cap A_3| + |A_2 \cap A_3| - |A_1 \cap A_2 \cap A_3|$
+
+We know that $|A_1| = |A_2| = |A_3| = 2$ and $|A_1 \cap A_2| = |A_1 \cap A_3| = |A_3 \cap A_2| =|A_1 \cap A_2 \cap A_3| = 1$
+
+Therefore, $D(3) = 3! - 6 + 3 - 1 = 2$
+
+What about D(4) ?
+
+$A_k =$ {\# of permutations of {1, 2, ... , n} which preserve the position of $k$}
+
+$\displaystyle D(n) = n! - |A_1 \cup A_2 \cup ... \cup A_n| = n! - \sum_{i=1}^n|A_i| + \sum_{1 \leq i < j \leq n}|A_i \cap A_j| - \sum_{1 \leq i < j < k \leq n}|A_i \cap A_j \cap A_k| + \ldots + (-1)^{n} |A_1 \cap A_2 \ldots \cap A_n|$
+
+where $n!$ is the total \# of ways to deliver letters
+
+$|A_i| = (n - 1)!$
+
+$|A_i \cap A_j| = (n - 2)!$
+
+In general, $|A_{i_1} \cap A_{i_2} \cap \ldots \cap A_{i_k}| = (n-k)!$
+
+Therefore, 
+\begin{flalign*}
+D(n) &= n! - |A_1 \cup A_2 \cup ... \cup A_n| = n! - \sum_{i=1}^n|A_i| + \sum_{1 \leq i < j \leq n}|A_i \cap A_j| - \sum_{1 \leq i < j < k \leq n}|A_i \cap A_j \cap A_k| &\\ &+ \ldots + (-1)^{n} |A_1 \cap A_2 \ldots \cap A_n| &\\
+&= n! - n \cdot (n - 1)! + {n \choose 2}(n-2)! - {n \choose 3}(n=3)! + {n \choose 4} (n-4)! - \ldots + (-1)^n {n \choose n} 0! &\\
+&= n! - n! + \frac{n!}{\cancel{(n-2)!}2!} \ \cancel{(n-2)!} - \frac{n!}{\cancel{(n-3)!}3!} \ \cancel{(n-3)!} + \ldots &\\
+&= n!(1 - \frac{1}{1!} + \frac{1}{2!} - \frac{1}{3!} + \frac{1}{4!}  \dots + (-1)^n \frac{1}{n!}) &\\
+&\approx \frac{n!}{e} \pm \frac{1}{n+1} &\\
+e^x &= 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \ldots \qquad \frac{1}{e} \approx 0.37 &\\
+\end{flalign*}
+
+\textbf{Proposition}: $D(n) = (n-1)(D(n-1) + D(n-2))$ has a purely combinatorial proof.
+
+How many ways are there to deliver \textbf{exactly} one letter correctly? (For at least one letter the answer is $n! - D(n) \approx n! (1 - \frac{1}{e})$)
+
+Delivering only the first letter correctly: $D(n-1)$
+
+Delivering only the second letter correctly: $D(n-1)$
+
+It is impossible to "deliver only the first letter correctly"  and "deliver only the second letter correctly". These sets are disjoint, hence allowing us to use the inclusion-exclusion principle.
+
+Delivering the first and second letters correctly $\to n \ D(n-1)$ ways $\approx n \ \frac{(n-1)!}{e} \approx \frac{n!}{e} \approx 0.37 n!$
+
+\subsection{Euler's phi function (totient function)}
+
+$\varphi(n) = | \{ k : 1 \leq k \leq n, gcd(k, n) = 1 \} |$
+
+$\varphi(12) = | \{1,5,7,11 \} | = 4 $
+
+$A_1 = \{$even numbers in $\{1,2, \ldots ,12\}\}$
+
+$A_2 = \{$numbers in $\{1, 2, 3, \ldots, 12\}$ divisible by $3\}$
+
+$\varphi(12) = 12 - |A_1 \cup A_2| = 12 - |A_1| - |A_2| + |A_1 \cap A_2| = 12 - \frac{12}{2} - \frac{12}{3} + \frac{12}{6} = 4$ 
+
+\textbf{Theorem}: Let $n$ be a positive integer and let $p_1, p_2, \ldots, p_k$ be all distinct prime divisors $n$. Then $\varphi(n) = n(1 - \frac{1}{p_1})(1 - \frac{1}{p_2})\dots(1 - \frac{1}{p_k})$
+
+\textbf{Example}:
+
+$\varphi(36000) = 3600 \cdot (1 - \frac{1}{2}) \cdot (1 - \frac{1}{3}) \cdot (1 - \frac{1}{5}) = \frac{3600}{30} \cdot 8 = 960$
+
+\textbf{Proof}:
+
+$A_i = \{m : 1 \leq m \leq n, \quad p_i \mid m\}$
+
+$\displaystyle \varphi(n) = n - |A_1 \cup A_2 \cup \ldots \cup A_n| = n - \sum_{i=1}^n|A_i| + \sum_{1 \leq i < j \leq n} |A_i \cup A_j| - \sum_{1 \leq < i < j<k\leq n} |A_i \cup A_j \cup A_k| + \ldots + (-1)^{n} |A_1 \cap A_2 \ldots \cap A_n|$
+
+
+$A_i = \{p_i, 2p_i, 3p_i, \ldots, \frac{n}{p_i} \cdot p_i\}$
+
+$|A_i| = \frac{n}{p_i}$
+
+$|A_i \cap A_j| = \frac{n}{p_ip_j}$
+
+$|A_{i_1} \cap A_{i_2} \cap \ldots \cap A_{i_s}| = \frac{n}{p_{i_1}p_{i_2} \ldots p_{i_s}}$
+
+\begin{flalign*}
+\varphi(n) &= n (1 - \frac{1}{p_1} - \frac{1}{p_2} - \ldots - \frac{1}{p_k} + \frac{1}{p_1p_2} + \frac{1}{p_1p_3} + \ldots + \frac{1}{p_1p_k} - \frac{1}{p_1p_2p_3} - \frac{1}{p_1p_2p_3}  - \frac{1}{p_1p_2p_4}  - \ldots  - \frac{1}{p_1p_2p_k} + \ldots )&\\
+&= n(1 - \frac{1}{p_1})(1 - \frac{1}{p_2})(1 - \frac{1}{p_3}) \ldots (1 - \frac{1}{p_k}) &\\
+\end{flalign*}
+
+\textbf{Corollary}: If $gcd(m, n) = 1$ then $\varphi(m \cdot n) = \varphi(m) \ \varphi(n)$
+
+\section{The mutlinomial theorem}
+
+$\displaystyle {n \choose k} = \frac{n!}{k! (n-k)!}$
+\begin{itemize}
+    \item \# of ways to select k objects out of a set of size n
+    \item \# of ways of dividing n objects into two piles, $1^{st}$ one containing k objects, $2^{nd}$ one containing (n-k)
+    \item \# of n-bit sequences which contain exactly k 1's
+    \item a coefficient of $x^ky^{n-k}$ in the expansion of $(x+y)^n$
+\end{itemize}
+
+\paragraph{Example}
+We have n distinguishable presents which we want to distribute among $k$ children so that:\\
+$1^{st}$ child gets $n_1$ presents\\
+$2^{nd}$ child gets $n_2$ presents\\
+$\ldots$\\
+$k^{th}$ child gets $n_k$ presents\\
+$(n_1 + n_2 + \ldots + n_k = n)$
+
+How many ways are there to accomplish this?
+
+There are ${n \choose n_1}$ ways to select $n_1$ presents for the first child.
+
+$(n - n_1)$ presents remain. In particular there are ${n - n_1 \choose n_2}$ ways to select presents for the $2^{nd}$ child continuing the process we get (by the generalized product rule).
+
+\begin{flalign*}
+&\displaystyle {n \choose n_1} {n - n_1 \choose n_2} {n - n_1 -n_2 \choose n_3} \ldots {n - n_1 - n_2 - \ldots - n_{k-1} \choose n_k} &\\
+&=  \frac{n!}{n_1! (n-n_1)!} \frac{(n - n_1)!}{n_2! (n-n_1 - n_2)!} \frac{(n - n_1 - n_2)!}{n_3! (n-n_1 - n_2 - n_3)!} \ldots &\\
+&=  \frac{n!}{n_1! \cancel{(n-n_1)!}} \frac{\cancel{(n - n_1)!}}{n_2! \cancel{(n-n_1 - n_2)!}} \frac{\cancel{(n - n_1 - n_2)}!}{n_3! (n-n_1 - n_2 - n_3)!} \ldots &\\
+&= \frac{n!}{n_1! n_2! n_3! \ldots n_k!} &\\
+&= {n \choose n_1, n_2, n_3, \ldots, n_k} \qquad \rm (multinomial \ coefficient)&\\
+\end{flalign*}
+
+Note: $\displaystyle {n \choose k} = {n \choose k, n-k}$
+
+Let us order the presents and then give first $n_1$ to the $1^{st}$ child, next $n_2$ to the $2^{nd}$ child etc.
+
+There are $n!$ orderings in total.
+
+Each ordering corresponds to a unique distribution of presents, however each distribution of presents corresponds to $n_1! n_2! \ldots n_k!$ orderings (there are $n_i!$ ways to order presents given to the $i^{th}$ child).
+
+By the division rule there are $\frac{n!}{n_1! \cdot n_2! \cdot \ldots \cdot n_k!}$ ways to distribute presents.
+
+\subsection{Statement of the theorem}
+
+$ \displaystyle (x_1 + x_2 + \ldots + x)k)^n = \sum_{n_1 + n_2 + \ldots + n_k = n (s.t. n_1 \geq 0)} {n \choose n_1, n_2, n_3, \ldots, n_k} x_1^{n_1} \cdot x_2^{n_2} \cdot \ldots \cdots x_k^{n_k}$
+
+\textbf{Proof}:
+
+$(x_1 + x_2 + \ldots + x_k)^n = \overbrace{(x_1 + x_2 + \ldots + x_k)(x_1 + x_2 + \ldots + x_k) \ldots (x_1 + x_2 + \ldots + x_k) }^{\rm n \ times} $
+
+% http://www.physicsforums.com/showthread.php?t=264861 (look up the protons + neutrons + electrons)
+% I'm at http://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics but I'll look at yours too
+
+In the expansion we select our summand from each of the terms and multiply.
+
+There are (by definition) exactly ${n \choose n_1, n_2, \ldots, n_k}$ ways of selecting $x_k$ $n_1$ times, $x_2$ $n_2$ times, etc.
+
+\textbf{Example 1}: What is the coefficient of $x^2y^3z^4$ in the expansion of $(x + y + z)^9$?
+
+\textbf{Answer}: $\displaystyle {9 \choose 2, 3, 4} = \frac{9!}{2!3!4!} = \frac{9 \cdot 8 \cdot 7 \cdot \cancel{6} \cdot 5 \cdot \cancel{4 \cdot 3 \cdot 2 \cdot 1}}{2\cdot \cancel{6} \cdot \cancel{4!}} = 9 \cdot \cdot 7 \cdot 4 \cdot 5 = 1260$
+
+\textbf{Example 2}: How many anagrams of the word \begin{verbatim} MISSISSIPPI \end{verbatim} are there?
+
+M occurs 1 time, I occurs 4 times, S occurs 4 times, P occurs 2 times $\to$ we need to distribute 11 available positions among the letters so that M gets 1 position, I gets 4 etc.
+
+\textbf{Answer}: $\displaystyle {11 \choose 1, 4, 4, 2} = \frac{11 \cdot 10 \cdot 9 \cdot \cancel{8 \cdot 7 \cdot 6 \cdot 5 \cdot 4!}}{1! \cancel{\cdot 4! \cdot 4! \cdot 2!}}= 50 \cdot 99 \cdot 7 = 350 \cdot 99 = 34650$
+
+% Happy 11/11/11 11:11:11 :P!!!!!! it just passed :(
+
+\subsection{Distributing money}
+
+We want to distribute $n$ dollars among $k$ children so that every child gets at least 1 dollar.
+
+How many ways are there to do this?
+
+Let us give out money one dollar at a time to children in order. When to stop giving money to our current child and start giving it to the next one? 
+
+The distribution is completely described by the choices of $k - 1$ out of $n - 1$ gaps in which we move on to the next child.
+
+Answer: $\displaystyle {n - 1 \choose k - 1}$
+
+Another way of stating the same problem:
+
+$x_1 + x_2 + \ldots x_k = n$
+
+The number of positive integer solutions of this equation is ${n - 1 \choose k - 1}$.
+
+What about non-negative integer solutions (i.e. relaxing the requirement that every child gets a dollar)?
+
+If $x_1 + x_2 + \ldots + x_k = n$ is a non-negative integer solution then.
+
+$(x_1 + 1) + (x_2 + 1) + \ldots + (x_k + 1) = n + k$ is a positive integer solution of the corresponding equation.
+
+There are ${(n + k) - 1 \choose k - 1}$ solutions to the $2^{nd}$ equation.
+
+\textbf{Example}: 
+
+30 identical balls are to be distributed among jugglers so that each juggler has at least 3 balls and at most 7 balls. How many ways are there to do this?
+
+Suppose we relax the second requirement. How many ways are there to do this?
+
+An integer solution to $x_1 + x_2 + x_3 + x_4 + x_5 = 30 \qquad x_i \geq 3$
+
+$\displaystyle (x_1 - 3) + (x_2 - 3) + \ldots + (x_5 - 3) = 15 \qquad \to {15 + 5 - 1 \choose 4} = {19 \choose 4}$
+
+\section{Graphs (section under construction)}
+
+\subsection{Definition}
+
+Informally, a graph is a collection of dots with pairs of dots joined by lines
+
+\textbf{Dots}: vertices
+
+\textbf{Lines}: edges
+
+Vertices can represent objects, computer programs, cities, people, web pages.
+Edges can represent pairwise relationships between the objects: two poeple know each other,  etc.
+
+A \textbf{simple graph} $G = (V, E)$ where $V$ is a non-empty set and $E$ is a set of pairs of elements of $V$.
+
+$V$ is the set of vertices of $G$.
+
+$E$ is the set of edges of $G$.
+
+$V = \{a, b, c, d, e, f\}$
+$E = \{\{a, b\}, \{b, c\}, \{b, d\}, \{c, d\}, \{e, f\}\}$
+
+Two vertices are \textbf{adjacent} if there exists an edge joining them.
+
+An edge is \textbf{incident} to the two vertices which are its ends. 
+
+\textbf{Degree} of a vertex $v \in V$ is the number of edges incident to it. It is denoted by $deg(v)$. 
+% This chapter is going to suck to LaTeX yeah :( :( :( :( :( :( Are you drawing? Or do you want me to draw? I'm taking notes by hand, will see if I can convert to Latex later
+% I'll write in LaTeX as much as I can to save you some time.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[shorten >=1pt,->]
+  \tikzstyle{vertex}=[circle,fill=black!25,minimum size=12pt,inner sep=2pt]
+  \node[vertex] (G_1) at (0,0) {a};
+  \node[vertex] (G_2) at (0,1)   {b};
+  \node[vertex] (G_3) at (1,2)  {c};
+  \node[vertex] (G_4) at (1,1)  {d};
+  \draw (G_1) -- (G_2) -- (G_3) -- cycle;
+  \draw (G_2) -- (G_4) -- (G_3) -- cycle;
+\end{tikzpicture}
+\begin{tikzpicture}[shorten >=1pt,->]
+  \tikzstyle{vertex}=[circle,fill=black!25,minimum size=12pt,inner sep=2pt]
+  \node[vertex] (G_5) at (0,3)  {e};
+  \node[vertex] (G_6) at (1,4)  {f};
+  \draw (G_5) -- (G_6) -- cycle;
+\end{tikzpicture}
+\end{figure}
+
+\begin{itemize}
+\item Vertex $a$ has degree $1$
+\item Vertex $b$ has degree $3$
+\item Vertex $c$ has degree $2$
+\item Vertex $d$ has degree $2$
+\item Vertex $e$ has degree $1$
+\item Vertex $f$ has degree $1$
+\end{itemize}
+
+At a party of 51 people, there is always a person who knows an even number of other people?
+
+If G is a graph $G = (V, E), |V| = 51$, then $\exists v \in V$, $deg(v)$ is even. 
+
+\textbf{Case 1: $|V| = 50$}: Not true, because it is possible that $deg(v) = 49$ for all $v \in V$. This works for any even number $|V|$.
+
+\textbf{Case 2: $|V| = 1$}: $|V|$ is always one, and so always odd.
+
+$\to$ We must prove that \emph{At a party with an odd number of people, there is always a person who knows an even number of others.}
+
+This is the equivalent of \emph{if a graph has an even number of vertices, then the number of vertices of even degree is even.}. In such a case, the number of vertices with odd degree is the total number of vertices $|V|$ minus the number of nodes with even degree, which is an even number as well ($even - even = even$).
+
+\textbf{Theorem}: In every graph, there is an even number of vertices of odd degree. [This statement implies the one above]
+
+\textbf{Proof}: G = (V, E) 
+
+Let $|E| = m$, and prove the theorem by induction on $m$.
+
+\textbf{Base case}: 
+\begin{itemize}
+	\item $m = 0 \to$ all degrees are $0 \ \checkmark$ 
+	\item $m = 1 \to$ all vertices have degree $1 \ \checkmark$
+\end{itemize}
+
+\textbf{Induction step}:
+Suppose $|E| = m + 1$. By the induction hypothesis, the theorem is true for every graph on $m$ edges. 
+Pick two vertices $u,v \in V$ joined by an edge $\{u,v\}$
+% if you want to draw I can type? all right I got it somewhat working byt the graphs are on top of one another instead of being next to eachother, I'll look into it
+% yeah no worries
+\begin{enumerate}
+\item If $deg(u), deg(v)$ are both even in G, then in the new graph (after deleting uv), we have two more vertices of odd degree, so the parity of the number of vertices of odd degree is unchanged.
+\item Exactly of one of $u$ and $v$ had an odd degree $\to$ the number of vertices of odd degree is unchanged.
+\item If $deg(u), deg(v)$ are both odd $\to$ deleting the edge decreases the number of vertices of odd degree by two.
+\end{enumerate}
+
+$\displaystyle \sum_{v \in V} deg(v)$ is even $\leftrightarrow$ there is an even number of vertices of odd degree
+
+\textbf{Theorem}: $\displaystyle \sum_{v \in V} deg(v) = 2|E|$
+
+\textbf{Proof}: Both sides of this identity enumerate ends of edges.
+
+\textbf{Example}: In a simple graph $G = (V, E)$, there are always $u, v \in V, u \neq v, deg(u) = deg(v)$ ($|V| \geq 2$)
+
+\textbf{Proof:} $|V|=n$ Maximum possible degree of a vertex in $G$ is $n-1$. The set of possible degrees is $\{0,1,2,\ldots, n-1 \}$. 
+
+We are done by the pigeonhole principle unless the degrees of vertices in the graph are $\{0,1,2,\ldots, n-1\}$. 
+
+It is impossible to have two vertices $v$ and $u$ such as $deg(v) = 0$ and $deg(u) = n-1$, we cannot have at the same time a person knowing nobody and a person knowing everybody.
+
+\textbf{English explanation:} For each vertex, we count the edges that leave that vertex (this the degree of the vertex). If we sum these numbers, we count every edge twice. So dividing the sum by two, we get the number of edges.
+
+% PICTURE GOES HERE OF LOTS OF GRAPHS AND THINGS :( oh it's the same as before yay!
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[shorten >=1pt,->]
+  \tikzstyle{vertex}=[circle,fill=black!25,minimum size=12pt,inner sep=2pt]
+  \node[vertex] (G_1) at (0,0) {a};
+  \node[vertex] (G_2) at (0,1)   {b};
+  \node[vertex] (G_3) at (1,2)  {c};
+  \node[vertex] (G_4) at (1,1)  {d};
+  \draw (G_1) -- (G_2) -- (G_3) -- cycle;
+  \draw (G_2) -- (G_4) -- (G_3) -- cycle;
+\end{tikzpicture}
+\begin{tikzpicture}[shorten >=1pt,->]
+  \tikzstyle{vertex}=[circle,fill=black!25,minimum size=12pt,inner sep=2pt]
+  \node[vertex] (G_5) at (0,3)  {e};
+  \node[vertex] (G_6) at (1,4)  {f};
+  \draw (G_5) -- (G_6) -- cycle;
+\end{tikzpicture}
+\end{figure}
+
+A \textbf{walk} in a graph is a sequence of vertices so that two consecutive vertices are adjacent.
+\textbf{Example}: The sequence of vertices $[a, b, c, d, b, c]$ is a walk. 
+
+A walk is \textbf{closed} if its first and last vertices are the same.
+\textbf{Example}: The sequence of vertices $[a, b, c, d, b, a]$ is a closed walk.
+
+A walk is a \textbf{path} if it doesn't repeat any vertices. 
+\textbf{Example:} The sequence of vertices $[a,b,c,d]$ is a path.
+
+A \textbf{circuit} is a closed walk which does not repeat any edges.
+\textbf{Example}: The sequence of vertices $[b, c, d, b, a]$ is a circuit.
+
+A \textbf{cycle} is a closed walk which does not repeat any vertices except for the first and last one.
+\textbf{Example}: The sequence of vertices $[b, c, d, b]$ is a cycle.
+
+% why are you making it so complicated snorin lol
+% whatever are we going to do? :( I don't care, bcd is a cycle in the previous simple figure.
+% hahahaha
+% stupid python program has been running for nearly 40 minutes now. I hope it finishes in the next 5 min or I have to stay here. aaaw the protest is in 30 mn anyway, might as well do something constructive before
+% I thought it was 12:30? It's 12:00, walk to james admin, 12:30, protest in james square. How many people are expected now? 2.8k
+
+\textbf{1736 Euler}: Koninsberg bridges
+
+Is there a way to walk around Koninsberg passing along every bridge exactly once? Is there a walk in this graph using every edge exactly once?
+% blah blah too lazy use the pictures on wikipedia good idea
+
+\begin{comment}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.75,transform shape]
+  \Vertex[x=0,y=2](1)
+  \Vertex[x=1,y=3](2)
+  \Vertex[x=3,y=0](3)
+  \Vertex[x=4,y=2](4)
+  \Vertex[x=3,y=3](5)
+   \Vertex[x=5,y=2](6)
+  \tikzstyle{LabelStyle}=[fill=white,sloped]
+  \Edge(1)(2)
+  \Edge(2)(3)
+  \Edge(3)(4)
+  \Edge(4)(5)
+  \Edge(5)(1)
+  \tikzstyle{EdgeStyle}=[bend left]
+  \Edge(1)(2)
+  \Edge(1)(3)
+  \Edge(2)(5)
+  \tikzstyle{EdgeStyle}=[bend right]
+  \Edge(3)(4)
+  \Edge(4)(5)
+\end{tikzpicture}
+\end{figure}
+\end{comment}
+
+% November 16th
+\subsection{Cycles \& Circuits}
+% those definitions are already up
+
+\textbf{Simple graphs}: there is at most one edge joining any pair of vertices
+
+In general graphs this condition is relaxed.
+
+Koninsberg bridges: Is it possible to walk around Koninsberg crossing each of its seven bridges exactly once?
+
+\includegraphics[width=0.4\textwidth]{konigsberg.jpg}
+$\qquad \to\qquad$
+\includegraphics[width=0.3\textwidth]{konigsberg_graph.jpg}
+
+Each land parcel is represented by a vertex (labelled with a letter) and each edge represents one of Koninsberg's seven bridges.
+
+Does there exist a walk which uses every edge exactly once?
+
+\subsubsection{Eulerian circuit}
+\textbf{Defintion}: A circuit in a graph using every edge exactly once.
+
+In a circuit, every time we visit a vertex, we use two edges incident to this vertex.
+
+A graph is called \textbf{connected} if there is a path (or walk) between any pair of vertices.
+
+\textbf{Theorem}: A connected graph contains an Eulerian circuit if and only if every vertex in it has an even degree. % lol like a bauss
+
+\textbf{Proof}: We already established the "only if" part of the statement, now for the if part.
+
+\textbf{"If" part}: Choose a circuit in our graph using as many edges as possible.
+\begin{comment}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.75,transform shape]
+  \Vertex[x=0,y=2](1)
+  \Vertex[x=1,y=3](2)
+  \Vertex[x=3,y=0](3)
+  \Vertex[x=4,y=2](4)
+  \Vertex[x=3,y=3](5)
+   \Vertex[x=5,y=2](6)
+  \tikzstyle{LabelStyle}=[fill=white,sloped]
+  \Edge(1)(2)
+  \Edge(2)(3)
+  \Edge(3)(4)
+  \Edge(4)(5)
+  \Edge(5)(1)
+  \tikzstyle{EdgeStyle}=[bend left]
+  \Edge(1)(2)
+  \Edge(1)(3)
+  \Edge(2)(5)
+  \tikzstyle{EdgeStyle}=[bend right]
+  \Edge(3)(4)
+  \Edge(4)(5)
+\end{tikzpicture}
+\end{figure}
+\end{comment}
+If it uses all of the edges, this is an Eulerian circuit. 
+
+If not, there exists an edge not in our circuit, and because the graph is connected, we can choose an edge incident to some vertex of this circuit.
+
+Every vertex is incident to an even number of edges not in the chosen circuit.
+
+Starting with the original edge, we can construct a walk using only edges not belong to the circuit.
+
+We can continue until we reach the vertex we started at, i.e., we constructed a circuit, say $C'$, which contains no edges of $C$, but shares a vertex $v$ with the original circuit C.
+
+We can trace $C$ (starting and ending at $v$), and then trace $C'$, so $C \cap C'$ also correspondings to a circuit, contradicting the choice of $C$.
+
+\subsubsection{Eulerian Walk}
+An \textbf{Eulerian walk} is a walk (not necessarily closed) which uses every edge exactly once.
+
+\textbf{Corollary}: A connected graph has an Eulerian walk if and only if it has at most two vertices of odd degree.
+
+\textbf{Proof}:
+\begin{itemize}
+\item \textbf{"Only if"}: Let an Eulerian walk start at $u$ and end at $v$. If $u = v$, this is an Eulerian circuit, so by the theorem, all degrees are even. If $u \neq v$, add an edge to the walk, and the graph. We have an Eulerian circuit in the new graph, so all degrees are even, so only $u \& v$ had an odd degree before.
+\item \textbf{"If"}: If all degrees are even, we are done. If exactly two vertices $u \& v$ have an odd degree, add an edge $u\--v$. In the new graph, there is an Eulerian circuit, which corresponds to an Eulerian walk in the original graph.
+\end{itemize}
+
+A \textbf{Hamiltonian cycle} is a cycle in a graph that uses all of the vertices. The problem of determining whether a graph has a Hamiltonian circuit is \textbf{NP-complete}. (if $P \neq NP$, it is not possible to find Hamiltonian circuits efficiently)
+
+\subsubsection{The Petersen graph}
+
+\includegraphics[width=0.3\textwidth]{petersen.jpg}
+
+This graph has no Hamiltonian cycle. 
+
+A graph is \textbf{3-regular} of every vertex has degree 3. 
+
+A \textbf{3-edge colouring} of a 3-regular graph is a way of assigning colours $\{1, 2, 3\}$ to the edges of the graph so that every vertex is incident to the edges of all 3 colours. If a 3-regular graph has a Hamiltonian cycle, then it has a 3-edge colouring (use colours 1 and 2 on the cycle)
+
+However, the Petersen graph does not have a 3-edge colouring. Suppose there is a 3-edge colouring.
+
+\begin{enumerate}
+ \item There is an edge of every colour on the outer cycle.
+ \item It follows that the inner cycle has at least two edges of every colour, but there are 3 colours and only 5 edges.
+\end{enumerate}
+
+% November 18th
+
+\subsubsection{Hamiltonian Cycles}
+
+A cycle which uses every vertex exactly once. 
+
+\textbf{Complete graph on n vertices $K_n$} 
+
+Example:$K_s$ a graph where every pair of vertices is joined by an edge 
+
+\includegraphics{fig13.png}
+
+$K_n$ has $n$ vertices ${n \choose 2}$ edges = $\frac{n(n-1)}{2}$.
+
+\textbf{Complete Bipartite graph $K_{n_1, n_2}$}
+
+A complete bipartite graph $K_{n_1, n_2} = (V,E)$
+
+\includegraphics{fig14.png}
+
+$V = A \cup B \qquad A \cap B = \emptyset \qquad |A| = n_1 \qquad |B| = n_2$ 
+
+Every vertex of A is joined to every vertex of B and there are no other edges ($n_1 n_2$ edges in total)
+
+If $n_1, n_2 \geq 2$, $K_{n_1,n_2}$ has a Hamiltonian cycle if and only if $n_1 = n_2$ (the vertices of the parts A $\&$ B must alternate along the cycle). 
+
+
+\textbf{Theorem (Dirac):} Let G be a simple graph on n vertices, $n \geq 3$, then if $deg(v) \geq \frac{n}{2}$ for every vertex v of G then G has a hamiltonian cycle.
+
+\textbf{Proof:} Assume that G does not have a Hamiltonian cycle. Further, assume that G has as many edges as possible subject to all of the above (Adding an edge between any pair of non-adjacent vertices of G creates a Hamiltonian cycle.)
+
+\includegraphics{fig15.png}
+
+There are $\geq \frac{n}{2}$ squares neighbours of $v_i$
+
+Let the circles in the picture denote vertices to the left of the squares.
+
+There are $\geq \frac{n}{2}$ circles. If $v_n$ is adjacent to one of these vertices say $v_k$ then: $v_1 \to v_k \to v_n \to v_{k+1} \to v_1$ is a hamiltonian cycle. So we may assume that $v_n$ is adjacent to any of these vertices.
+
+So there are only $n - 1 - \frac{n}{2} < \frac{n}{2}$ vertices which $v_n$ can be adjacent to $\to$ contradiction $\blacksquare$
+
+Example:
+\includegraphics{fig16.png}
+
+$deg = \lfloor n / 2 \rfloor \to$ No hamiltonian cycle. 
+
+\section{Trees (section under construction)}
+A \textbf{tree} is a connected simple graph without any cycles.
+
+\includegraphics{fig17.png}
+
+\textbf{Theorem:}
+\begin{enumerate}
+    \item In a tree there exists a unique path between any pair of vertices.
+    \item Deleting any edge from a tree disconnects it.
+    \item Adding an edge between non-adjacent vertices of a tree to a tree creates a cycle.
+    \item If a tree has at least $\geq 2$ vertices then it has $\geq 2$ leaves.
+    \item The number of edges in a tree is one less then the number of vertices.
+\end{enumerate}
+
+\textbf{Proofs for the above:}
+\begin{enumerate}
+    \item Suppose not, for some pair of verties $x$, $y$ there exist two paths between them. Let $p_1$, $p_2$, denote those paths. Let $x^{'}$ be the first vertex where $p_2$ deviates from $p_1$. Let $y^{'}$ be the next vertex along $p_1$ which belongs to $p_2$. 
+    Then, if $x^{'} \to(p_2)\to y^{'} \to(p_1) \to x^{'}$ is a cycle $\to$ contradiction
+    \item If we delete an edge $e = \{x, y\}$. e was the edge of the unique path from $x$ to $y$ after deleting it there are no paths from x to y $\checkmark$ 
+    \item Adding an $x\-- y$ edge together with the existing path from x to y in a tree creates a cycle.
+    \item Considering the longest path in a tree, then x and y are both leaves.
+    \item Induction on the number of vertices.\\
+    \textbf{Base case}:1 vertex three has no edges\\
+    \textbf{Induction step:} Consider a tree on $(n+1)$ vertices. Let $v$ be a leaf of this tree. Delete $v$ (this removes 1 vertex and 1 edge). The remaining graph clearly has no cycles and is connected. (no path without an end in v can use v).\\
+    By the induction hypothesis it has $n$ vertices and $n-1$ edges so our graph had $n$ edges. $\blacksquare$
+\end{enumerate}
+
+% November 21st
+\subsection{Counting trees}
+How many different trees are there with n vertices?
+
+V = \{0,1,2\}
+
+\textbf{Unlabeled Trees}
+
+$G_1 = (V_1, E_1), \quad G_2 = (V_2, E_2)$ - simple graphs
+
+$G_1$ and $G_2$ are \textbf{isomorphic} if there exists $f:V_1 \to V_2$ a bijection, such that $u \-- v \in E_1$ if and only if $f(u)\-- f(v) \in E_2$. In other words, two nodes in the first tree that are connected by an edge correspond to nodes in the second tree that are connected by an edge and vice-versa.
+
+How many different (non-isomorphic) trees are there?
+
+n =1 , n = 2
+
+There is no closed form expression of the \# of unlabeled trees.
+
+\textbf{Labeled trees}
+
+How many trees are there with the vertex set V =\{0,1,2,\ldots, n-1\}? (what about simple graphs?)
+
+There are $\displaystyle {n \choose 2}$ possible edges and $\displaystyle 2^{{n \choose 2}}$ different simple graphs.
+
+\begin{itemize}
+\item n = 1: 1 way
+\item n = 2: 1 way
+\item n = 3: 3 ways
+\item n = 4: 4 ways to label linear tree, 24 ways to label the non-linear tree if we fix the left end but this way we count every tree twice so $24/2$. $12 + 4 = 16$
+\end{itemize}
+
+\subsubsection{Number of labeled trees}
+
+\textbf{Theorem (Cayley)}: There are $n^{n-2}$ labeled trees with n vertices. 
+
+How can we represent trees in the computer?
+
+\textbf{Adjacency matrix}
+
+\includegraphics{fig1.png} 
+$\qquad$can be represented by the adjacency matrix:
+
+$$
+\begin{matrix}
+0 & 1 & 1 & 0 & 0 & 0 & 1 \\
+1 &0 & 0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 & 1 & 1 & 0 \\
+\end{matrix}
+\qquad \begin{cases}
+1 $ if and only if corresponding vertices are adjacent$ \\
+0 $ otherwise$\\
+\end{cases}$$
+
+$\to {n \choose 2}$ bits
+
+There is no way to represent a general graph with fewer bits. But for trees we can do better. 
+
+\textbf{The Incidence List}: A tree has $n-1$ edges. Let us write down the ends of the edges.
+
+$
+\begin{pmatrix}
+0 & 0 & 0 & 2 & 4 & 5 \\
+1 & 2 & 6 & 3 & 6 & 6 \\
+\end{pmatrix}
+\to$
+a sequence of $2(n-1)$ numbers (takes $2(n-1)\lceil log_2 n \rceil$ bits)
+
+There are at most $n^{2(n-1)}$ labeled trees on n vertices.
+
+\includegraphics{fig2.png}
+
+\textbf{The Parent List}:  For every vertex (except the root) there exists a unique edge from it along the path towards the root. 
+We call the second end of this edge the \textbf{parent} of the vertex. 
+Every edge joins some vertex to its parent.
+
+$\begin{matrix}1 & 2 & 3 & 4 & 5 & 6 \\0 & 0 & 2 & 6 & 6 & 0\end{matrix}$.
+
+The second row completely records the tree as the first row is just $0$ to $n$ in order $\leq n^{n-1}$ trees
+
+Every tree corresponds to a parent list, but the converse is not true. Example:
+
+$\begin{matrix} 1 & 2 & 3 & 4 & 5 \\2 & 3 & 1 & 5 & 4 \end{matrix}\qquad$ corresponds to a disconnected non-simple graph.
+
+\includegraphics{fig3.png}
+
+\textbf{Pr\"{u}fer codes}
+
+At each step we record the leaf with the smallest label, we record its parent and then we erase the leaf and recurse (extended Pr\"{u}fer code).
+
+$\begin{matrix}
+1 & 3 & 5 & 2 & 6 & 8 & 7 & 4 & 9 \\
+2 & 2 & 2 & 0 & 7 & 7 & 4 & 0 & 0 \\
+\end{matrix}$
+
+$2(n-1)$ numbers
+
+It is possible to reconstruct the first row from the second one. 
+
+\textbf{Justification:}
+$i^{th}$ entry of the $1^{st}$ row is the smallest number which is not yet in the $1^{st}$ row, and does not appear in the $2^{nd}$ row in the $i^{th}$ or greater position.
+
+Furthermore, we do not need the last column since the last vertex will always be 0 (the root).
+
+Every tree can be recorded as a sequence of $n-2$ numbers.
+
+%November 23rd
+
+\includegraphics{prufer.png}
+
+\textbf{Cayley's theorem}: There are $n^{n-2}$ labeled trees on $n$ vertices.
+
+\textbf{Proof}: Prufer codes
+
+1 3 5 2 6 8 7 4 9 $\to$ Extended Prufer code
+
+2 2 2 0 7 7 4 0 0 $\to$ Prufer code
+
+% I noted them down on my notebook, will convert later
+% I think you missed the first tree though, by the time he came in, it was erased already. (the one on the right blackboard?
+% No, there was another tree on the left with the above Prufer code ^ I only got part of it though, but I'll calculate it out later. Gotcha
+
+\paragraph{Reconstructing extended Prufer code from the Prufer code}
+
+\begin{enumerate}
+\item Last digit of the 2nd row is 0
+\item Every entry of the first row is the smallest (non-zero) number that does not appear to the left of it in the 1st row or underneath and to the right in the 2nd row (there is always a choice)
+\end{enumerate}
+\textbf{Example}: Tree with 9 vertices. Prufer code: 7 numbers from 0 to 8
+
+$\begin{matrix}
+2 &3& 4& 1& 6& 7& 8 &5\\
+4 &5& 1& 7& 7& 0& 5& 0
+\end{matrix}
+$
+
+\includegraphics{fig5.png} 
+
+Every Preufer code corresponds to a graph with $n-1$ edges and $n$ vertices
+
+[picture of connections between first row] $\to$ Every vertex (except for 0) is joined to exactly one vertex to the right of it.
+
+\subsubsection{Number of unlabeled trees}
+
+\textbf{Unlabeled trees}: let $T_n$ be the number of unlabeled trees on $n$ vertices $T_1 = T_2 = T_3 = 1, \quad T_4 = 2, \quad T_5 = 3$ (draw them out to see)
+
+\textbf{Theorem:}
+
+$$\displaystyle \frac{n}{n!} \leq T_n \leq 2^{2(n-1)} = 4^{n-1}$$
+
+\subsubsection*{$\to$ Lower bound on the number of unlabeled trees}
+
+$$\displaystyle \underbrace{n^{n-2}}_{\text{\# of labeled trees}} \leq \underbrace{n! \cdot T_n}_{\substack{\text{\#of ways of labeling} \\ \text{unlabeled tree}}}$$
+
+\includegraphics{fig6.png}
+
+Each unlabeled tree can be labeled in at most $n!$ ways. Since the number of labeled trees is $n^{n-2}$, the number of unlabeled trees is at least $\frac{n^{n-2}}{n!}$
+
+\subsubsection*{Stirling's formula}
+
+$\displaystyle n! \approx \sqrt{2\pi n} (\frac{n}{e})^n$
+
+$\displaystyle \lim_{n \to \infty} \frac{n!}{\sqrt{2\pi n}(\frac{n}{e})^n} = 1$
+
+$\displaystyle \frac{n^{n-2}}{n!} \approx \frac{n^{n-2}}{\sqrt{2 \pi n}\frac{n^n}{e^n}} = \frac{e^n}{\sqrt{2 \pi}n^{5/2}} = \frac{1}{\sqrt{2 \pi}}n^{-5/2}e^n$
+
+\subsubsection*{$\to$ Upper bound on the number of unlabeled trees}
+$$T_n \leq 2^{2(n-1)} = 4^{n-1}$$
+
+Trace the tree drawn in the plane. It takes 2(n-1) steps, at each step, let us record 1 if we go away from the root and 0 if we go towards the root. 
+
+The tree is completed described by a sequence:
+
+1 1 1 0 1 0 0 1 0 0
+
+\includegraphics{fig7bis.png}
+
+Another example:
+
+\includegraphics{fig7.png}
+
+There are $n-1$ edges in a tree and each edge must be recorded by a 0 and a 1. The length of the sequence is therefore $2(n-1)$. There are $2^{2(n-1)} = 4^{n-1}$ such sequences.
+
+Note that a sequence of 0's and 1's does not necessarily produce a tree. Example: 1 1 0 0 0 1 1 0
+
+$\underbrace{11000}_{\text{in every initial segment the \# 1's must be at least as large as the \# of 0's}}110$
+
+Furthermore, there must be an equal number of 0s and 1s.
+
+\subsection{Minimum cost (or spanning) tree}
+
+We have n cities, 8 want to build a road netwrok connecting them. We want to be able to get from every city to every other city possibly passing some cities in between. We know costs (on distances) for building roads between cities. How can we build the network spending as little as possible.
+
+Let $d \ : \ \{0,1,\ldots,n-1\} \times \{0,1,2,\ldots,n-1\} \to \mathbb{R}_+$ be the distance function $d(0,1) = 1 \qquad d(1,2) = 2 \ldots$
+
+We want to construct a tree on these n vertices, with the sum of distances over its edges as small as possible.
+
+Enumerating all the trees takes too much time.
+
+\textbf{Greedy algorithm:} "Be as greedy as possible at each step." At each step of the algorithm build the road which is as cheap as possible (i.e. connects two cities at the shortest distance) joining two cities not connected by the network.
+
+%November 25th
+
+Given a weighted graph $G = (V, E)$ find a spanning tree:
+
+$T = (V, S) \ \mathrm{of} \ G \ \mathrm{with} \ \sum_{e \in S} d(e) \ \text{minimum}$
+
+\textbf{Kruskal's (Greedy) algorithm}
+
+\includegraphics{kruskal.png}
+
+Grow $S$ step by step. Start with $S = \emptyset$. At each step add to $S$ an edge of $G$ with the minimum weight (value of $d$) so that the graph formed by edges in $S$ remains acyclic.
+
+(If $G$ was connected this algorithm produces a tree, if not we can add edges)
+
+\textbf{Theorem}: Kruskal's algorithm produces a minimal cost tree.
+
+\textbf{Proof}: We will prove by induction on the $\#$ of steps performed that $S$ belongs to some minimum cost tree. (This suffices)
+
+\textbf{Base case}: In the beginning, $S = \emptyset$.
+
+\textbf{Induction step}: By the induction hypothesis $S$ belongs to some MCT $T'$, we add an edge $e$ to $S$. Our goal is to show that $S \cup \{e\}$ belongs to some MCT.
+
+\begin{itemize}
+\item \textbf{Case 1}: $e$ belongs to T (the edge of set of $T'$), then so does $S \cup \{e\}$, and we are done.
+\item \textbf{Case 2}: $e$ does not belong to $T'$. Adding $e$ to $T'$ creates a cycle C. Is it possible that all edges of C belong to S? No, because in our algorithm S never contains any cycles. 
+So consider $e'$ in C, $e' \notin S$. We added $e$ and not $e'$  so $d(e') \geq d(e)$.\\
+Consider deleting $e'$ from $T'$ and adding $e$.
+\end{itemize}
+\textbf{Proof:} We end up with a new tree. The cost of this tree is  minimal.
+% where is the above sentence? it was on the blackboard 
+
+\includegraphics{fig9.png}
+
+\section{Planar graphs}
+
+Graphs which can be drawn in the plane without crossings.
+
+\includegraphics{fig10.png}
+$\to$
+\includegraphics{fig11.png}
+
+\textbf{Theorem (Fary 48):} A planar graph always has a drawing where all the edges are represented by straight lines.
+
+If a graph is drawn on the plane, it partitions it into regions called \textbf{faces}.
+
+\textbf{Theorem (Euler's formula)}: Let G be a connected graph drawn in the plane with $n$ vertices, $m$ edges and $f$ faces then $f = m -n + 2$
+
+\textbf{Proof}: By induction on the number of edges $m$ 
+
+\textbf{Base case}: 0 edges $\to 1$ vertex $\to 1$ face $\checkmark$
+
+\textbf{Induction step}: We are assuming that the formula holds for all graphs with $< m$ edges.
+\begin{itemize}
+\item \textbf{Case 1}: $G$ has no cycles $\to G$ is a tree. There is one face and $m = n -1 \to 1 = (n-1) - n+2  \quad \checkmark$
+
+\item \textbf{Case 2}: G has a cycle C. Delete an edge of C. The two sides of the deleted edge belonged to different faces. Deleting $e$ decreases the number of faces by 1. \\
+By the induction hypothesis:
+$(f - 1) = (m - 1) - n + 2 \quad \checkmark$
+\end{itemize}
+
+
+%% November 28th
+\textbf{Example:}
+
+\includegraphics{fig18.png}
+
+6 vertices = n\\
+10 edges= m\\
+6 faces = f
+
+What is the maximum number of edges in a  planar simple graph with n vertices?
+
+\textbf{Euler's formula} n -m + f = 2 for every planar graph
+
+\textbf{Theorem:} A planar graph on $n$ vertices has edges $m \leq 3n-6$ (can be achieved for all $n \geq 3$)
+
+\textbf{Proof:}
+\begin{itemize}
+    \item Every edge belongs to at most two faces (1)
+    \item Every face is bounded by at least 3 edges (2)
+\end{itemize}
+Count pairs (edge, face) such that the edge belongs to the face.
+
+Say there are L such pairs.
+
+$
+\begin{cases}
+L \leq 2m$ from (1) $\\ 
+L \geq 3f$ from (2) $\\
+\end{cases}
+\to 3f \leq 2m$ 
+% is that \subseteq or geq? yeah we're talking about numbers not sets lol ok
+
+$3(m-n+2) \leq 2m$
+
+$m -3n + 6 \leq 0$
+
+$m \leq 3n - 6$
+
+\includegraphics{fig19.png}
+
+This is a complete graph on 5 vertices with one edge deleted. 
+
+\textbf{Corollary}: $K_5$ is not planar
+
+10 edges 5 vertices $\qquad 10 > 3 \cdot 5 - 6$
+
+\includegraphics{fig20.png}
+
+A \textbf{subdivision} of a graph G is a graph obtained from G replacing some of the edges by paths, that is dividing those edges using new vertices of degree 2.
+
+Clearly a subdivision of a non-planar graph is non-planar. So any graph with a subdivision of $k_5$ as a subgraph is non planar.
+
+\includegraphics{fig21.png}
+
+\textbf{Bipartite graphs:} A graph $G = (V,E)$ is bipartite if there exists a partition $V = A \cup B$, $A \cap B = \emptyset$ so that every edge joins a vertex of A to a vertex of B.
+
+(In a bipartite graph every cycle has even length). In particular, it has length $\geq$ 4.
+
+\textbf{Theorem}: $m \leq 2n - 4$ for a planar simple bipartite graph $G$ with $n$ vertices and $m$ edges. $n \geq 4$
+
+\textbf{Proof:} 
+\begin{itemize}
+\item Every face contains at least 4 edges\\
+\begin{flalign*}
+2m &\geq 4f \to m \geq 2f &\\
+m &= n+f-2 \leq n +\frac{m}{2} - 2 &\\
+2m &\leq 2n + m - 4 &\\
+m &\leq 2n-4&\\
+\end{flalign*}
+\item **missed**
+\end{itemize}
+
+\textbf{Theorem (Kuratowski):} A graph G is non-planar if and only if it contains a subdivision of $K_5$ or $K_{3,3}$ as a subgraph.
+
+Being planar is in NP $\to$ a drawing is a certificate.
+
+Being non-planar is also in NP $\to$ a subdivision of $K_5$ or $K_{3,3}$ is a certificate.
+
+It is possible to test planarity very efficiently (in fact, in linear time $O(n)$)
+
+\includegraphics{fig22.png}
+\includegraphics{fig23.png}
+
+\subsection{Coloring graphs}
+
+A \textbf{(proper) k-coloring} of a graph $G = (V, E)$ is a function $c : V \to \{1, 2, \ldots, k\}$ so that $c(u) \neq c(v)$ for every pair of adjacent vertices $u,v \in V$.
+
+\textbf{Chromatic number}: $\chi(G)$ of a graph $G$ is the smallest positive integer $k$ such that $G$ allows a k-coloring.
+
+\includegraphics{fig24.png}
+
+x(G) = 3
+x(G) $\geq$ 3 $\to$ 2 is not enough.
+x(G) $\leq$ 3 (just color the graph to show)
+
+\paragraph{Graph coloring}
+
+\textbf{k-coloring}: c - V $\to$ $\{1, 2, \ldots k\}: c(u) \neq c(v)$ if $u$ is adjacent to $v$
+
+$X(G)$ [chromatic number] \-- minimum $k$ such that $G$ can be k-colored.
+
+[$X(G) = 1$ if and only if $G$ has no edges]
+When is $X(G)$ = 2?
+
+G is \textbf{bipartite} if $V$ can be partitioned:
+
+$V = A \cup B$
+$A \cap B = \emptyset$
+
+so that every edge joins a vertex of $A$ to a vertex of $B$.
+
+\textbf{Claim}:
+
+A graph is 2-colorable if and only if it is bipartite.
+
+A graph is not bipartite if it contains an odd cycle (a cycle with an odd number of vertices).
+
+\textbf{Theorem}: A graph is bipartite (or two-colorable) if and only if it contains no odd cycles.
+
+\textbf{Proof}: A graph is not bipartite if and only if it contains an odd cycle.
+
+We already know the 'if' part, so it only remains to show the 'only if' part.
+
+Suppose that $G$ is not bipartite (or two-colorable), we may assume that $G$ is connected. Let V be some vertex of $G$. 
+
+Let $d(u,v)$ denote the length of the shortest path between $u$ and $v$ for any other vertex $u$. Color $v$ in color 1, and color every other vertex $u$ in color 1 if $d(u,v)$ is even, and color 2 if $d(u,v)$ is odd
+
+This doesn't produce a two coloring. So there are adjacent vertices $u_1$ and $u_2$ of the same color.
+
+$d(x, v)$ - differ by at most 1
+$d(y, v)$ 
+
+\includegraphics{something.png}
+
+This is the closest vertex to $u_1$ and $u_2$ along the shortest paths along the shortest paths from $u_1$ and $u_2$ to $v$ to belongs to both paths.
+
+$d(u_1,v) = k_1 + L$
+$d(u_2,v) = k_2 + L$
+$k_1 = k_2 = k$
+
+[BOTTOM OF FIGURE] - an odd cycle of length 2k.
+
+The problem of determining whether $X(G) \leq 3$ is NP-hard (at least as hard as every problem in NP)
+
+\subsection{What obstructions are there to k-coloring?}
+
+$K_{k+1}$ as a subgraph $\to$ There exist non k-colorable for any k with [missing]?
+
+\textbf{Theorem (Brooks)}: If a graph has maximum degree $k$ then it is $(k+1)-colorable$.
+
+\textbf{Proof}: By induction on the number of vertices.
+
+\begin{itemize}
+    \item \textbf{Base Case:} (1 vertex) $\checkmark$
+    \item \textbf{Induction Step:} Let G be a graph with n+1 vertices. Choose some vertex v in G and remove it. The graph that remains has n vertices, has maximum degree $\leq k$ so is $(k+1)$-colorable by the induction hypothesis.
+
+\end{itemize}
+
+Neighbors of $v$ use at most $k$ colors, so there is at least one color that is not yet used, and we can color $v$ in this color.
+
+\subsection{Coloring of planar maps}: In a map every country is a contiguous region of the plane. We want to colour the map so that any two countries which share a border (non-zero length segment) receive different colors. How many colours suffice?
+
+\textbf{The Four colour theorem:} Every map is 4-colourable (Francis Guthrie 1852). Appel \& Hakken published a non human-readable proof in 1976 (solved by computer-assistance using case-analysis)
+ 
+\textbf{Dual graph}:
+\begin{itemize}
+    \item Vertices correspond to regions
+    \item Two vertices are joined by an edge if regions share the segment of the border
+    \item We get a planar graph.
+    \item It now suffeces to show that $\chi(G) \leq 4 (\leq 5) for every planar (simple) graph G$
+\end{itemize}
+
+
+%% December 2nd
+
+\section{Coloring planar graphs}
+
+Four-colour theorem: $\chi(G) \leq 4$ for every planar (simple) graph G.
+
+\textbf{Six-color theorem:} $\chi(G) \leq 6$
+
+\begin{itemize}
+\item \textbf{Claim:} Every planar simple graph contains a vertex of degree $\leq 5$
+\item \textbf{Proof of thTe claim:} $\sum_{v \in V} deg(v) = 2e \leq 2(3n-6) = 6n -12$\\
+Suppose the graph has $n$ vertices\\
+$$\displaystyle \frac{\sum_{v \in V} deg(v)}{n} \leq 6 - \frac{12}{n} < 6$$
+\item \textbf{Proof of the 6-color theorem:}
+By induction on the number of vertices in G. 
+\begin{itemize}
+\item \textbf{Base case:} 1 vertex $\checkmark$
+\item \textbf{Induction Step:} Let $v$ be a vertex of degree $\leq 5$ in G. By the induction hypothesis if we delete $v$ from $G$ we can colour the vertices in 6 colours, but then we can also colour v, because at most 5 colours are used on its neighbours.
+\end{itemize}
+
+\textbf{Proof of the 5-color theorem:} $\chi(G) \leq 5$
+\includegraphics{fig40.png}
+
+Note: $K_6$ is not 5-colorable but every vertex has degree 5.
+
+\textbf{Proof:} By induction as the previous theorem.
+
+\begin{itemize}
+\item \textbf{Base case}: same as before
+\item \textbf{Induction step}: Let $v$ be the vertex of the smallest degree in $G$.
+    \begin{itemize}
+    \item \textbf{Case 1}: $deg(v) \leq 4 \to$ then the argument from the 6 colour theorem works.
+    \item \textbf{Case 2}: $deg(v) = $%%%%
+    \item The new graph can be coloured in 5 colours by the induction hypothesis. Let $u_1 \& u_3$ inherit the colour of the new vertex in the smaller graph. Neighbours of v now receive at most 4 colours, so there is a colour available for $v$.\\
+    The only possible difficulty in this step is that $u_1 \& u_3$ are adjacent. But we could have chosen any pair of neighbours of $v$ instead. There exists some pair of non-adjacent neigbours as otherwise $G$ would have contained a subgraph isomorphic to $K_5$.
+    \end{itemize}
+\end{itemize}
+\end{itemize}
+
+\textbf{3-edge coloring of a graph with all vertices of degree 3} $\to$ cubic graphs 
+
+Coloring of edges in colours 1,2,3 so that every vertex is incident to an edge in every colour.
+
+\includegraphics{fig42.png}
+
+A \textbf{bridge} in a graph is an edge so that deleting it disconnects the graph.
+
+\textbf{Theorem:} Every cubic planar graph with not bridges can be 3-edged colored.
+
+\includegraphics{fig43.png}
+\textbf{Proof:} By the 4.C.T. the faces of the graph can be coloured in 4 colours. (0,0), (0,1), (1,0), (1,1)
+Now we assign colours to edges (0,1),(1,0),(1,1). If an edge forms a border of regions with colours $(a_1, b_1) \& (a_2, b_2)$ we give it colour $(c,d)$ so that:
+\begin{itemize}
+    \item $c = 0$ if $a_1 = a_2$ and $c= 1$ otherwise
+    \item $d = 0$ if $b_1 = b_2$ and $d = 1$ otherwise
+    \item No edge receives a (0,0) colour.\\
+    Why no two edges incident to the same vertex receive the same colour?\\
+    TWo edges of the same colour would imply that two faces have the same colour.
+\end{itemize}
+
+
+%%% December 5th
+
+%lecture 39 2011-12-05
+\section{Review}
+
+\subsection{Bijective proofs of combinatorial formulas}
+
+Find a bijective proof of ${n \choose r}{r \choose k} = {n \choose k}{n - k \ choose r -l}$
+
+For $n \leq r \leq k$.
+
+$[n] = \{1, 2, \ldots , n\}$
+
+$A \in [n], |A| = r, B \in A, |B| = k$
+
+We can think of the left side as counting the pairs of subsets (A, B):
+
+$\{(A, B): |A| = r, |B| = k, B \in A \in [n]\}$
+
+That is the set that is counted on the left.
+
+\includegraphics{figure1.png}
+
+We can think of the right side as counting the pairs of subsets (C, D):
+
+$\{(C, D): |C| = k, |D| = r - k, C \cap D - \emptyset, C, D \leq [n]\}$
+
+This is the set that is counted on the right.
+
+\includegraphics{figure2.png}
+
+We want a bijection $f$ such that:
+
+$f: (A, B) \to (B, A - B)$ 
+
+maps the pairs from "the left side" to pairs on "the right side".
+
+$(C, D) \to (C \cup D, C)$ 
+
+is an inverse map, so $f$ is a bijection.
+
+\subsection{Example problem from final}
+
+Prove ${2n \choose n} + {2n \choose n + 1} = \frac{1}{2}{2n + 2 \choose n + 1}$
+
+$\frac{\cancel{(2n)!)}}{n!n!} + \frac{\cancel{(2n)!}}{(n+1)!(n+1)!} = \frac{1}{2} \frac{(2n+2)!}{(n+1)!(n+1)!}$
+
+$\cancel{(n+1)}(n+1) + \cancel{(n+1)}(n) = \cancel{\frac{1}{2}}(2n + 1)\cancel{(2n + 2)}$
+
+$(n + 1) + n = 2n + 1 \checkmark$
+% will rewrite algebra out later
+
+Find a bijective proof of the above combinatorial equation:
+
+\includegraphics{figure3.png}
+
+${2n + 2 \choose n + 1} = \underbrace{{2n \choose n - 1}}_{\text{Number of ways of selecting of the last two elements}} + \underbrace{2 {2n \choose n}}_{\text{Number of ways of selecting one of the last two elements}} $
+
+Dividing by half:
+
+$\frac{1}{2} {2n + 2 \choose n + 1} = {2n \choose n} + \frac{1}{2}({2n \choose n - 1} + {2n \choose n + 1} = {2n \choose n} + {2n \choose n+1}$
+
+\subsection{Another problem}
+
+$\displaystyle \sum_{i=0}^{k} {n + i \choose n} = {n + k + 1 \choose n + 1}$
+
+This is selecting a $(n+1)$ element subset out of the set of size $(n + k + 1)$.
+
+\includegraphics{figure4.png}
+
+Consider the position of the last selected element. It is between the $(n+1)^{st}$ and $(n + k + 1)^{st}$ position, so it is position is $n + i + 1$ for $0 \leq i \leq k$
+
+There are ${n + i \choose n}$ ways of selecting the other $k$ elements.
+
+\subsection{Logic}
+
+Know how to prove logical formulas using the rules of logic or logic tables.
+
+\textbf{Example}:
+
+Show $(p \wedge (p \to q)) \to q$ is a tautology.
+
+% I don't know how to latex tables :(
+\begin{tabular}{ |c |c| c| c| c| }
+p & q & $p \to q$ & $p \wedge (p \to q)$ & $(p \wedge (p \to q)) \to q$ \\
+\hline
+1 & 1 &   1   &         1        &         1 \\
+1 & 0 &   0   &         0        &  1 \\
+0 & 1 &   1   &         0        &  1 \\
+0 & 0 &   1   &         0        &  1 \\
+\end{tabular}
+
+Show that $P \lor (q \to r)$) is equivalent to $q \to (p \lor r)$
+
+Now $p \lor ((\lnot q) \lor r) \Leftrightarrow \lnot q \lor (p \lor r)$ by communitativy and associativity of v
+
+Write down the negation of $\forall n \in \mathbb{N}((n^3 + 6n + 5$ is odd $)\to ($n is even$))$
+
+So bascially $\forall n \in \mathbb{N}(p(n)) \exists n \in \mathbb{N} \lnot ((n^3 + 6n +5)$ is odd$) \to($ n is even$))$
+
+Negation is $\exists n \in \mathbb{N} (\lnot p(n)) \exists n \in \mathbb{N}((n^3 +6n + 5)$ is odd $) \wedge (n$ is odd$)) \to$ false
+
+$n \equiv 1 (mod \ 2) \to$ odd
+$n^3 \equiv 1 (mod \ 2)$
+$n^3 + 6n + 5 \equiv 1 + 0 + 1 \equiv 0 (mod \ 2)$
+
+\subsection{Number theory review}
+
+Euclid's algorithm not on the final because it was on the midterm?
+
+\textbf{Fermat's Little Theorem}: $a^{p-1} \equiv 1 (mod \ p)$ for all primes $p, p \nmid a$
+
+Compute $302^{303} (mod 11)$
+
+$302 \div 11 = 27$ remainder $5$
+
+$302 \equiv 5 (mod \ 11)$
+$302^{302} \equiv 5^{302} = 5^{300} \cdot 5^2 = (5^{10})^{30} \cdot 5^2 \equiv 5^2 = 25 \equiv 3 (mod \ 11)$
+
+%%% December 6th
+
+Show that for every prime $p$ and integer $k \qquad 1 < k \leq p$ 
+
+(a)
+
+$p | {p \choose k}$
+
+${p \choose k} = \frac{p!}{k!(p-k)!} \to$ the numerator is divisble by $p$ and the denominator is not divisible by $p$ so the ratio is divisible by $p$ (only true for primes)
+
+(b)
+
+Show that the product of all primes strictly between $n$ and $2n$ is no greater than ${2n \choose n} = \frac{(2n)!}{n! \ n!}$
+
+By the same argument as in ${2n \choose n}$ is divisible by every prime $p: \quad n < p \leq 2n$
+
+So the product of these primes divides ${2n \choose n}$, so it's at most ${2n \choose n}$
+
+Show that
+
+$\displaystyle \sum_{k=0}^n k(n-k) = {n+1 \choose 3}$
+
+Proof by induction on $n$:
+
+\begin{itemize}
+    \item \textbf{Base case} (n=1): $0 \cdot 1 + 1 \cdot 0 = {2 \choose 3} \qquad \checkmark$
+    \item \textbf{Induction step:} \\
+    \begin{flalign*}
+        \sum_{k=0}^{n+1} k((n+1)-k) = \sum_{k=0}^{n+1} k(n-k)+k &=\sum_{k=0}^{n+1} k(n-k) + \sum_{k=0}^{n+1} k &\\
+         {n+1 \choose 3} &= \sum_{k=0}^{n} k(n-k) + (n+1)n(n-1) - (n+1) \text{ (by induction hypothesis)} &\\
+    \end{flalign*}
+    \begin{flalign*}
+         & = \frac{(n+1)n(n-1)}{3!} - (n+1) + \frac{(n+1)(n+2)}{2} =? {n+2 \choose 3} = \frac{(n+2)(n+1)n}{3!} &\\
+    \end{flalign*}
+    \text{Multiply by 6}
+    $n(n-1) - 6 + 3(n+2) = (n+2)n$\\
+    $n^2 - n - 6 + 3n + 6 = n^2 + 2n \qquad \checkmark$\\
+\end{itemize}
+
+%%%% Show that $\displaystyle \sum_{k=0}^n$ oh well
+
+Show that $\displaystyle \sum_{k=0}^n = \frac{n!2^k}{k! (n-k)!} = 3^n$
+
+$\displaystyle \sum_{k=0}^n {n \choose k}2^k 1^{n-k}=3^n \qquad \sum_{k=0}^n {n \choose k}x^k y^{n-k} = (x+y)^n \qquad x = 2 y = 1$ (binomial theorem with x = 2 y = 1)
+
+How many pairs of subset $A,B \subseteq \{1,2,3,4,5\}$ are there so that $A \subseteq B$
+
+Product rule: Every element can
+\begin{itemize}
+    \item belong to neither $A$ nor $B$
+    \item belong to $A$ and $B$
+    \item belogn to just $B$ ($3^5$ choices in total $\to$ 243)
+\end{itemize}
+
+How many solutions are there to $x_1 + x_2 + x_3 + x_n = 30$ with $3 \leq x_i \leq 1$ and $x_i$ is an integer
+
+$x_1 + x_2 + \ldots x_k = n$
+
+it has ${n+k - 1 \choose k -1}$ non-negative integer solutions 
+
+$(x_1 -3) + (x_2 -3) + (x_3 - 3) + (x_4 - 3) = 30 - 3 \cdot 4 = 18$
+
+$y_i = x_i - 3$
+
+$y_1 + y_2 + y_3 + y_4 = 18$
+
+$0 \leq y_i \leq 7$ without and upper bound we have ${18 + 4 -1 \choose 4 -1} = {21 \choose 3}$
+
+Let $A_i = \{\text{solutions with }y_i \geq 8 \}$
+
+In total we have ${21 \choose 3} - |A_1 \cup A_2 \cup A_3 \cup A_4|$ solutions which satisfy the bound.
+
+$|A_i| = {13 \choose 3} \qquad |A_i \cap A_j|$
+
+$y_1 \geq 8 \to (y_1 - 8) + y_2 + y_3 + y_4 = 10 \qquad {10+3 \choose 3} = {13 \choose 3}$
+
+$y_1 \geq 8, \quad y_2 \geq 8 \to (y_1 - 8) + (y_2-8) + y_3 + y_4 = 18 - 2 \times 8 = 2$
+
+${21 \choose 3} \sum^4_{i=1} |A_i| + \sum_{1 \leq i < j \leq 4} |A_1 \cap A_j| = {21 \choose 3} - 4{13 \choose 3} + 6 {5 \choose 3}$
+
+\textbf{Notes:}
+Remember brufer codes, kruskal's algorithm and how to count anagrams (e.g. mississipi)
+
+Let $G$ be a planar connected graph with every vertex of degree 3 and 46 vertices. We add 30 edges to $G$ arbitrarily.
+
+How many edges and faces will there be in the resulting graph?
+
+Twice the number of edges in $G = \sum \deg (V) = 46 \cdot 3 = 138$ 
+
+number of edges = $\frac{46 \cdot 3}{2} = 23 \cdot 3 = 69 \to$ after adding 30 edges we get 99.
+ 
+By Euler's formula: $F = E - V +2 = 99 - 46 + 2 = 55$
+
+Does there exist a simple planar graph so that its edges can be coloured in colours red, blue and green so that every edge of every colour form a spanning tree (a tree on the same set of vertices).
+
+\textbf{No.}A tree on $n$ vertices has $(n-1)$ edges. Three trees have $3 (n-1) = 3n-3$ edges in total. But a planar graph has at most $3n-6$ edges (for $n \geq 3$).
+
+A \textbf{bridge} in a connected graph is an edge whose deletion disconnects the graph.
+
+Show that a connected graph is a tree if and only if every edge is a bridge.
+
+$\to$ If $G$ is a tree, consider an edge $u\--v$, there exists an unique pass between $u$ and $v$ consisting only of this edge, so after deleting it, there is no path between $u$ and $v$, so $G$ is disconnected.
+
+$\leftarrow$ It suffices to show that $G$ has no cycles. Suppose not.
+
+Deleting an edge from a cycle does not disconnect $G$.
+
+That's because if you had any path that used the edge, you could instead use the remainder of the cycle to connect the same pair, so you can use that other path instead to connect $u$ and $v$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
